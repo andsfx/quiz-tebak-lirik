@@ -10,8 +10,30 @@ Interactive quiz 4 grup, 5 lagu per grup. Untuk projector.
 - Admin UI (`admin.html`) untuk Mark Start/End timestamp bait
 - Audio via CDN: `https://cdn.andotherstori.my.id/quiz-tebak-lirik/audio/`
 
+## Local VPS server
+Service aktif via systemd user:
+
+```bash
+systemctl --user status quiz-tebak-lirik.service
+systemctl --user restart quiz-tebak-lirik.service
+```
+
+URL VPS:
+
+```text
+http://43.134.72.148:8777/
+```
+
 ## Upload MP3 ke CDN
-Upload MP3 ke R2/CDN path:
+Upload MP3 ke R2/CDN path. Taruh file di `audio/`, lalu jalankan:
+
+```bash
+BUCKET=cdn ./upload-audio.sh
+```
+
+Script pakai `npx wrangler r2 object put`, paralel default 4 upload.
+
+Expected path:
 
 ```text
 quiz-tebak-lirik/audio/grup1-01-mungkin-nanti.mp3

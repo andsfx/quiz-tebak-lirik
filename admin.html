@@ -6,54 +6,26 @@
 <title>Admin · Timestamp Tebak Lirik</title>
 <link rel="icon" href="data:," />
 <style>
-  :root{
-    --bg:#0f1115;
-    --panel:#161a22;
-    --panel2:#1c2230;
-    --text:#e8ecf3;
-    --muted:#9aa3b2;
-    --accent:#ffb84d;
-    --accent2:#7cd1ff;
-    --good:#5ddb8f;
-    --warn:#ff7676;
-    --border:#2a3142;
-  }
-  *{box-sizing:border-box}
-  html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
-  body{padding:20px;max-width:1100px;margin:0 auto}
-  h1{margin:4px 0 6px}
-  .sub{color:var(--muted);margin-bottom:20px}
-  .grid{display:grid;grid-template-columns:1fr;gap:14px}
-  .song{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:14px}
-  .song h3{margin:0 0 4px;font-size:16px}
-  .song .meta{color:var(--muted);font-size:13px;margin-bottom:8px}
-  audio{width:100%;max-width:520px}
-  .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:8px}
-  .btn{background:var(--accent);color:#1a1a1a;border:0;padding:8px 14px;border-radius:8px;font-weight:700;cursor:pointer;font-size:14px}
-  .btn.ghost{background:transparent;color:var(--text);border:1px solid var(--border)}
-  .btn.cool{background:var(--accent2);color:#0b1f2a}
-  .btn.warn{background:var(--warn);color:#2a0b0b}
-  .btn.ok{background:var(--good);color:#0b1f12}
-  .ts{background:var(--panel2);padding:6px 10px;border-radius:6px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;min-width:140px;text-align:center}
-  .group-head{margin-top:16px;font-size:18px;color:var(--accent)}
-  .topbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
-  textarea{width:100%;min-height:120px;background:var(--panel2);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:10px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px}
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+  :root{--bg:#121212;--panel:#181818;--panel2:#1f1f1f;--card:#252525;--text:#fff;--muted:#b3b3b3;--accent:#1ed760;--good:#1ed760;--warn:#f3727f;--info:#539df5;--border:#4d4d4d;--shadow:rgba(0,0,0,.5) 0 8px 24px}
+  *{box-sizing:border-box} html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:'DM Sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif} body{padding:22px;max-width:1180px;margin:0 auto;background:radial-gradient(circle at 18% 0%,rgba(30,215,96,.16),transparent 30%),#121212}
+  h1{font-size:clamp(34px,5vw,64px);line-height:.95;margin:0 0 8px;font-weight:1000;letter-spacing:-2px}.sub{color:var(--muted);margin-bottom:20px}.grid{display:grid;grid-template-columns:1fr;gap:14px}.song{background:linear-gradient(180deg,#1f1f1f,#181818);border:1px solid rgba(255,255,255,.05);border-radius:20px;padding:16px;box-shadow:rgba(0,0,0,.3) 0 8px 8px}.song h3{margin:0 0 4px;font-size:18px;font-weight:900}.song .meta{color:var(--muted);font-size:13px;margin-bottom:10px}.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px}.btn,a.btn{appearance:none;text-decoration:none;border:0;border-radius:9999px;padding:10px 16px;background:var(--accent);color:#000;font-weight:900;cursor:pointer;font-size:13px;text-transform:uppercase;letter-spacing:.9px}.btn.ghost{background:#1f1f1f;color:#fff;box-shadow:inset 0 0 0 1px #4d4d4d}.btn.cool{background:#fff;color:#000}.btn.warn{background:var(--warn);color:#28070b}.btn.ok{background:var(--good);color:#000}.ts{background:#252525;padding:8px 11px;border-radius:9999px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;min-width:110px;text-align:center;color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}.group-head{margin-top:20px;font-size:20px;color:#fff;font-weight:1000}.topbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}textarea{width:100%;min-height:130px;background:#1f1f1f;color:#fff;border:0;border-radius:16px;padding:12px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;box-shadow:inset 0 0 0 1px #4d4d4d}audio{width:100%;max-width:560px;filter:invert(1) hue-rotate(180deg)}.hide{display:none}@media(max-width:760px){body{padding:12px}.btn{width:100%}}
 </style>
 </head>
 <body>
-<h1>⚙ Admin Timestamp</h1>
+<h1>Admin Timestamp</h1>
 <div class="sub">Tandai segment bait untuk tiap lagu. Tersimpan otomatis di browser ini (<code>localStorage</code>). Export/Import untuk backup.</div>
 
 <div class="topbar">
-  <a class="btn ghost" href="index.html">⬅ Kembali ke Quiz</a>
-  <button class="btn cool" onclick="doExport()">💾 Export JSON</button>
-  <button class="btn cool" onclick="document.getElementById('imp').classList.toggle('hide')">📥 Import JSON</button>
-  <button class="btn warn" onclick="clearAll()">🗑 Hapus Semua</button>
+  <a class="btn ghost" href="index.html">Kembali ke Quiz</a>
+  <button class="btn cool" onclick="doExport()">Export JSON</button>
+  <button class="btn cool" onclick="document.getElementById('imp').classList.toggle('hide')">Import JSON</button>
+  <button class="btn warn" onclick="clearAll()">Hapus Semua</button>
 </div>
 
 <div id="imp" class="hide" style="margin-bottom:16px">
   <textarea id="imp-text" placeholder='Paste JSON di sini, lalu klik Apply...'></textarea>
-  <div class="row"><button class="btn ok" onclick="doImport()">✓ Apply</button></div>
+  <div class="row"><button class="btn ok" onclick="doImport()">Apply</button></div>
 </div>
 
 <div id="list" class="grid"></div>
@@ -122,7 +94,7 @@ function render(){
           <div class="ts" data-slot="start">${fmt(seg.start)}</div>
           <button class="btn" data-act="end">Mark End</button>
           <div class="ts" data-slot="end">${fmt(seg.end)}</div>
-          <button class="btn cool" data-act="preview">▶ Preview Bait</button>
+          <button class="btn cool" data-act="preview">Preview Bait</button>
           <button class="btn warn" data-act="clear">Clear</button>
         </div>
       `;
