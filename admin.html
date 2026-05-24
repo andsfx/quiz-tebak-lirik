@@ -18,11 +18,10 @@
 
 <div class="topbar">
   <a class="btn ghost" href="index.html">Kembali ke Quiz</a>
-  <button class="btn cool" onclick="doExport()">Export Timestamp</button>
-  <button class="btn cool" onclick="document.getElementById('imp').classList.toggle('hide')">Import Timestamp</button>
-  <button class="btn cool" onclick="exportSongs()">Export Lagu</button>
-  <button class="btn warn" onclick="clearSongs()">Reset Lagu</button>
-  <button class="btn warn" onclick="clearAll()">Hapus Timestamp</button>
+  <button class="btn cool" onclick="doExport()">Export songs.json</button>
+  <button class="btn cool" onclick="document.getElementById('imp').classList.toggle('hide')">Import songs.json</button>
+  <button class="btn warn" onclick="clearSongs()">Reset Draft</button>
+  <button class="btn warn" onclick="clearAll()">Hapus Legacy Timestamp</button>
 </div>
 
 <div id="imp" class="hide" style="margin-bottom:16px">
@@ -34,175 +33,117 @@
 
 <script>
 const STORAGE_SONGS = "quizTebakLirik_custom_songs_v1";
-const DEFAULT_GROUPS = [
-  { name: "Grup 1", songs: [
-    { title: "Mungkin Nanti", artist: "Peterpan", file: "https://cdn.andotherstori.my.id/quiz-tebak-lirik/audio/grup1-01-mungkin-nanti.mp3" },
-    { title: "Laskar Pelangi", artist: "Nidji", file: "https://cdn.andotherstori.my.id/quiz-tebak-lirik/audio/grup1-02-laskar-pelangi.mp3" },
-    { title: "Surat Cinta untuk Starla", artist: "Virgoun", file: "https://cdn.andotherstori.my.id/quiz-tebak-lirik/audio/grup1-03-surat-cinta-untuk-starla.mp3" },
-    { title: "To The Bone", artist: "Pamungkas", file: "https://cdn.andotherstori.my.id/quiz-tebak-lirik/audio/grup1-04-to-the-bone.mp3" },
-    { title: "Tak Segampang Itu", artist: "Anggi Marito", file: "https://cdn.andotherstori.my.id/quiz-tebak-lirik/audio/grup1-05-tak-segampang-itu.mp3" }
-  ]},
-  { name: "Grup 2", songs: [
-    { title: "Sempurna", artist: "Andra and the Backbone", file: "https://cdn.andotherstori.my.id/quiz-tebak-lirik/audio/grup2-01-sempurna.mp3" },
-    { title: "Tentang Aku, Kau & Dia", artist: "Kangen Band", file: "https://cdn.andotherstori.my.id/quiz-tebak-lirik/audio/grup2-02-tentang-aku-kau-dan-dia.mp3" },
-    { title: "Asal Kau Bahagia", artist: "Armada", file: "https://cdn.andotherstori.my.id/quiz-tebak-lirik/audio/grup2-03-asal-kau-bahagia.mp3" },
-    { title: "Gajah", artist: "Tulus", file: "https://cdn.andotherstori.my.id/quiz-tebak-lirik/audio/grup2-04-gajah.mp3" },
-    { title: "Akad", artist: "Payung Teduh", file: "https://cdn.andotherstori.my.id/quiz-tebak-lirik/audio/grup2-05-akad.mp3" }
-  ]},
-  { name: "Grup 3", songs: [
-    { title: "Pupus", artist: "Dewa 19", file: "https://cdn.andotherstori.my.id/quiz-tebak-lirik/audio/grup3-01-pupus.mp3" },
-    { title: "Menghapus Jejakmu", artist: "Peterpan", file: "https://cdn.andotherstori.my.id/quiz-tebak-lirik/audio/grup3-02-menghapus-jejakmu.mp3" },
-    { title: "Kehadiranmu", artist: "Vagetoz", file: "https://cdn.andotherstori.my.id/quiz-tebak-lirik/audio/grup3-03-kehadiranmu.mp3" },
-    { title: "Dia", artist: "Anji", file: "https://cdn.andotherstori.my.id/quiz-tebak-lirik/audio/grup3-04-dia.mp3" },
-    { title: "Monokrom", artist: "Tulus", file: "https://cdn.andotherstori.my.id/quiz-tebak-lirik/audio/grup3-05-monokrom.mp3" }
-  ]},
-  { name: "Grup 4", songs: [
-    { title: "Kenangan Terindah", artist: "Samsons", file: "https://cdn.andotherstori.my.id/quiz-tebak-lirik/audio/grup4-01-kenangan-terindah.mp3" },
-    { title: "Dan", artist: "Sheila on 7", file: "https://cdn.andotherstori.my.id/quiz-tebak-lirik/audio/grup4-02-dan.mp3" },
-    { title: "Terima Kasih Cinta", artist: "Afgan", file: "https://cdn.andotherstori.my.id/quiz-tebak-lirik/audio/grup4-03-terima-kasih-cinta.mp3" },
-    { title: "Tetap Dalam Jiwa", artist: "Isyana Sarasvati", file: "https://cdn.andotherstori.my.id/quiz-tebak-lirik/audio/grup4-04-tetap-dalam-jiwa.mp3" },
-    { title: "Zona Nyaman", artist: "Fourtwnty", file: "https://cdn.andotherstori.my.id/quiz-tebak-lirik/audio/grup4-05-zona-nyaman.mp3" }
-  ]}
-];
-function loadGroups(){try{const saved=JSON.parse(localStorage.getItem(STORAGE_SONGS)||'null');if(Array.isArray(saved)&&saved.length)return saved;}catch(e){}return JSON.parse(JSON.stringify(DEFAULT_GROUPS));}
-function saveGroups(){localStorage.setItem(STORAGE_SONGS, JSON.stringify(GROUPS));}
-let GROUPS = loadGroups();
+const STORAGE_TS = "quizTebakLirik_timestamps_v1"; // legacy import only
+let SONG_DATA = {version:1, groups:[]};
+let GROUPS = [];
 
-const STORAGE_TS = "quizTebakLirik_timestamps_v1";
-
-function loadTS(){
-  try{ return JSON.parse(localStorage.getItem(STORAGE_TS) || "{}"); }
-  catch(e){ return {}; }
-}
-function saveTS(obj){ localStorage.setItem(STORAGE_TS, JSON.stringify(obj)); }
-function fmt(t){ if(t==null) return "--"; return t.toFixed(2)+"s"; }
 function escapeHtml(v){return String(v||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-function setSongFields(card, s){s.bait=card.querySelector('[data-role="bait"]').value.trim();s.answer=card.querySelector('[data-role="answer"]').value.trim();s.lyricsSource=card.querySelector('[data-role="source"]').value.trim();}
-async function fetchLyricsFor(card, s){const status=card.querySelector('[data-role="status"]');status.textContent='Browsing lirik...';const url=`api/lyrics?title=${encodeURIComponent(s.title)}&artist=${encodeURIComponent(s.artist)}`;const res=await fetch(url);if(!res.ok)throw new Error(await res.text());const data=await res.json();if(data.status==='missing'){status.textContent='Tidak ketemu. Jangan dipakai tanpa source.';return;}card.querySelector('[data-role="bait"]').value=data.bait||'';card.querySelector('[data-role="answer"]').value=data.answer||'';card.querySelector('[data-role="source"]').value=data.source||data.url||'';s.lyrics=data.lyrics||'';s.verification=data.status;s.lyricsSource=data.source||data.url||'';s.bait=data.bait||'';s.answer=data.answer||'';saveGroups();status.innerHTML=`Status: <b>${escapeHtml(data.status)}</b> · <a href="${escapeHtml(s.lyricsSource)}" target="_blank" rel="noreferrer">source</a>`;}
-
+function fmt(t){ if(t==null || t==='') return "--"; return Number(t).toFixed(2)+"s"; }
+function normalizeSongData(data){
+  if(Array.isArray(data)) return {version:1, groups:data.map((g,i)=>({name:g.name||`Grup ${i+1}`, meta:g.meta||g.name||`Grup ${i+1}`, songs:g.songs||[]}))};
+  if(data && Array.isArray(data.groups)) return {version:data.version||1, groups:data.groups.map((g,i)=>({name:g.name||`Grup ${i+1}`, meta:g.meta||g.name||`Grup ${i+1}`, songs:(g.songs||[]).map(s=>({...s, timestamp:s.timestamp||{start:null,end:null}}))}))};
+  return {version:1, groups:[]};
+}
+function setData(data){SONG_DATA=normalizeSongData(data);GROUPS=SONG_DATA.groups;}
+function saveDraft(){localStorage.setItem(STORAGE_SONGS, JSON.stringify(SONG_DATA));}
+function clearDraft(){localStorage.removeItem(STORAGE_SONGS);}
+async function loadInitial(){
+  try{const draft=JSON.parse(localStorage.getItem(STORAGE_SONGS)||'null'); if(draft){setData(draft); return;}}catch(e){}
+  const res=await fetch('songs.json',{cache:'no-store'});
+  setData(await res.json());
+}
+function currentExport(){
+  document.querySelectorAll('.song').forEach(card=>saveCard(card, false));
+  return JSON.stringify(SONG_DATA, null, 2);
+}
+function saveCard(card, persist=true){
+  const g=Number(card.dataset.g), i=Number(card.dataset.i), s=GROUPS[g].songs[i];
+  s.title=card.querySelector('[data-role="title"]').value.trim();
+  s.artist=card.querySelector('[data-role="artist"]').value.trim();
+  s.year=card.querySelector('[data-role="year"]').value.trim();
+  s.file=card.querySelector('[data-role="file"]').value.trim();
+  s.bait=card.querySelector('[data-role="bait"]').value.trim();
+  s.answer=card.querySelector('[data-role="answer"]').value.trim();
+  s.lyricsSource=card.querySelector('[data-role="source"]').value.trim();
+  const st=card.querySelector('[data-slot="start"]').dataset.value;
+  const en=card.querySelector('[data-slot="end"]').dataset.value;
+  s.timestamp={start:st===''?null:Number(st), end:en===''?null:Number(en)};
+  if(persist){saveDraft(); card.querySelector('[data-role="status"]').textContent='Draft tersimpan. Export songs.json lalu commit untuk permanent.';}
+}
+async function fetchLyricsFor(card, s){
+  const status=card.querySelector('[data-role="status"]');
+  status.textContent='Browsing lirik...';
+  const url=`api/lyrics?title=${encodeURIComponent(s.title)}&artist=${encodeURIComponent(s.artist)}`;
+  const res=await fetch(url);
+  if(!res.ok)throw new Error(await res.text());
+  const data=await res.json();
+  if(data.status==='missing'){status.textContent='Tidak ketemu. Jangan dipakai tanpa source.';return;}
+  card.querySelector('[data-role="bait"]').value=data.bait||'';
+  card.querySelector('[data-role="answer"]').value=data.answer||'';
+  card.querySelector('[data-role="source"]').value=data.source||data.url||'';
+  s.lyrics=data.lyrics||''; s.verification=data.status; s.lyricsSource=data.source||data.url||''; s.bait=data.bait||''; s.answer=data.answer||'';
+  saveCard(card);
+  status.innerHTML=`Status: <b>${escapeHtml(data.status)}</b> · <a href="${escapeHtml(s.lyricsSource)}" target="_blank" rel="noreferrer">source</a>`;
+}
 function render(){
-  const ts = loadTS();
-  const list = document.getElementById("list");
-  list.innerHTML = "";
-  GROUPS.forEach((g, gi) => {
-    const head = document.createElement("div");
-    head.className = "group-head";
-    head.textContent = g.name;
-    list.appendChild(head);
-    g.songs.forEach((s, qi) => {
-      const key = `g${gi+1}q${qi}`;
-      const seg = ts[key] || {};
-      const card = document.createElement("div");
-      card.className = "song";
-      card.innerHTML = `
-        <h3>${qi+1}. ${s.title}</h3>
-        <div class="meta">${s.artist} · <code>${key}</code></div>
-        <audio controls preload="metadata" src="${s.file}"></audio>
-        <div class="row">
-          <button class="btn" data-act="start">Mark Start</button>
-          <div class="ts" data-slot="start">${fmt(seg.start)}</div>
-          <button class="btn" data-act="end">Mark End</button>
-          <div class="ts" data-slot="end">${fmt(seg.end)}</div>
-          <button class="btn cool" data-act="preview">Preview Bait</button>
-          <button class="btn warn" data-act="clear">Clear</button>
-        </div>
-        <div class="row">
-          <button class="btn ok small" data-act="lyrics">Fetch Lyrics</button>
-          <button class="btn cool small" data-act="save-song">Save Song</button>
-          <span class="status" data-role="status">${s.verification ? `Status: ${s.verification}` : 'Belum fetch lirik'}</span>
+  const list=document.getElementById('list'); list.innerHTML='';
+  GROUPS.forEach((g,gi)=>{
+    const head=document.createElement('div'); head.className='group-head'; head.textContent=`${g.name} · ${g.meta||''}`; list.appendChild(head);
+    g.songs.forEach((s,si)=>{
+      s.timestamp=s.timestamp||{start:null,end:null};
+      const card=document.createElement('div'); card.className='song'; card.dataset.g=gi; card.dataset.i=si;
+      card.innerHTML=`
+        <h3>${si+1}. ${escapeHtml(s.title)}</h3>
+        <div class="lyrics-box">
+          <div class="field"><label>Title</label><textarea data-role="title" style="min-height:42px">${escapeHtml(s.title)}</textarea></div>
+          <div class="field"><label>Artist</label><textarea data-role="artist" style="min-height:42px">${escapeHtml(s.artist)}</textarea></div>
         </div>
         <div class="lyrics-box">
-          <div class="field"><label>Bait / Prompt</label><textarea data-role="bait">${escapeHtml(s.bait||'')}</textarea></div>
-          <div class="field"><label>Jawaban</label><textarea data-role="answer">${escapeHtml(s.answer||'')}</textarea></div>
+          <div class="field"><label>Year</label><textarea data-role="year" style="min-height:42px">${escapeHtml(s.year||'')}</textarea></div>
+          <div class="field"><label>Audio URL</label><textarea data-role="file" style="min-height:42px">${escapeHtml(s.file||'')}</textarea></div>
         </div>
-        <div class="field" style="margin-top:10px"><label>Source URL</label><textarea data-role="source" style="min-height:48px">${escapeHtml(s.lyricsSource||'')}</textarea></div>
-      `;
-      const audio = card.querySelector("audio");
-      const startSlot = card.querySelector('[data-slot="start"]');
-      const endSlot = card.querySelector('[data-slot="end"]');
-      card.querySelectorAll("button[data-act]").forEach(btn => {
-        btn.addEventListener("click", () => {
-          const cur = loadTS();
-          cur[key] = cur[key] || {};
-          const act = btn.dataset.act;
-          if(act === "start"){ cur[key].start = audio.currentTime; startSlot.textContent = fmt(cur[key].start); saveTS(cur); }
-          else if(act === "end"){ cur[key].end = audio.currentTime; endSlot.textContent = fmt(cur[key].end); saveTS(cur); }
-          else if(act === "clear"){ delete cur[key]; saveTS(cur); startSlot.textContent="--"; endSlot.textContent="--"; }
-          else if(act === "preview"){
-            const seg = cur[key];
-            if(!seg || seg.start==null || seg.end==null){ alert("Set Start dan End dulu."); return; }
-            audio.currentTime = seg.start;
-            audio.play();
-            const handler = () => {
-              if(audio.currentTime >= seg.end){
-                audio.pause();
-                audio.removeEventListener("timeupdate", handler);
-              }
-            };
-            audio.addEventListener("timeupdate", handler);
-          }
-          else if(act === "save-song"){
-            setSongFields(card, s);
-            saveGroups();
-            card.querySelector('[data-role="status"]').textContent = 'Lagu tersimpan ke localStorage. Buka quiz untuk pakai data ini.';
-          }
-          else if(act === "lyrics"){
-            fetchLyricsFor(card, s).catch(err => card.querySelector('[data-role="status"]').textContent = 'Fetch gagal: '+err.message);
-          }
-        });
-      });
+        <audio controls preload="metadata" src="${escapeHtml(s.file||'')}"></audio>
+        <div class="row">
+          <button class="btn" data-act="start">Mark Start</button><div class="ts" data-slot="start" data-value="${s.timestamp.start??''}">${fmt(s.timestamp.start)}</div>
+          <button class="btn" data-act="end">Mark End</button><div class="ts" data-slot="end" data-value="${s.timestamp.end??''}">${fmt(s.timestamp.end)}</div>
+          <button class="btn cool" data-act="preview">Preview Bait</button><button class="btn warn" data-act="clear">Clear</button>
+        </div>
+        <div class="row"><button class="btn ok small" data-act="lyrics">Fetch Lyrics</button><button class="btn cool small" data-act="save-song">Save Draft</button><span class="status" data-role="status">${s.verification?`Status: ${escapeHtml(s.verification)}`:'Draft/source songs.json'}</span></div>
+        <div class="lyrics-box"><div class="field"><label>Bait / Prompt</label><textarea data-role="bait">${escapeHtml(s.bait||'')}</textarea></div><div class="field"><label>Jawaban</label><textarea data-role="answer">${escapeHtml(s.answer||'')}</textarea></div></div>
+        <div class="field" style="margin-top:10px"><label>Source URL</label><textarea data-role="source" style="min-height:48px">${escapeHtml(s.lyricsSource||'')}</textarea></div>`;
+      const audio=card.querySelector('audio'); const startSlot=card.querySelector('[data-slot="start"]'); const endSlot=card.querySelector('[data-slot="end"]');
+      card.querySelectorAll('[data-act]').forEach(btn=>btn.addEventListener('click',()=>{
+        const act=btn.dataset.act;
+        if(act==='start'){startSlot.dataset.value=audio.currentTime.toFixed(2); startSlot.textContent=fmt(audio.currentTime); saveCard(card);}
+        else if(act==='end'){endSlot.dataset.value=audio.currentTime.toFixed(2); endSlot.textContent=fmt(audio.currentTime); saveCard(card);}
+        else if(act==='clear'){startSlot.dataset.value=''; endSlot.dataset.value=''; startSlot.textContent='--'; endSlot.textContent='--'; saveCard(card);}
+        else if(act==='preview'){
+          const st=startSlot.dataset.value, en=endSlot.dataset.value; if(st===''||en===''){alert('Set Start dan End dulu.'); return;}
+          audio.currentTime=Number(st); audio.play(); const stop=Number(en); const h=()=>{if(audio.currentTime>=stop){audio.pause();audio.removeEventListener('timeupdate',h);}}; audio.addEventListener('timeupdate',h);
+        } else if(act==='save-song') saveCard(card);
+        else if(act==='lyrics'){saveCard(card,false); fetchLyricsFor(card, s).catch(err=>card.querySelector('[data-role="status"]').textContent='Fetch gagal: '+err.message);}
+      }));
       list.appendChild(card);
     });
   });
 }
-
 function doExport(){
-  const data = JSON.stringify(loadTS(), null, 2);
-  const blob = new Blob([data], { type: "application/json" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "quiz-timestamps.json";
-  a.click();
-  URL.revokeObjectURL(url);
+  const blob=new Blob([currentExport()],{type:'application/json'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='songs.json'; a.click(); URL.revokeObjectURL(url);
 }
-
-function doImport(){
-  try{
-    const obj = JSON.parse(document.getElementById("imp-text").value);
-    saveTS(obj);
-    alert("Imported. Reloading...");
-    location.reload();
-  }catch(e){ alert("Invalid JSON: "+e.message); }
+function exportSongs(){doExport();}
+function importJSON(){
+  try{setData(JSON.parse(document.getElementById('jsonbox').value)); saveDraft(); render(); alert('songs.json loaded as draft.');}
+  catch(e){alert('JSON invalid: '+e.message)}
 }
-
 function clearAll(){
-  if(!confirm("Hapus semua timestamp?")) return;
-  localStorage.removeItem(STORAGE_TS);
-  location.reload();
-}
-function exportSongs(){
-  const data = JSON.stringify(GROUPS, null, 2);
-  const blob = new Blob([data], { type: "application/json" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "quiz-songs-with-lyrics.json";
-  a.click();
-  URL.revokeObjectURL(url);
+  if(!confirm('Hapus legacy timestamp localStorage?')) return; localStorage.removeItem(STORAGE_TS); alert('Legacy timestamp cleared.');
 }
 function clearSongs(){
-  if(!confirm("Reset semua data lagu/lirik custom?")) return;
-  localStorage.removeItem(STORAGE_SONGS);
-  location.reload();
+  if(!confirm('Reset draft, balik ke songs.json repo?')) return; clearDraft(); location.reload();
 }
-
+loadInitial().then(render).catch(err=>{document.getElementById('list').innerHTML='<div class="song">Gagal load songs.json: '+escapeHtml(err.message)+'</div>';});
 document.getElementById('imp').classList.add('hide');
-const style = document.createElement('style');
-style.textContent = '.hide{display:none}';
-document.head.appendChild(style);
-
-render();
+const style=document.createElement('style'); style.textContent='#imp:not(.hide){display:block}'; document.head.appendChild(style);
 </script>
 </body>
 </html>
