@@ -22,7 +22,12 @@
           "audioMatchedArtist": "peterpan",
           "audioScore": 8,
           "previewSeconds": 30,
-          "directPreviewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/15/af/a0/15afa040-6a64-9405-7e4c-185593ff5748/mzaf_1077372444592201737.plus.aac.p.m4a"
+          "directPreviewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/15/af/a0/15afa040-6a64-9405-7e4c-185593ff5748/mzaf_1077372444592201737.plus.aac.p.m4a",
+          "youtube": {
+            "id": "SWcMwUySDvI",
+            "start": 35,
+            "end": 65
+          }
         },
         {
           "title": "Laskar Pelangi",
@@ -60,7 +65,12 @@
           "audioMatchedArtist": "Virgoun",
           "audioScore": 14,
           "previewSeconds": 30,
-          "directPreviewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/2b/15/be/2b15bee7-3031-3cf7-2f75-1940379174cf/mzaf_597427527657645840.plus.aac.p.m4a"
+          "directPreviewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/2b/15/be/2b15bee7-3031-3cf7-2f75-1940379174cf/mzaf_597427527657645840.plus.aac.p.m4a",
+          "youtube": {
+            "id": "8GFWd7-JoE4",
+            "start": 35,
+            "end": 65
+          }
         },
         {
           "title": "To The Bone",
@@ -243,7 +253,12 @@
           "audioMatchedArtist": "peterpan",
           "audioScore": 8,
           "previewSeconds": 30,
-          "directPreviewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/aa/3e/31/aa3e3160-eff3-1dbe-8c40-cd8202c5ab33/mzaf_2143616650751538166.plus.aac.p.m4a"
+          "directPreviewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/aa/3e/31/aa3e3160-eff3-1dbe-8c40-cd8202c5ab33/mzaf_2143616650751538166.plus.aac.p.m4a",
+          "youtube": {
+            "id": "Qk8C5dDz3LU",
+            "start": 35,
+            "end": 65
+          }
         },
         {
           "title": "Kehadiranmu",
