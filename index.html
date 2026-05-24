@@ -164,7 +164,8 @@
   </footer>
 </div>
 <script>
-const GROUPS = [
+const STORAGE_SONGS = "quizTebakLirik_custom_songs_v1";
+const DEFAULT_GROUPS = [
   { name: "Grup 1", songs: [
     { title: "Mungkin Nanti", artist: "Peterpan", file: "https://cdn.andotherstori.my.id/quiz-tebak-lirik/audio/grup1-01-mungkin-nanti.mp3",
       bait: "Mungkin nanti saatku tlah pergi\nSaat semua telah berakhir",
@@ -234,6 +235,8 @@ const GROUPS = [
       answer: "Berbagi takdir kita selalu\nKau dan aku menjadi satu" }
   ]}
 ];
+function loadGroups(){try{const saved=JSON.parse(localStorage.getItem(STORAGE_SONGS)||'null');if(Array.isArray(saved)&&saved.length)return saved;}catch(e){}return DEFAULT_GROUPS;}
+let GROUPS = loadGroups();
 const GROUP_META = ["Lintas Era", "Galau Pop", "Nostalgia", "Sing Along"];
 const YEAR_MAP = {
   "Mungkin Nanti":"2004","Laskar Pelangi":"2008","Surat Cinta untuk Starla":"2016","To The Bone":"2019","Tak Segampang Itu":"2022",

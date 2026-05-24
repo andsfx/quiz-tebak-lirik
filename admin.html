@@ -9,7 +9,7 @@
   @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
   :root{--bg:#121212;--panel:#181818;--panel2:#1f1f1f;--card:#252525;--text:#fff;--muted:#b3b3b3;--accent:#1ed760;--good:#1ed760;--warn:#f3727f;--info:#539df5;--border:#4d4d4d;--shadow:rgba(0,0,0,.5) 0 8px 24px}
   *{box-sizing:border-box} html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:'DM Sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif} body{padding:22px;max-width:1180px;margin:0 auto;background:radial-gradient(circle at 18% 0%,rgba(30,215,96,.16),transparent 30%),#121212}
-  h1{font-size:clamp(34px,5vw,64px);line-height:.95;margin:0 0 8px;font-weight:1000;letter-spacing:-2px}.sub{color:var(--muted);margin-bottom:20px}.grid{display:grid;grid-template-columns:1fr;gap:14px}.song{background:linear-gradient(180deg,#1f1f1f,#181818);border:1px solid rgba(255,255,255,.05);border-radius:20px;padding:16px;box-shadow:rgba(0,0,0,.3) 0 8px 8px}.song h3{margin:0 0 4px;font-size:18px;font-weight:900}.song .meta{color:var(--muted);font-size:13px;margin-bottom:10px}.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px}.btn,a.btn{appearance:none;text-decoration:none;border:0;border-radius:9999px;padding:10px 16px;background:var(--accent);color:#000;font-weight:900;cursor:pointer;font-size:13px;text-transform:uppercase;letter-spacing:.9px}.btn.ghost{background:#1f1f1f;color:#fff;box-shadow:inset 0 0 0 1px #4d4d4d}.btn.cool{background:#fff;color:#000}.btn.warn{background:var(--warn);color:#28070b}.btn.ok{background:var(--good);color:#000}.ts{background:#252525;padding:8px 11px;border-radius:9999px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;min-width:110px;text-align:center;color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}.group-head{margin-top:20px;font-size:20px;color:#fff;font-weight:1000}.topbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}textarea{width:100%;min-height:130px;background:#1f1f1f;color:#fff;border:0;border-radius:16px;padding:12px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;box-shadow:inset 0 0 0 1px #4d4d4d}audio{width:100%;max-width:560px;filter:invert(1) hue-rotate(180deg)}.hide{display:none}@media(max-width:760px){body{padding:12px}.btn{width:100%}}
+  h1{font-size:clamp(34px,5vw,64px);line-height:.95;margin:0 0 8px;font-weight:1000;letter-spacing:-2px}.sub{color:var(--muted);margin-bottom:20px}.grid{display:grid;grid-template-columns:1fr;gap:14px}.song{background:linear-gradient(180deg,#1f1f1f,#181818);border:1px solid rgba(255,255,255,.05);border-radius:20px;padding:16px;box-shadow:rgba(0,0,0,.3) 0 8px 8px}.song h3{margin:0 0 4px;font-size:18px;font-weight:900}.song .meta{color:var(--muted);font-size:13px;margin-bottom:10px}.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px}.btn,a.btn{appearance:none;text-decoration:none;border:0;border-radius:9999px;padding:10px 16px;background:var(--accent);color:#000;font-weight:900;cursor:pointer;font-size:13px;text-transform:uppercase;letter-spacing:.9px}.btn.ghost{background:#1f1f1f;color:#fff;box-shadow:inset 0 0 0 1px #4d4d4d}.btn.cool{background:#fff;color:#000}.btn.warn{background:var(--warn);color:#28070b}.btn.ok{background:var(--good);color:#000}.btn.small{padding:8px 12px;font-size:11px}.status{font-size:12px;color:var(--muted);line-height:1.45}.status a{color:var(--accent)}.lyrics-box{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}.field{display:grid;gap:5px}.field label{font-size:10px;color:#888;font-weight:1000;text-transform:uppercase;letter-spacing:.12em}.field textarea{min-height:76px}.ts{background:#252525;padding:8px 11px;border-radius:9999px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;min-width:110px;text-align:center;color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}.group-head{margin-top:20px;font-size:20px;color:#fff;font-weight:1000}.topbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}textarea{width:100%;min-height:130px;background:#1f1f1f;color:#fff;border:0;border-radius:16px;padding:12px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;box-shadow:inset 0 0 0 1px #4d4d4d}audio{width:100%;max-width:560px;filter:invert(1) hue-rotate(180deg)}.hide{display:none}@media(max-width:760px){body{padding:12px}.btn{width:100%}}
 </style>
 </head>
 <body>
@@ -18,9 +18,11 @@
 
 <div class="topbar">
   <a class="btn ghost" href="index.html">Kembali ke Quiz</a>
-  <button class="btn cool" onclick="doExport()">Export JSON</button>
-  <button class="btn cool" onclick="document.getElementById('imp').classList.toggle('hide')">Import JSON</button>
-  <button class="btn warn" onclick="clearAll()">Hapus Semua</button>
+  <button class="btn cool" onclick="doExport()">Export Timestamp</button>
+  <button class="btn cool" onclick="document.getElementById('imp').classList.toggle('hide')">Import Timestamp</button>
+  <button class="btn cool" onclick="exportSongs()">Export Lagu</button>
+  <button class="btn warn" onclick="clearSongs()">Reset Lagu</button>
+  <button class="btn warn" onclick="clearAll()">Hapus Timestamp</button>
 </div>
 
 <div id="imp" class="hide" style="margin-bottom:16px">
@@ -31,7 +33,8 @@
 <div id="list" class="grid"></div>
 
 <script>
-const GROUPS = [
+const STORAGE_SONGS = "quizTebakLirik_custom_songs_v1";
+const DEFAULT_GROUPS = [
   { name: "Grup 1", songs: [
     { title: "Mungkin Nanti", artist: "Peterpan", file: "https://cdn.andotherstori.my.id/quiz-tebak-lirik/audio/grup1-01-mungkin-nanti.mp3" },
     { title: "Laskar Pelangi", artist: "Nidji", file: "https://cdn.andotherstori.my.id/quiz-tebak-lirik/audio/grup1-02-laskar-pelangi.mp3" },
@@ -61,6 +64,9 @@ const GROUPS = [
     { title: "Zona Nyaman", artist: "Fourtwnty", file: "https://cdn.andotherstori.my.id/quiz-tebak-lirik/audio/grup4-05-zona-nyaman.mp3" }
   ]}
 ];
+function loadGroups(){try{const saved=JSON.parse(localStorage.getItem(STORAGE_SONGS)||'null');if(Array.isArray(saved)&&saved.length)return saved;}catch(e){}return JSON.parse(JSON.stringify(DEFAULT_GROUPS));}
+function saveGroups(){localStorage.setItem(STORAGE_SONGS, JSON.stringify(GROUPS));}
+let GROUPS = loadGroups();
 
 const STORAGE_TS = "quizTebakLirik_timestamps_v1";
 
@@ -70,6 +76,9 @@ function loadTS(){
 }
 function saveTS(obj){ localStorage.setItem(STORAGE_TS, JSON.stringify(obj)); }
 function fmt(t){ if(t==null) return "--"; return t.toFixed(2)+"s"; }
+function escapeHtml(v){return String(v||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function setSongFields(card, s){s.bait=card.querySelector('[data-role="bait"]').value.trim();s.answer=card.querySelector('[data-role="answer"]').value.trim();s.lyricsSource=card.querySelector('[data-role="source"]').value.trim();}
+async function fetchLyricsFor(card, s){const status=card.querySelector('[data-role="status"]');status.textContent='Browsing lirik...';const url=`api/lyrics?title=${encodeURIComponent(s.title)}&artist=${encodeURIComponent(s.artist)}`;const res=await fetch(url);if(!res.ok)throw new Error(await res.text());const data=await res.json();if(data.status==='missing'){status.textContent='Tidak ketemu. Jangan dipakai tanpa source.';return;}card.querySelector('[data-role="bait"]').value=data.bait||'';card.querySelector('[data-role="answer"]').value=data.answer||'';card.querySelector('[data-role="source"]').value=data.source||data.url||'';s.lyrics=data.lyrics||'';s.verification=data.status;s.lyricsSource=data.source||data.url||'';s.bait=data.bait||'';s.answer=data.answer||'';saveGroups();status.innerHTML=`Status: <b>${escapeHtml(data.status)}</b> · <a href="${escapeHtml(s.lyricsSource)}" target="_blank" rel="noreferrer">source</a>`;}
 
 function render(){
   const ts = loadTS();
@@ -97,6 +106,16 @@ function render(){
           <button class="btn cool" data-act="preview">Preview Bait</button>
           <button class="btn warn" data-act="clear">Clear</button>
         </div>
+        <div class="row">
+          <button class="btn ok small" data-act="lyrics">Fetch Lyrics</button>
+          <button class="btn cool small" data-act="save-song">Save Song</button>
+          <span class="status" data-role="status">${s.verification ? `Status: ${s.verification}` : 'Belum fetch lirik'}</span>
+        </div>
+        <div class="lyrics-box">
+          <div class="field"><label>Bait / Prompt</label><textarea data-role="bait">${escapeHtml(s.bait||'')}</textarea></div>
+          <div class="field"><label>Jawaban</label><textarea data-role="answer">${escapeHtml(s.answer||'')}</textarea></div>
+        </div>
+        <div class="field" style="margin-top:10px"><label>Source URL</label><textarea data-role="source" style="min-height:48px">${escapeHtml(s.lyricsSource||'')}</textarea></div>
       `;
       const audio = card.querySelector("audio");
       const startSlot = card.querySelector('[data-slot="start"]');
@@ -121,6 +140,14 @@ function render(){
               }
             };
             audio.addEventListener("timeupdate", handler);
+          }
+          else if(act === "save-song"){
+            setSongFields(card, s);
+            saveGroups();
+            card.querySelector('[data-role="status"]').textContent = 'Lagu tersimpan ke localStorage. Buka quiz untuk pakai data ini.';
+          }
+          else if(act === "lyrics"){
+            fetchLyricsFor(card, s).catch(err => card.querySelector('[data-role="status"]').textContent = 'Fetch gagal: '+err.message);
           }
         });
       });
@@ -152,6 +179,21 @@ function doImport(){
 function clearAll(){
   if(!confirm("Hapus semua timestamp?")) return;
   localStorage.removeItem(STORAGE_TS);
+  location.reload();
+}
+function exportSongs(){
+  const data = JSON.stringify(GROUPS, null, 2);
+  const blob = new Blob([data], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "quiz-songs-with-lyrics.json";
+  a.click();
+  URL.revokeObjectURL(url);
+}
+function clearSongs(){
+  if(!confirm("Reset semua data lagu/lirik custom?")) return;
+  localStorage.removeItem(STORAGE_SONGS);
   location.reload();
 }
 
