@@ -14,13 +14,13 @@
   }
   *{box-sizing:border-box}
   html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:'DM Sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif}
-  body{height:100vh;overflow:hidden}
-  .app{max-width:720px;height:100vh;margin:0 auto;padding:18px 20px 16px;display:grid;grid-template-rows:auto auto 1fr auto;gap:14px}
+  body{min-height:100vh;overflow:auto}
+  .app{max-width:760px;min-height:100vh;margin:0 auto;padding:18px 20px 16px;display:grid;grid-template-rows:auto auto 1fr auto;gap:14px}
   .header{text-align:center;margin:0}
   .kicker{font-size:9px;letter-spacing:.18em;color:#8a8a8a;font-weight:900;text-transform:uppercase}
   h1{font-size:clamp(28px,4.8vw,38px);line-height:1.02;font-weight:1000;letter-spacing:-1.1px;margin:6px 0 5px}
   .subtitle{font-size:12px;color:var(--muted)}
-  .group-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:0}
+  .group-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:0} body.in-question .group-grid,body.in-question .footer{display:none} body.in-question .app{grid-template-rows:auto 1fr}
   .group-card{background:#181818;border-radius:8px;padding:10px 12px;min-height:92px;color:#858585;position:relative;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.14)}
   .group-card.active{background:var(--active);color:var(--text)}
   .group-card.active:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--green);box-shadow:0 0 18px rgba(30,215,96,.45)}
@@ -30,7 +30,7 @@
   .score{margin-top:14px;font-size:24px;font-weight:1000;letter-spacing:-.5px;color:inherit}
   .score span{font-size:10px;color:#888;font-weight:800}
   .song-count{font-size:10px;color:#777;margin-top:1px;font-weight:700}
-  .panel{background:var(--panel);border-radius:8px;padding:18px;box-shadow:0 8px 24px rgba(0,0,0,.25);min-height:0;overflow:hidden}
+  .panel{background:var(--panel);border-radius:18px;padding:18px;box-shadow:0 8px 24px rgba(0,0,0,.25);min-height:0;overflow:hidden}
   .screen{display:none} .screen.active{display:block}
   .quiz-top{display:flex;justify-content:space-between;align-items:center;font-size:10px;margin-bottom:12px;gap:12px}
   .quiz-group{color:var(--green);font-weight:1000;letter-spacing:.1em;text-transform:uppercase}
@@ -47,9 +47,7 @@
   .play-status{margin-top:8px;font-size:11px;font-weight:900;color:#cbd5e1;background:#0f172a;border-radius:999px;padding:7px 10px;text-align:center;letter-spacing:.04em}
   .playbar{height:4px;background:#333;border-radius:999px;overflow:hidden;margin-top:9px}.playbar-fill{height:100%;width:0%;background:var(--green);border-radius:inherit;transition:width .12s linear}.audio-time{display:flex;justify-content:space-between;margin-top:5px;color:#888;font-size:10px;font-weight:800}.utility-wrap{text-align:center;margin-top:10px}.utility-panel{display:none;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:8px}.utility-panel.show{display:flex}
   audio{width:100%;height:30px;margin-bottom:8px;filter:invert(1) hue-rotate(180deg);opacity:.92}
-  .yt-frame{width:1px;height:1px;border:0;opacity:.01;position:absolute;left:-9999px;top:auto;pointer-events:none}
-  .yt-frame.show{display:block}
-  .btn{border:0;border-radius:999px;background:var(--green);color:var(--greenText);font-weight:1000;text-transform:uppercase;letter-spacing:.12em;cursor:pointer;height:40px;padding:0 24px;font-size:12px;font-family:inherit}
+  .btn{border:0;border-radius:999px;background:var(--green);color:var(--greenText);font-weight:1000;text-transform:uppercase;letter-spacing:.10em;cursor:pointer;min-height:42px;padding:0 22px;font-size:12px;font-family:inherit}
   .btn:hover{filter:brightness(1.06);transform:translateY(-1px)} .btn:active{transform:translateY(0)}
   .btn.full{width:100%} .btn.ghost{background:transparent;color:#8b8b8b} .btn.danger{background:transparent;color:var(--danger)}
   .section-label{margin-top:14px;margin-bottom:8px;font-size:10px;letter-spacing:.14em;color:#aaa;font-weight:1000;text-transform:uppercase}
@@ -70,6 +68,8 @@
   .footer{margin:0;padding-top:0;border-top:0;text-align:center;color:#6f6f6f;font-size:9px;align-self:end}
   .reset{font-weight:1000;letter-spacing:.14em;margin-bottom:6px;text-transform:uppercase;cursor:pointer;color:#777}
   .admin-link{display:inline-block;margin-top:4px;color:#777;text-decoration:none;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+
+  @media(max-width:560px){.app{padding:14px;gap:10px}.header{text-align:left}h1{font-size:28px}.subtitle{font-size:11px}.group-grid{grid-template-columns:repeat(2,1fr);gap:8px}.group-card{min-height:74px;padding:9px}.score{font-size:20px;margin-top:8px}.panel{padding:14px;border-radius:16px}.song-row{gap:10px}.song-art{width:46px;height:46px}.lyric-text{font-size:20px}.score-buttons{grid-template-columns:1fr}.footer{padding-bottom:10px}}
 </style>
 </head>
 <body>
@@ -113,7 +113,6 @@
       <div class="audio-box">
         <div class="audio-warning" id="audio-warn"></div>
         <audio id="q-audio" controls preload="metadata"></audio>
-        <iframe id="yt-frame" class="yt-frame" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         <button class="btn full" id="btn-play" onclick="togglePlayback()">▶ Play Bait</button>
         <button class="btn full ghost" id="btn-retry" onclick="playSegment()" style="display:none">Retry Audio</button>
         <div class="play-status" id="play-status">Ready</div>
@@ -147,7 +146,7 @@
   </footer>
 </div>
 <script>
-const STORAGE_SONGS = "quizTebakLirik_songs_draft_v2";
+const STORAGE_SONGS = "quizTebakLirik_songs_draft_v3";
 const DEFAULT_GROUPS = [
   { name: "Grup 1", songs: [
     { title: "Mungkin Nanti", artist: "Peterpan", file: "https://cdn.andotherstori.my.id/quiz-tebak-lirik/audio/grup1-01-mungkin-nanti.mp3",
@@ -239,29 +238,27 @@ let scores = loadScores();
 let progress = JSON.parse(localStorage.getItem('quizTebakLirik_progress_v2') || '[0,0,0,0]');
 let history = JSON.parse(localStorage.getItem(STORAGE_HISTORY) || '[]');
 let cur = { g: 0, q: 0 };
-let ytPlayer=null, ytReadyPromise=null, ytStopTimer=null, ytLoadTimeout=null, playState="idle", activeSeg=null;
+let audioTimer=null, playState="idle", activeSeg=null;
 function loadScores(){try{const s=JSON.parse(localStorage.getItem(STORAGE_SCORE)||'null');if(Array.isArray(s)&&s.length===GROUPS.length)return s;}catch(e){}return GROUPS.map(()=>0)}
 function saveScores(){localStorage.setItem(STORAGE_SCORE,JSON.stringify(scores));localStorage.setItem('quizTebakLirik_progress_v2',JSON.stringify(progress));localStorage.setItem(STORAGE_HISTORY,JSON.stringify(history.slice(-80)));}
 function loadTimestamps(){try{return JSON.parse(localStorage.getItem(STORAGE_TS)||'{}')}catch(e){return {}}}
 function renderSongMeta(visible=false){const s=getCurrentSong?.();if(!s)return;document.getElementById('q-title').textContent=visible?s.title:'Tebak judul lagu';document.getElementById('q-artist').textContent=visible?s.artist:'Dengar bait, lanjutkan lirik';document.getElementById('q-year').textContent=visible?(s.year||YEAR_MAP[s.title]||''):'????';}
 function setAnswerVisible(visible){document.body.classList.toggle('answer-visible',!!visible);const row=document.getElementById('song-row');if(row)row.classList.toggle('locked',!visible);renderSongMeta(!!visible);}
-function show(id){document.querySelectorAll('.screen').forEach(el=>el.classList.toggle('active',el.id===id));if(id!=='screen-question')setAnswerVisible(false);renderGroups();}
+function show(id){document.body.classList.toggle('in-question',id==='screen-question');document.querySelectorAll('.screen').forEach(el=>el.classList.toggle('active',el.id===id));if(id!=='screen-question')setAnswerVisible(false);renderGroups();}
 function renderGroups(){const box=document.getElementById('group-grid');box.innerHTML='';GROUPS.forEach((g,i)=>{const d=document.createElement('div');d.className='group-card '+(i===cur.g?'active':'');d.innerHTML=`<div class="group-label">GRUP ${String(i+1).padStart(2,'0')}</div><div class="group-name">${GROUP_META[i]}</div><div class="score">${scores[i]} <span>/10</span></div><div class="song-count">${progress[i]||0} / 5 lagu</div>`;d.onclick=()=>startGroup(i);box.appendChild(d);})}
 function startGroup(idx){cur.g=idx;cur.q=progress[idx]||0;if(cur.q>=GROUPS[idx].songs.length)cur.q=0;document.getElementById('gi-label').textContent=`GRUP ${String(idx+1).padStart(2,'0')} - ${GROUP_META[idx].toUpperCase()}`;document.getElementById('gi-copy').textContent=`${GROUPS[idx].name} siap. ${GROUPS[idx].songs.length} lagu menunggu.`;show('screen-group-intro');}
 function getCurrentSong(){return GROUPS[cur.g].songs[cur.q];}
 function fmtTime(sec){sec=Math.max(0,Math.floor(Number(sec)||0));return `${Math.floor(sec/60)}:${String(sec%60).padStart(2,'0')}`;}
 function setPlayProgress(ratio=0, elapsed=0, total=0){const fill=document.getElementById('playbar-fill');if(fill)fill.style.width=`${Math.max(0,Math.min(1,ratio))*100}%`;const a=document.getElementById('play-elapsed'),b=document.getElementById('play-total');if(a)a.textContent=fmtTime(elapsed);if(b)b.textContent=fmtTime(total);}
-function setPlayUI(state,text='',error=false){if(state!=='loading'&&ytLoadTimeout){clearTimeout(ytLoadTimeout);ytLoadTimeout=null}playState=state;const btn=document.getElementById('btn-play');if(btn){btn.textContent=(state==='playing'||state==='loading')?'■ Stop':(state==='ended'?'↻ Replay':'▶ Play Bait');btn.classList.toggle('ghost',state==='playing'||state==='loading');}const el=document.getElementById('play-status');if(el){el.textContent=text||state;el.style.color=error?'#fda4af':'#cbd5e1'}const retry=document.getElementById('btn-retry');if(retry)retry.style.display=error?'block':'none';const art=document.getElementById('song-art');if(art)art.textContent=state==='playing'?'■':'▶';}
-function setPlayStatus(text, error=false){setPlayUI(error?'error':playState,text,error);}
-function segFor(song){const y=song.youtube||{};const start=Number(y.start??0);const end=Number(y.end??start+30);return {start,end,id:y.id||''};}
-function ensureYT(){if(window.YT&&YT.Player)return Promise.resolve();if(ytReadyPromise)return ytReadyPromise;ytReadyPromise=new Promise(res=>{window.onYouTubeIframeAPIReady=()=>res();const t=document.createElement('script');t.src='https://www.youtube.com/iframe_api';document.head.appendChild(t);});return ytReadyPromise;}
-async function loadYTPlayer(song){const seg=segFor(song);if(!seg.id){setPlayStatus('Error: YouTube ID kosong',true);return null}await ensureYT();if(ytPlayer&&ytPlayer.loadVideoById)return ytPlayer;ytPlayer=await new Promise(res=>{let p=new YT.Player('yt-frame',{width:'1',height:'1',videoId:seg.id,playerVars:{playsinline:1,rel:0,controls:0},events:{onReady:()=>res(p),onError:()=>setPlayStatus('Error: YouTube gagal. Klik Retry.',true),onStateChange:e=>{if(e.data===YT.PlayerState.BUFFERING)setPlayUI('loading','Loading...');if(e.data===YT.PlayerState.PLAYING)setPlayUI('playing',`Playing ${seg.start.toFixed(2)}s → ${seg.end.toFixed(2)}s`);if(e.data===YT.PlayerState.ENDED)setPlayUI('ended','Ended. Replay ready.');}}})});return ytPlayer;}
-function stopYTTimer(){if(ytStopTimer){clearInterval(ytStopTimer);ytStopTimer=null}if(ytLoadTimeout){clearTimeout(ytLoadTimeout);ytLoadTimeout=null}}
-function stopPlayback(){stopYTTimer();try{if(ytPlayer&&ytPlayer.pauseVideo)ytPlayer.pauseVideo();}catch(e){}setPlayUI('idle',activeSeg?`Stopped ${activeSeg.start.toFixed(2)}s → ${activeSeg.end.toFixed(2)}s`:'Stopped');}
+function setPlayUI(state,text='',error=false){playState=state;const btn=document.getElementById('btn-play');if(btn){btn.textContent=(state==='playing'||state==='loading')?'■ Stop':(state==='ended'?'↻ Replay':'▶ Play Bait');btn.classList.toggle('ghost',state==='playing'||state==='loading');}const el=document.getElementById('play-status');if(el){el.textContent=text||state;el.style.color=error?'#fda4af':'#cbd5e1'}const retry=document.getElementById('btn-retry');if(retry)retry.style.display=error?'block':'none';const art=document.getElementById('song-art');if(art)art.textContent=state==='playing'?'■':'▶';}
+function fileFor(song){return song.file||''}
+function segFor(song){const t=song.timestamp||{};const start=Number(t.start??0);let end=Number(t.end??(start+Number(song.previewSeconds||30)));if(end<=start)end=start+Number(song.previewSeconds||30);return {start,end,file:fileFor(song)};}
+function stopAudioTimer(){if(audioTimer){clearInterval(audioTimer);audioTimer=null}}
+function stopPlayback(){stopAudioTimer();const a=document.getElementById('q-audio');a.pause();setPlayUI('idle',activeSeg?`Stopped ${activeSeg.start.toFixed(2)}s → ${activeSeg.end.toFixed(2)}s`:'Stopped');}
 function togglePlayback(){if(playState==='playing'||playState==='loading')stopPlayback();else playSegment();}
 function toggleUtility(){document.getElementById('utility-panel')?.classList.toggle('show');}
-function startQuestion(){stopYTTimer();setAnswerVisible(false);const g=GROUPS[cur.g], s=g.songs[cur.q];document.getElementById('q-group').textContent=`GRUP ${String(cur.g+1).padStart(2,'0')} - ${GROUP_META[cur.g].toUpperCase()}`;document.getElementById('q-progress').textContent=`Lagu ${cur.q+1} dari ${g.songs.length}`;document.getElementById('q-progress-fill').style.width=`${((cur.q+1)/g.songs.length)*100}%`;document.getElementById('q-bait').textContent=s.bait;document.getElementById('q-answer').textContent=s.answer;document.getElementById('q-answer').style.display='none';document.getElementById('answer-label').style.display='none';document.getElementById('btn-reveal').style.display='inline-block';document.getElementById('score-buttons').style.display='none';document.getElementById('utility-panel')?.classList.remove('show');const frame=document.getElementById('yt-frame');frame.classList.add('show');const audio=document.getElementById('q-audio');audio.pause();audio.removeAttribute('src');audio.style.display='none';activeSeg=segFor(s);setPlayProgress(0,0,activeSeg.end-activeSeg.start);setPlayUI('idle',`Ready ${activeSeg.start.toFixed(2)}s → ${activeSeg.end.toFixed(2)}s`);show('screen-question');loadYTPlayer(s).then(p=>{try{p.cueVideoById({videoId:activeSeg.id,startSeconds:activeSeg.start,endSeconds:activeSeg.end});}catch(e){}});} 
-async function playSegment(){const s=getCurrentSong(), seg=segFor(s);activeSeg=seg;setPlayProgress(0,0,seg.end-seg.start);setPlayUI('loading','Loading...');const loadingSince=Date.now();if(ytLoadTimeout)clearTimeout(ytLoadTimeout);ytLoadTimeout=setTimeout(()=>{if(playState==='loading')setPlayUI('error','Error: audio belum jalan. Klik Retry.',true)},8000);const p=await loadYTPlayer(s);if(!p)return;try{p.loadVideoById({videoId:seg.id,startSeconds:seg.start,endSeconds:seg.end});p.playVideo();stopYTTimer();ytStopTimer=setInterval(()=>{try{const state=p.getPlayerState?.();const now=p.getCurrentTime?.()||seg.start;const elapsed=Math.max(0,now-seg.start),total=Math.max(1,seg.end-seg.start);if(state===YT.PlayerState.PLAYING){setPlayUI('playing',`Playing ${seg.start.toFixed(2)}s → ${seg.end.toFixed(2)}s`);setPlayProgress(elapsed/total,elapsed,total);}else if(playState==='loading'&&Date.now()-loadingSince>8000){setPlayUI('error','Error: audio belum jalan. Klik Retry.',true);stopYTTimer();}if(now>=seg.end){p.pauseVideo();stopYTTimer();setPlayProgress(1,total,total);setPlayUI('ended','Ended. Replay ready.');}}catch(e){}},150);}catch(e){setPlayUI('error','Error: '+e.message,true)}}
+function startQuestion(){stopPlayback();setAnswerVisible(false);const g=GROUPS[cur.g], s=g.songs[cur.q];document.getElementById('q-group').textContent=`GRUP ${String(cur.g+1).padStart(2,'0')} - ${GROUP_META[cur.g].toUpperCase()}`;document.getElementById('q-progress').textContent=`Lagu ${cur.q+1} dari ${g.songs.length}`;document.getElementById('q-progress-fill').style.width=`${((cur.q+1)/g.songs.length)*100}%`;document.getElementById('q-bait').textContent=s.bait;document.getElementById('q-answer').textContent=s.answer;document.getElementById('q-answer').style.display='none';document.getElementById('answer-label').style.display='none';document.getElementById('btn-reveal').style.display='inline-block';document.getElementById('score-buttons').style.display='none';document.getElementById('utility-panel')?.classList.remove('show');const audio=document.getElementById('q-audio');activeSeg=segFor(s);audio.src=activeSeg.file;audio.style.display='block';setPlayProgress(0,0,activeSeg.end-activeSeg.start);setPlayUI('idle',activeSeg.file?`Ready ${activeSeg.start.toFixed(2)}s → ${activeSeg.end.toFixed(2)}s`:'Audio belum diupload',!activeSeg.file);show('screen-question');}
+async function playSegment(){const a=document.getElementById('q-audio'), s=getCurrentSong(), seg=segFor(s);activeSeg=seg;if(!seg.file){setPlayUI('error','Audio belum diupload',true);return}try{stopAudioTimer();setPlayProgress(0,0,seg.end-seg.start);setPlayUI('loading','Loading local audio...');if(a.src!==new URL(seg.file,location.href).href)a.src=seg.file;a.currentTime=seg.start;await a.play();setPlayUI('playing',`Playing ${seg.start.toFixed(2)}s → ${seg.end.toFixed(2)}s`);audioTimer=setInterval(()=>{const elapsed=Math.max(0,a.currentTime-seg.start),total=Math.max(1,seg.end-seg.start);setPlayProgress(elapsed/total,elapsed,total);if(a.currentTime>=seg.end||a.ended){a.pause();stopAudioTimer();setPlayProgress(1,total,total);setPlayUI('ended','Ended. Replay ready.');}},100);}catch(e){setPlayUI('error','Audio gagal: '+e.message,true);}}
 function revealAnswer(){setAnswerVisible(true);document.getElementById('q-answer').style.display='block';document.getElementById('answer-label').style.display='block';document.getElementById('btn-reveal').style.display='none';document.getElementById('score-buttons').style.display='grid';}
 function pushHistory(action,delta=0){history.push({action,g:cur.g,q:cur.q,scoreDelta:delta,scores:[...scores],progress:[...progress],time:Date.now()});saveScores()}
 function score(n){pushHistory('score',n);scores[cur.g]+=n;cur.q++;progress[cur.g]=Math.min(cur.q,GROUPS[cur.g].songs.length);saveScores();const g=GROUPS[cur.g];if(cur.q>=g.songs.length){document.getElementById('gd-name').textContent=`${g.name} selesai`;document.getElementById('gd-score').textContent=scores[cur.g];document.getElementById('btn-next-group').textContent=cur.g>=GROUPS.length-1?'Lihat Hasil Akhir':'Lanjut Grup Berikutnya';show('screen-group-done');}else startQuestion();}
