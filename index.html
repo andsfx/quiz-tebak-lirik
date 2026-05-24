@@ -270,7 +270,7 @@ function loadScores(){try{const s=JSON.parse(localStorage.getItem(STORAGE_SCORE)
 function saveScores(){localStorage.setItem(STORAGE_SCORE,JSON.stringify(scores));localStorage.setItem('quizTebakLirik_progress_v2',JSON.stringify(progress));localStorage.setItem(STORAGE_HISTORY,JSON.stringify(history.slice(-80)));}
 function loadTimestamps(){try{return JSON.parse(localStorage.getItem(STORAGE_TS)||'{}')}catch(e){return {}}}
 function setViewMode(mode){const isStage=mode==='stage';document.body.classList.toggle('stage',isStage);localStorage.setItem(STORAGE_VIEW,isStage?'stage':'host');document.getElementById('btn-view-host').classList.toggle('active',!isStage);document.getElementById('btn-view-stage').classList.toggle('active',isStage);}
-function initViewMode(){const q=new URLSearchParams(location.search);const fromUrl=q.get('view')||q.get('mode');const saved=localStorage.getItem(STORAGE_VIEW);setViewMode(fromUrl==='stage'||fromUrl==='projector'?'stage':(saved==='stage'?'stage':'host'));}
+function initViewMode(){const q=new URLSearchParams(location.search);const fromUrl=q.get('view')||q.get('mode');setViewMode(fromUrl==='stage'||fromUrl==='projector'?'stage':'host');}
 function setAnswerVisible(visible){document.body.classList.toggle('answer-visible',!!visible);}
 function currentScreen(){return document.querySelector('.screen.active')?.id||'screen-intro'}
 function saveRuntime(){localStorage.setItem(STORAGE_RUNTIME,JSON.stringify({screen:currentScreen(),cur,scores,progress,answer:document.body.classList.contains('answer-visible'),t:Date.now()}));}
