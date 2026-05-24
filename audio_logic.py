@@ -75,21 +75,26 @@ def find_deezer_preview(title: str, artist: str) -> dict:
 
 
 def find_audio_preview(title: str, artist: str) -> dict:
-    best = None
     errors = []
-    for fn in (find_itunes_preview, find_deezer_preview):
-        try:
-            cand = fn(title, artist)
-            if best is None or cand["score"] > best["score"]:
-                best = cand
-        except Exception as exc:
-            errors.append(str(exc))
-    if not best:
-        raise ValueError("; ".join(errors) or "preview not found")
-    return best
+    # Browser compatibility first: Deezer previews are MP3 and play reliably in Chrome/Safari.
+    # iTunes m4a previews are legal and stable, but some browsers/headless codecs reject them.
+    try:
+        deezer = find_deezer_preview(title, artist)
+        if deezer["score"] >= 5:
+            return deezer
+    except Exception as exc:
+        errors.append(str(exc))
+    try:
+        return find_itunes_preview(title, artist)
+    except Exception as exc:
+        errors.append(str(exc))
+    raise ValueError("; ".join(errors) or "preview not found")
 
 
-def open_preview(title: str, artist: str):
+def open_preview(title: str, artist: str, range_header: str | None = None):
     data = find_audio_preview(title, artist)
-    req = urllib.request.Request(data["preview"], headers={"User-Agent": UA})
+    headers = {"User-Agent": UA}
+    if range_header:
+        headers["Range"] = range_header
+    req = urllib.request.Request(data["preview"], headers=headers)
     return data, urllib.request.urlopen(req, timeout=20)

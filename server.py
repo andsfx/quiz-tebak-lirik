@@ -41,10 +41,10 @@ class Handler(SimpleHTTPRequestHandler):
                 return
             try:
                 if parsed.path == "/api/preview":
-                    data, upstream = open_preview(title, artist)
+                    data, upstream = open_preview(title, artist, self.headers.get("Range"))
                     with upstream:
                         self.send_response(206 if upstream.status == 206 else 200)
-                        self.send_header("Content-Type", "audio/mp4")
+                        self.send_header("Content-Type", "audio/mpeg" if data.get("source") == "deezer" else "audio/mp4")
                         self.send_header("Cache-Control", "public, max-age=3600")
                         self.send_header("X-Audio-Source", data.get("source", ""))
                         self.send_header("X-Audio-Title", data.get("matchedTitle", ""))
