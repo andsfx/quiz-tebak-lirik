@@ -138,7 +138,33 @@ def make_quiz_from_lines(lines: list[str]) -> tuple[str, str]:
     return "\n".join(usable[:2]), "\n".join(usable[2:4])
 
 
+def find_lrclib(title: str, artist: str) -> dict | None:
+    clean_title = title.replace("&", "dan")
+    url = "https://lrclib.net/api/search?" + urllib.parse.urlencode({"track_name": clean_title, "artist_name": artist})
+    try:
+        data = json.loads(fetch(url))
+    except Exception:
+        return None
+    title_l = title.lower(); artist_l = artist.lower()
+    for item in data[:8]:
+        plain = (item.get("plainLyrics") or "").strip()
+        if not plain:
+            continue
+        if title_l.split()[0] not in (item.get("trackName") or "").lower():
+            continue
+        lines = [ln.strip() for ln in plain.splitlines() if score_line(ln.strip())]
+        if len(lines) < 4:
+            continue
+        bait, answer = make_quiz_from_lines(lines)
+        if bait and answer:
+            return {"status":"verified","source":"https://lrclib.net","url":"https://lrclib.net","host":"lrclib.net","priority":True,"lineCount":len(lines),"lyrics":"\n".join(lines),"bait":bait,"answer":answer,"candidates":[]}
+    return None
+
+
 def find_lyrics(title: str, artist: str) -> dict:
+    lrclib = find_lrclib(title, artist)
+    if lrclib:
+        return lrclib
     queries = [
         f'"{title}" "{artist}" lirik',
         f'"{title}" "{artist}" lyrics',

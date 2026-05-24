@@ -9,24 +9,23 @@
           "title": "Mungkin Nanti",
           "artist": "Peterpan",
           "file": "",
-          "bait": "Mungkin nanti saatku tlah pergi\nSaat semua telah berakhir",
-          "answer": "Coba untuk kau tunggu\nDan bila yang kau tunggu tak datang",
+          "bait": "Dan mungkin bila nanti kita 'kan bertemu lagi\nSatu pintaku jangan kau coba tanyakan kembali",
+          "answer": "Rasa yang kutinggal mati\nSeperti hari kemarin saat semua disini",
           "year": "2004",
           "timestamp": {
             "start": null,
             "end": null
           },
           "audioSource": "youtube",
-          "audioSourceUrl": "https://music.apple.com/id/album/mungkin-nanti/1753918951?i=1753918964&uo=4",
-          "audioMatchedTitle": "Mungkin Nanti",
-          "audioMatchedArtist": "peterpan",
-          "audioScore": 8,
           "previewSeconds": 30,
           "youtube": {
             "id": "SWcMwUySDvI",
-            "start": 35,
-            "end": 65
-          }
+            "start": 0.73,
+            "end": 8.73
+          },
+          "lyricsSource": "https://lrclib.net",
+          "verification": "verified",
+          "syncStatus": "synced"
         },
         {
           "title": "Laskar Pelangi",
@@ -40,85 +39,81 @@
             "end": null
           },
           "audioSource": "youtube",
-          "audioSourceUrl": "https://music.apple.com/id/album/laskar-pelangi/766160296?i=766160395&uo=4",
-          "audioMatchedTitle": "Laskar Pelangi",
-          "audioMatchedArtist": "Nidji",
-          "audioScore": 8,
           "previewSeconds": 30,
           "youtube": {
             "id": "fO1iJqBdXrc",
-            "start": 45,
-            "end": 75
-          }
+            "start": 12.45,
+            "end": 34.12
+          },
+          "lyricsSource": "https://lrclib.net",
+          "verification": "verified",
+          "syncStatus": "synced"
         },
         {
           "title": "Surat Cinta untuk Starla",
           "artist": "Virgoun",
           "file": "",
-          "bait": "Kutuliskan kenangan tentang\nCaraku menemukan dirimu",
-          "answer": "Tentang apa yang membuatku mudah\nBerikan hatiku padamu",
+          "bait": "Teruntuk kamu, hidup dan matiku\nAku tak tahu lagi",
+          "answer": "Harus dengan kata apa aku menuliskannya\nAtau dengan kalimat apa aku mengungkapkannya",
           "year": "2016",
           "timestamp": {
             "start": null,
             "end": null
           },
           "audioSource": "youtube",
-          "audioSourceUrl": "https://music.apple.com/id/album/surat-cinta-untuk-starla/1882725581?i=1882725587&uo=4",
-          "audioMatchedTitle": "Surat Cinta untuk Starla",
-          "audioMatchedArtist": "Virgoun",
-          "audioScore": 14,
           "previewSeconds": 30,
           "youtube": {
             "id": "8GFWd7-JoE4",
-            "start": 18,
-            "end": 48
-          }
+            "start": 1.93,
+            "end": 15.14
+          },
+          "verification": "verified",
+          "syncStatus": "synced",
+          "lyricsSource": "https://lrclib.net"
         },
         {
           "title": "To The Bone",
           "artist": "Pamungkas",
           "file": "",
-          "bait": "I love you to the bone\nKnow I'll never let you go",
-          "answer": "Said I love you to the bone\nKnow I'll never leave you alone",
+          "bait": "Have I ever told you\nI want you to the bone?",
+          "answer": "Have I ever called you\nWhen you are all alone?",
           "year": "2019",
           "timestamp": {
             "start": null,
             "end": null
           },
           "audioSource": "youtube",
-          "audioSourceUrl": "https://music.apple.com/id/album/to-the-bone/1787908376?i=1787908642&uo=4",
-          "audioMatchedTitle": "To The Bone",
-          "audioMatchedArtist": "Pamungkas & The PeoplePeople",
-          "audioScore": 11,
           "previewSeconds": 30,
           "youtube": {
             "id": "oIYWenB637c",
-            "start": 49,
-            "end": 79
-          }
+            "start": 25.46,
+            "end": 39.81
+          },
+          "verification": "verified",
+          "syncStatus": "synced",
+          "lyricsSource": "https://lrclib.net"
         },
         {
           "title": "Tak Segampang Itu",
           "artist": "Anggi Marito",
           "file": "",
-          "bait": "Tak segampang itu Ferguso\nUntuk melupakanmu",
-          "answer": "Kalau aku bisa\nSudah dari dulu",
+          "bait": "Waktu demi waktu, hari demi hari\nSadar ku t'lah sendiri",
+          "answer": "Kau t'lah pergi jauh, tinggalkan diriku\nTernyata ku rindu",
           "year": "2022",
           "timestamp": {
             "start": null,
             "end": null
           },
           "audioSource": "youtube",
-          "audioSourceUrl": "https://music.apple.com/id/album/tak-segampang-itu/1655502818?i=1655502819&uo=4",
-          "audioMatchedTitle": "Tak Segampang Itu",
-          "audioMatchedArtist": "Anggi Marito",
-          "audioScore": 13,
           "previewSeconds": 30,
           "youtube": {
             "id": "6NsiA6GFAbU",
-            "start": 58,
-            "end": 88
-          }
+            "start": 15.55,
+            "end": 45.78
+          },
+          "verification": "verified",
+          "syncStatus": "synced",
+          "lyricsSource": "https://lrclib.net"
         }
       ]
     },
@@ -130,116 +125,111 @@
           "title": "Sempurna",
           "artist": "Andra and the Backbone",
           "file": "",
-          "bait": "Kau begitu sempurna\nDi mataku kau begitu indah",
-          "answer": "Kau membuatku sangat terpesona\nKau buatku terlena",
+          "bait": "Kau begitu sempurna, di mataku kau begitu indah\nKau membuat diriku akan selalu memujamu",
+          "answer": "Di setiap langkahku, 'ku 'kan selalu memikirkan dirimu\n'Tak bisa 'ku bayangkan hidupku tanpa cintamu",
           "year": "2007",
           "timestamp": {
             "start": null,
             "end": null
           },
           "audioSource": "youtube",
-          "audioSourceUrl": "https://music.apple.com/id/album/sempurna/1566337626?i=1566337654&uo=4",
-          "audioMatchedTitle": "Sempurna",
-          "audioMatchedArtist": "Andra And The Backbone",
-          "audioScore": 9,
           "previewSeconds": 30,
           "youtube": {
             "id": "jStNaVCW838",
-            "start": 31,
-            "end": 61
-          }
+            "start": 8.96,
+            "end": 45.94
+          },
+          "verification": "verified",
+          "syncStatus": "synced",
+          "lyricsSource": "https://lrclib.net"
         },
         {
           "title": "Tentang Aku, Kau & Dia",
           "artist": "Kangen Band",
           "file": "",
-          "bait": "Sayang, kau pergi tinggalkan aku\nDemi seorang yang baru kau kenal",
-          "answer": "Aku rela tinggalkanmu\nKarena kau bukan milikku",
+          "bait": "Selayaknya engkau tahu\nBetapa ku mencintaimu",
+          "answer": "Kau tenangkanku dari mimpi burukku\nSelayaknya kau mengerti",
           "year": "2007",
           "timestamp": {
             "start": null,
             "end": null
           },
           "audioSource": "youtube",
-          "audioSourceUrl": "https://music.apple.com/id/album/tentang-aku-kau-dan-dia/251014735?i=251014804&uo=4",
-          "audioMatchedTitle": "Tentang Aku, Kau & Dia",
-          "audioMatchedArtist": "Kangen Band",
-          "audioScore": 14,
           "previewSeconds": 30,
           "youtube": {
             "id": "S5UFxiJnC4I",
-            "start": 27,
-            "end": 57
-          }
+            "start": 17.2,
+            "end": 38.63
+          },
+          "verification": "verified",
+          "syncStatus": "synced",
+          "lyricsSource": "https://lrclib.net"
         },
         {
           "title": "Asal Kau Bahagia",
           "artist": "Armada",
           "file": "",
-          "bait": "Aku tak apa-apa\nMeski hancur hatiku mendengar",
-          "answer": "Kau bersama yang lain\nAsalkan kau bahagia",
+          "bait": "Yang, kemarin ku melihatmu\nKau bertemu dengannya",
+          "answer": "Kurasa sekarang kau masih\nMemikirkan tentang dia",
           "year": "2017",
           "timestamp": {
             "start": null,
             "end": null
           },
           "audioSource": "youtube",
-          "audioSourceUrl": "https://music.apple.com/id/album/asal-kau-bahagia/1542644136?i=1542645054&uo=4",
-          "audioMatchedTitle": "Asal Kau Bahagia",
-          "audioMatchedArtist": "Armada",
-          "audioScore": 11,
           "previewSeconds": 30,
           "youtube": {
             "id": "py6GDNgye6k",
-            "start": 47,
-            "end": 77
-          }
+            "start": 14.79,
+            "end": 43.5
+          },
+          "verification": "verified",
+          "syncStatus": "synced",
+          "lyricsSource": "https://lrclib.net"
         },
         {
           "title": "Gajah",
           "artist": "Tulus",
           "file": "",
-          "bait": "Kawan, ku punya cerita\nTentang aku yang dulu",
-          "answer": "Sering diludahi\nDan terinjak tanah",
+          "bait": "Setidaknya punya tujuh puluh tahun\nTak bisa melompat kumahir berenang",
+          "answer": "Bahagia melihat kawanan betina\nBerkumpul bersama sampai ajal",
           "year": "2014",
           "timestamp": {
             "start": null,
             "end": null
           },
           "audioSource": "youtube",
-          "audioSourceUrl": "https://music.apple.com/id/album/gajah/823622637?i=823622718&uo=4",
-          "audioMatchedTitle": "Gajah",
-          "audioMatchedArtist": "Tulus",
-          "audioScore": 5,
           "previewSeconds": 30,
           "youtube": {
             "id": "lLER9AdL-Ig",
-            "start": 9,
-            "end": 39
-          }
+            "start": 0,
+            "end": 21.41
+          },
+          "verification": "verified",
+          "syncStatus": "synced",
+          "lyricsSource": "https://lrclib.net"
         },
         {
           "title": "Akad",
           "artist": "Payung Teduh",
           "file": "",
-          "bait": "Betapa kusangat beruntung\nHati ini telah kau pilih",
-          "answer": "Bukan sekedar menjadi penghuni\nTapi pemilik utuh diriku",
+          "bait": "Betapa bahagianya hatiku\nSaat ku duduk berdua denganmu",
+          "answer": "Berjalan bersamamu\nMenarilah denganku",
           "year": "2017",
           "timestamp": {
             "start": null,
             "end": null
           },
           "audioSource": "youtube",
-          "audioSourceUrl": "https://music.apple.com/id/album/akad/1318700857?i=1318701282&uo=4",
-          "audioMatchedTitle": "Akad",
-          "audioMatchedArtist": "Payung Teduh",
-          "audioScore": 7,
           "previewSeconds": 30,
           "youtube": {
             "id": "viW0M5R2BLo",
-            "start": 26,
-            "end": 56
-          }
+            "start": 11.32,
+            "end": 24.35
+          },
+          "verification": "verified",
+          "syncStatus": "synced",
+          "lyricsSource": "https://lrclib.net"
         }
       ]
     },
@@ -252,115 +242,110 @@
           "artist": "Dewa 19",
           "file": "",
           "bait": "Aku tak mengerti apa yang kurasa\nRindu yang tak pernah begitu hebatnya",
-          "answer": "Aku mencintaimu, lebih dari apapun\nWalaupun ku tahu mungkin tak akan bisa",
+          "answer": "Aku mencintaimu lebih dari yang kau tau\nMeski kau takkan pernah tau",
           "year": "2002",
           "timestamp": {
             "start": null,
             "end": null
           },
           "audioSource": "youtube",
-          "audioSourceUrl": "https://music.apple.com/id/album/pupus/533699929?i=533699938&uo=4",
-          "audioMatchedTitle": "Pupus",
-          "audioMatchedArtist": "Dewa 19",
-          "audioScore": 7,
           "previewSeconds": 30,
           "youtube": {
             "id": "VQ-qjEV1m6M",
-            "start": 24,
-            "end": 54
-          }
+            "start": 26.24,
+            "end": 53.74
+          },
+          "verification": "verified",
+          "syncStatus": "synced",
+          "lyricsSource": "https://lrclib.net"
         },
         {
           "title": "Menghapus Jejakmu",
           "artist": "Peterpan",
           "file": "",
-          "bait": "Terlalu indah dilupakan\nTerlalu sedih dikenangkan",
-          "answer": "Setelah aku jauh berjalan\nDan kau ku tinggalkan",
+          "bait": "Terus melangkah melupakanmu\nLelah hati perhatikan sikapmu",
+          "answer": "Jalan pikiranmu buatku ragu\nTak mungkin ini tetap bertahan",
           "year": "2007",
           "timestamp": {
             "start": null,
             "end": null
           },
           "audioSource": "youtube",
-          "audioSourceUrl": "https://music.apple.com/id/album/menghapus-jejakmu/1753918951?i=1753919160&uo=4",
-          "audioMatchedTitle": "Menghapus Jejakmu",
-          "audioMatchedArtist": "peterpan",
-          "audioScore": 8,
           "previewSeconds": 30,
           "youtube": {
             "id": "Qk8C5dDz3LU",
-            "start": 35,
-            "end": 65
-          }
+            "start": 17.28,
+            "end": 32.68
+          },
+          "verification": "verified",
+          "syncStatus": "synced",
+          "lyricsSource": "https://lrclib.net"
         },
         {
           "title": "Kehadiranmu",
           "artist": "Vagetoz",
           "file": "",
-          "bait": "Aku berharap kau tahu\nSiapa diriku sebenarnya",
-          "answer": "Aku tak bisa hidup tanpamu\nKau adalah segalanya untukku",
+          "bait": "Hadirnya dirimu\nBerikan suasana baru",
+          "answer": "Kau mampu tenangkan aku\nDi saat risau dalam hatiku",
           "year": "2007",
           "timestamp": {
             "start": null,
             "end": null
           },
           "audioSource": "youtube",
-          "audioSourceUrl": "https://music.apple.com/id/album/kehadiranmu/316947045?i=316947094&uo=4",
-          "audioMatchedTitle": "Kehadiranmu",
-          "audioMatchedArtist": "Vagetoz",
-          "audioScore": 5,
           "previewSeconds": 30,
           "youtube": {
             "id": "KzbrDZwLwv0",
-            "start": 33,
-            "end": 63
-          }
+            "start": 18.72,
+            "end": 37.91
+          },
+          "verification": "verified",
+          "syncStatus": "synced",
+          "lyricsSource": "https://lrclib.net"
         },
         {
           "title": "Dia",
           "artist": "Anji",
           "file": "",
-          "bait": "Mungkin ini memang jalan takdirku\nMengagumi tanpa dicintai",
-          "answer": "Tak mengapa bagiku asal kau pun bahagia\nDengan hidupmu, dengan hidupmu",
+          "bait": "Di suatu hari tanpa sengaja kita bertemu\nAku yang pernah terluka kembali mengenal cinta",
+          "answer": "Hati ini kembali temukan senyum yang hilang\nSemua itu karena dia",
           "year": "2016",
           "timestamp": {
             "start": null,
             "end": null
           },
           "audioSource": "youtube",
-          "audioSourceUrl": "https://music.apple.com/id/album/dia/1368025156?i=1368025193&uo=4",
-          "audioMatchedTitle": "Dia",
-          "audioMatchedArtist": "Anji",
-          "audioScore": 5,
           "previewSeconds": 30,
           "youtube": {
             "id": "jjYpd6X41VA",
-            "start": 33,
-            "end": 63
-          }
+            "start": 15.34,
+            "end": 43.29
+          },
+          "verification": "verified",
+          "syncStatus": "synced",
+          "lyricsSource": "https://lrclib.net"
         },
         {
           "title": "Monokrom",
           "artist": "Tulus",
           "file": "",
-          "bait": "Terima kasih telah mewarnaiku\nSampai aku di titik ini",
-          "answer": "Walau tak selalu berakhir indah\nAku berterima kasih",
+          "bait": "Lembaran foto hitam-putih\nAku coba ingat lagi warna bajumu kala itu",
+          "answer": "Kali pertama di hidupku\nManusia lain memelukku",
           "year": "2016",
           "timestamp": {
             "start": null,
             "end": null
           },
           "audioSource": "youtube",
-          "audioSourceUrl": "https://music.apple.com/id/album/monokrom/1137907436?i=1137907946&uo=4",
-          "audioMatchedTitle": "Monokrom",
-          "audioMatchedArtist": "Tulus",
-          "audioScore": 5,
           "previewSeconds": 30,
           "youtube": {
             "id": "QqJ-Vp8mvbk",
-            "start": 55,
-            "end": 85
-          }
+            "start": 25.76,
+            "end": 48.28
+          },
+          "verification": "verified",
+          "syncStatus": "synced",
+          "lyricsSource": "https://lrclib.net"
         }
       ]
     },
@@ -373,115 +358,110 @@
           "artist": "Samsons",
           "file": "",
           "bait": "Aku yang lemah tanpamu\nAku yang rentan karena",
-          "answer": "Cinta yang tlah hilang darimu\nYang mampu menyanjungku",
+          "answer": "Cinta yang t'lah hilang darimu\nYang mampu menyanjungku",
           "year": "2005",
           "timestamp": {
             "start": null,
             "end": null
           },
           "audioSource": "youtube",
-          "audioSourceUrl": "https://music.apple.com/id/album/kenangan-terindah/1443625277?i=1443625295&uo=4",
-          "audioMatchedTitle": "Kenangan Terindah",
-          "audioMatchedArtist": "SAMSONS",
-          "audioScore": 8,
           "previewSeconds": 30,
           "youtube": {
             "id": "X0YDGxu1dCQ",
-            "start": 35,
-            "end": 65
-          }
+            "start": 20.0,
+            "end": 36.24
+          },
+          "verification": "verified",
+          "syncStatus": "synced",
+          "lyricsSource": "https://lrclib.net"
         },
         {
           "title": "Dan",
           "artist": "Sheila on 7",
           "file": "",
-          "bait": "Dan terjadi lagi\nKisah lama yang terulang kembali",
-          "answer": "Kau terluka lagi\nDari cinta rumit yang kau jalani",
+          "bait": "Dan...\nDan bila esok datang kembali",
+          "answer": "Seperti sedia kala\nDi mana kau bisa bercanda",
           "year": "1999",
           "timestamp": {
             "start": null,
             "end": null
           },
           "audioSource": "youtube",
-          "audioSourceUrl": "https://music.apple.com/id/album/dan/326500886?i=326500979&uo=4",
-          "audioMatchedTitle": "Dan",
-          "audioMatchedArtist": "Sheila On 7",
-          "audioScore": 7,
           "previewSeconds": 30,
           "youtube": {
             "id": "dGcGbF4ex5o",
-            "start": 26,
-            "end": 56
-          }
+            "start": 16.04,
+            "end": 31.6
+          },
+          "verification": "verified",
+          "syncStatus": "synced",
+          "lyricsSource": "https://lrclib.net"
         },
         {
           "title": "Terima Kasih Cinta",
           "artist": "Afgan",
           "file": "",
-          "bait": "Terima kasih cinta untuk segalanya\nKau berikan lagi kesempatan itu",
-          "answer": "Tak akan terulang lagi semua\nKesalahan yang membuatmu kecewa",
+          "bait": "Tersadar di dalam sepiku\nSetelah jauh melangkah",
+          "answer": "Cahaya kasihmu menuntunku\nKembali dalam dekap tanganmu",
           "year": "2008",
           "timestamp": {
             "start": null,
             "end": null
           },
           "audioSource": "youtube",
-          "audioSourceUrl": "https://music.apple.com/id/album/terima-kasih-cinta/1794736681?i=1794736692&uo=4",
-          "audioMatchedTitle": "Terima Kasih Cinta",
-          "audioMatchedArtist": "Afgan",
-          "audioScore": 11,
           "previewSeconds": 30,
           "youtube": {
             "id": "Hr0AAqHLLSg",
-            "start": 23,
-            "end": 53
-          }
+            "start": 16.41,
+            "end": 46.77
+          },
+          "verification": "verified",
+          "syncStatus": "synced",
+          "lyricsSource": "https://lrclib.net"
         },
         {
           "title": "Tetap Dalam Jiwa",
           "artist": "Isyana Sarasvati",
           "file": "",
-          "bait": "Mengingatmu dalam khayalan\nAndaikan dirimu masih di sini",
-          "answer": "Walau ku tahu ini takkan kembali\nNamun ku tetap menanti",
+          "bait": "Tak pernah terbayang akan jadi seperti\nIni pada akhirnya",
+          "answer": "Semua waktu yang pernah kita lewati bersama\nNyata hilang dan sirna",
           "year": "2015",
           "timestamp": {
             "start": null,
             "end": null
           },
           "audioSource": "youtube",
-          "audioSourceUrl": "https://music.apple.com/id/album/tetap-dalam-jiwa/1162739059?i=1162739301&uo=4",
-          "audioMatchedTitle": "Tetap Dalam Jiwa",
-          "audioMatchedArtist": "Isyana Sarasvati",
-          "audioScore": 13,
           "previewSeconds": 30,
           "youtube": {
             "id": "anMYu17aZT4",
-            "start": 37,
-            "end": 67
-          }
+            "start": 12.55,
+            "end": 28.14
+          },
+          "verification": "verified",
+          "syncStatus": "synced",
+          "lyricsSource": "https://lrclib.net"
         },
         {
           "title": "Zona Nyaman",
           "artist": "Fourtwnty",
           "file": "",
-          "bait": "Lelahmu jadi lelahku juga\nBahagiamu bahagiaku pasti",
-          "answer": "Berbagi takdir kita selalu\nKau dan aku menjadi satu",
+          "bait": "Pagi ke pagi, ku terjebak di dalam ambisi\nSeperti orang-orang berdasi yang gila materi",
+          "answer": "Rasa bosan membukakan jalan mencari peran\nKeluarlah dari zona nyaman",
           "year": "2017",
           "timestamp": {
             "start": null,
             "end": null
           },
           "audioSource": "youtube",
-          "audioSourceUrl": "https://music.apple.com/id/album/zona-nyaman-from-filosofi-kopi-2-ben-jody/1503120859?i=1503120873&uo=4",
-          "audioMatchedTitle": "Zona Nyaman",
-          "audioMatchedArtist": "Fourtwnty",
-          "audioScore": 8,
           "previewSeconds": 30,
           "youtube": {
             "id": "tb_RhafSifw",
-            "start": 39,
-            "end": 69
-          }
+            "start": 15.84,
+            "end": 47.41
+          },
+          "verification": "verified",
+          "syncStatus": "synced",
+          "lyricsSource": "https://lrclib.net"
         }
       ]
     }
