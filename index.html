@@ -16,10 +16,14 @@
   html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:'DM Sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif}
   body{min-height:100vh;overflow:auto}
   .app{max-width:760px;min-height:100vh;margin:0 auto;padding:18px 20px 16px;display:grid;grid-template-rows:auto auto 1fr auto;gap:14px}
-  .header{text-align:center;margin:0}
+  .header{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center;margin:0}
+  .header-copy{text-align:left}
   .kicker{font-size:9px;letter-spacing:.18em;color:#8a8a8a;font-weight:900;text-transform:uppercase}
   h1{font-size:clamp(28px,4.8vw,38px);line-height:1.02;font-weight:1000;letter-spacing:-1.1px;margin:6px 0 5px}
   .subtitle{font-size:12px;color:var(--muted)}
+  .top-admin-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:38px;padding:0 15px;border-radius:999px;background:#222;color:#fff;text-decoration:none;font-size:10px;font-weight:1000;letter-spacing:.12em;text-transform:uppercase;border:1px solid #333;box-shadow:0 8px 22px rgba(0,0,0,.22)}
+  .top-admin-btn:before{content:"⚙";font-size:12px;color:var(--green)}
+  .top-admin-btn:hover{border-color:var(--green);transform:translateY(-1px)}
   .group-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:0} body.in-question .group-grid,body.in-question .footer{display:none} body.in-question .app{grid-template-rows:auto 1fr}
   .group-card{background:#181818;border-radius:8px;padding:10px 12px;min-height:92px;color:#858585;position:relative;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.14)}
   .group-card.active{background:var(--active);color:var(--text)}
@@ -69,15 +73,18 @@
   .reset{font-weight:1000;letter-spacing:.14em;margin-bottom:6px;text-transform:uppercase;cursor:pointer;color:#777}
   .admin-link{display:inline-block;margin-top:4px;color:#777;text-decoration:none;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
 
-  @media(max-width:560px){.app{padding:14px;gap:10px}.header{text-align:left}h1{font-size:28px}.subtitle{font-size:11px}.group-grid{grid-template-columns:repeat(2,1fr);gap:8px}.group-card{min-height:74px;padding:9px}.score{font-size:20px;margin-top:8px}.panel{padding:14px;border-radius:16px}.song-row{gap:10px}.song-art{width:46px;height:46px}.lyric-text{font-size:20px}.score-buttons{grid-template-columns:1fr}.footer{padding-bottom:10px}}
+  @media(max-width:560px){.app{padding:14px;gap:10px}.header{grid-template-columns:1fr;gap:8px}.header-copy{text-align:left}h1{font-size:28px}.subtitle{font-size:11px}.top-admin-btn{justify-self:start;padding:0 12px;min-height:34px;font-size:9px}.group-grid{grid-template-columns:repeat(2,1fr);gap:8px}.group-card{min-height:74px;padding:9px}.score{font-size:20px;margin-top:8px}.panel{padding:14px;border-radius:16px}.song-row{gap:10px}.song-art{width:46px;height:46px}.lyric-text{font-size:20px}.score-buttons{grid-template-columns:1fr}.footer{padding-bottom:10px}}
 </style>
 </head>
 <body>
 <div class="app">
   <header class="header">
-    <div class="kicker">Lyric Quiz - Indonesia</div>
-    <h1>Quiz Tebak Lirik</h1>
-    <div class="subtitle">20 Lagu Pop Indonesia 2000-2026 • 4 Grup Bersaing</div>
+    <div class="header-copy">
+      <div class="kicker">Lyric Quiz - Indonesia</div>
+      <h1>Quiz Tebak Lirik</h1>
+      <div class="subtitle">20 Lagu Pop Indonesia 2000-2026 • 4 Grup Bersaing</div>
+    </div>
+    <a class="top-admin-btn" href="admin.html">Admin Timestamp</a>
   </header>
 
   <div class="group-grid" id="group-grid"></div>
@@ -92,7 +99,6 @@
         <div><b>4.</b> Tiap grup dapat 5 lagu. Ranking keluar setelah semua grup selesai.</div>
       </div>
       <button class="btn full" onclick="startGroup(0)">Mulai Grup 1</button>
-      <a class="admin-link" href="admin.html">Admin Timestamp / Audio Marker</a>
     </section>
 
     <section id="screen-group-intro" class="screen">
