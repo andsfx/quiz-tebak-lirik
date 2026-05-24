@@ -92,7 +92,7 @@
         <div><b>4.</b> Tiap grup dapat 5 lagu. Ranking keluar setelah semua grup selesai.</div>
       </div>
       <button class="btn full" onclick="startGroup(0)">Mulai Grup 1</button>
-      <a class="admin-link" href="admin.html">Admin Timestamp</a>
+      <a class="admin-link" href="admin.html">Admin Timestamp / Audio Marker</a>
     </section>
 
     <section id="screen-group-intro" class="screen">
@@ -142,89 +142,387 @@
 
   <footer class="footer">
     <div class="reset" onclick="resetAll()">Reset Quiz</div>
-    <div>Skor dan timestamp tersimpan lokal di browser ini.</div>
+    <div>Skor tersimpan lokal. Audio marker di Admin Timestamp.</div>
   </footer>
 </div>
 <script>
 const STORAGE_SONGS = "quizTebakLirik_songs_draft_v3";
 const DEFAULT_GROUPS = [
-  { name: "Grup 1", songs: [
-    { title: "Mungkin Nanti", artist: "Peterpan", file: "https://cdn.andotherstori.my.id/quiz-tebak-lirik/audio/grup1-01-mungkin-nanti.mp3",
-      bait: "Mungkin nanti saatku tlah pergi\nSaat semua telah berakhir",
-      answer: "Coba untuk kau tunggu\nDan bila yang kau tunggu tak datang" },
-    { title: "Laskar Pelangi", artist: "Nidji", file: "https://cdn.andotherstori.my.id/quiz-tebak-lirik/audio/grup1-02-laskar-pelangi.mp3",
-      bait: "Mimpi adalah kunci\nUntuk kita menaklukkan dunia",
-      answer: "Berlarilah tanpa lelah\nSampai engkau meraihnya" },
-    { title: "Surat Cinta untuk Starla", artist: "Virgoun", file: "https://cdn.andotherstori.my.id/quiz-tebak-lirik/audio/grup1-03-surat-cinta-untuk-starla.mp3",
-      bait: "Kutuliskan kenangan tentang\nCaraku menemukan dirimu",
-      answer: "Tentang apa yang membuatku mudah\nBerikan hatiku padamu" },
-    { title: "To The Bone", artist: "Pamungkas", file: "https://cdn.andotherstori.my.id/quiz-tebak-lirik/audio/grup1-04-to-the-bone.mp3",
-      bait: "I love you to the bone\nKnow I'll never let you go",
-      answer: "Said I love you to the bone\nKnow I'll never leave you alone" },
-    { title: "Tak Segampang Itu", artist: "Anggi Marito", file: "https://cdn.andotherstori.my.id/quiz-tebak-lirik/audio/grup1-05-tak-segampang-itu.mp3",
-      bait: "Tak segampang itu Ferguso\nUntuk melupakanmu",
-      answer: "Kalau aku bisa\nSudah dari dulu" }
-  ]},
-  { name: "Grup 2", songs: [
-    { title: "Sempurna", artist: "Andra and the Backbone", file: "https://cdn.andotherstori.my.id/quiz-tebak-lirik/audio/grup2-01-sempurna.mp3",
-      bait: "Kau begitu sempurna\nDi mataku kau begitu indah",
-      answer: "Kau membuatku sangat terpesona\nKau buatku terlena" },
-    { title: "Tentang Aku, Kau & Dia", artist: "Kangen Band", file: "https://cdn.andotherstori.my.id/quiz-tebak-lirik/audio/grup2-02-tentang-aku-kau-dan-dia.mp3",
-      bait: "Sayang, kau pergi tinggalkan aku\nDemi seorang yang baru kau kenal",
-      answer: "Aku rela tinggalkanmu\nKarena kau bukan milikku" },
-    { title: "Asal Kau Bahagia", artist: "Armada", file: "https://cdn.andotherstori.my.id/quiz-tebak-lirik/audio/grup2-03-asal-kau-bahagia.mp3",
-      bait: "Aku tak apa-apa\nMeski hancur hatiku mendengar",
-      answer: "Kau bersama yang lain\nAsalkan kau bahagia" },
-    { title: "Gajah", artist: "Tulus", file: "https://cdn.andotherstori.my.id/quiz-tebak-lirik/audio/grup2-04-gajah.mp3",
-      bait: "Kawan, ku punya cerita\nTentang aku yang dulu",
-      answer: "Sering diludahi\nDan terinjak tanah" },
-    { title: "Akad", artist: "Payung Teduh", file: "https://cdn.andotherstori.my.id/quiz-tebak-lirik/audio/grup2-05-akad.mp3",
-      bait: "Betapa kusangat beruntung\nHati ini telah kau pilih",
-      answer: "Bukan sekedar menjadi penghuni\nTapi pemilik utuh diriku" }
-  ]},
-  { name: "Grup 3", songs: [
-    { title: "Pupus", artist: "Dewa 19", file: "https://cdn.andotherstori.my.id/quiz-tebak-lirik/audio/grup3-01-pupus.mp3",
-      bait: "Aku tak mengerti apa yang kurasa\nRindu yang tak pernah begitu hebatnya",
-      answer: "Aku mencintaimu, lebih dari apapun\nWalaupun ku tahu mungkin tak akan bisa" },
-    { title: "Menghapus Jejakmu", artist: "Peterpan", file: "https://cdn.andotherstori.my.id/quiz-tebak-lirik/audio/grup3-02-menghapus-jejakmu.mp3",
-      bait: "Terlalu indah dilupakan\nTerlalu sedih dikenangkan",
-      answer: "Setelah aku jauh berjalan\nDan kau ku tinggalkan" },
-    { title: "Kehadiranmu", artist: "Vagetoz", file: "https://cdn.andotherstori.my.id/quiz-tebak-lirik/audio/grup3-03-kehadiranmu.mp3",
-      bait: "Aku berharap kau tahu\nSiapa diriku sebenarnya",
-      answer: "Aku tak bisa hidup tanpamu\nKau adalah segalanya untukku" },
-    { title: "Dia", artist: "Anji", file: "https://cdn.andotherstori.my.id/quiz-tebak-lirik/audio/grup3-04-dia.mp3",
-      bait: "Mungkin ini memang jalan takdirku\nMengagumi tanpa dicintai",
-      answer: "Tak mengapa bagiku asal kau pun bahagia\nDengan hidupmu, dengan hidupmu" },
-    { title: "Monokrom", artist: "Tulus", file: "https://cdn.andotherstori.my.id/quiz-tebak-lirik/audio/grup3-05-monokrom.mp3",
-      bait: "Terima kasih telah mewarnaiku\nSampai aku di titik ini",
-      answer: "Walau tak selalu berakhir indah\nAku berterima kasih" }
-  ]},
-  { name: "Grup 4", songs: [
-    { title: "Kenangan Terindah", artist: "Samsons", file: "https://cdn.andotherstori.my.id/quiz-tebak-lirik/audio/grup4-01-kenangan-terindah.mp3",
-      bait: "Aku yang lemah tanpamu\nAku yang rentan karena",
-      answer: "Cinta yang tlah hilang darimu\nYang mampu menyanjungku" },
-    { title: "Dan", artist: "Sheila on 7", file: "https://cdn.andotherstori.my.id/quiz-tebak-lirik/audio/grup4-02-dan.mp3",
-      bait: "Dan terjadi lagi\nKisah lama yang terulang kembali",
-      answer: "Kau terluka lagi\nDari cinta rumit yang kau jalani" },
-    { title: "Terima Kasih Cinta", artist: "Afgan", file: "https://cdn.andotherstori.my.id/quiz-tebak-lirik/audio/grup4-03-terima-kasih-cinta.mp3",
-      bait: "Terima kasih cinta untuk segalanya\nKau berikan lagi kesempatan itu",
-      answer: "Tak akan terulang lagi semua\nKesalahan yang membuatmu kecewa" },
-    { title: "Tetap Dalam Jiwa", artist: "Isyana Sarasvati", file: "https://cdn.andotherstori.my.id/quiz-tebak-lirik/audio/grup4-04-tetap-dalam-jiwa.mp3",
-      bait: "Mengingatmu dalam khayalan\nAndaikan dirimu masih di sini",
-      answer: "Walau ku tahu ini takkan kembali\nNamun ku tetap menanti" },
-    { title: "Zona Nyaman", artist: "Fourtwnty", file: "https://cdn.andotherstori.my.id/quiz-tebak-lirik/audio/grup4-05-zona-nyaman.mp3",
-      bait: "Lelahmu jadi lelahku juga\nBahagiamu bahagiaku pasti",
-      answer: "Berbagi takdir kita selalu\nKau dan aku menjadi satu" }
-  ]}
+  {
+    "name": "Grup 1",
+    "meta": "Lintas Era",
+    "songs": [
+      {
+        "title": "Mungkin Nanti",
+        "artist": "Peterpan",
+        "file": "audio/grup1-01-mungkin-nanti.mp3",
+        "bait": "Dan mungkin bila nanti kita 'kan bertemu lagi\nSatu pintaku jangan kau coba tanyakan kembali",
+        "answer": "Rasa yang kutinggal mati\nSeperti hari kemarin saat semua disini",
+        "year": "2004",
+        "timestamp": {
+          "start": 0.73,
+          "end": 8.73
+        },
+        "audioSource": "local",
+        "previewSeconds": 30,
+        "lyricsSource": "https://lrclib.net",
+        "verification": "verified",
+        "syncStatus": "needs_audio_upload"
+      },
+      {
+        "title": "Laskar Pelangi",
+        "artist": "Nidji",
+        "file": "audio/grup1-02-laskar-pelangi.mp3",
+        "bait": "Mimpi adalah kunci\nUntuk kita menaklukkan dunia",
+        "answer": "Berlarilah tanpa lelah\nSampai engkau meraihnya",
+        "year": "2008",
+        "timestamp": {
+          "start": 12.45,
+          "end": 34.12
+        },
+        "audioSource": "local",
+        "previewSeconds": 30,
+        "lyricsSource": "https://lrclib.net",
+        "verification": "verified",
+        "syncStatus": "needs_audio_upload"
+      },
+      {
+        "title": "Surat Cinta untuk Starla",
+        "artist": "Virgoun",
+        "file": "audio/grup1-03-surat-cinta-untuk-starla.mp3",
+        "bait": "Teruntuk kamu, hidup dan matiku\nAku tak tahu lagi",
+        "answer": "Harus dengan kata apa aku menuliskannya\nAtau dengan kalimat apa aku mengungkapkannya",
+        "year": "2016",
+        "timestamp": {
+          "start": 1.93,
+          "end": 15.14
+        },
+        "audioSource": "local",
+        "previewSeconds": 30,
+        "verification": "verified",
+        "syncStatus": "needs_audio_upload",
+        "lyricsSource": "https://lrclib.net"
+      },
+      {
+        "title": "To The Bone",
+        "artist": "Pamungkas",
+        "file": "audio/grup1-04-to-the-bone.mp3",
+        "bait": "Have I ever told you\nI want you to the bone?",
+        "answer": "Have I ever called you\nWhen you are all alone?",
+        "year": "2019",
+        "timestamp": {
+          "start": 25.46,
+          "end": 39.81
+        },
+        "audioSource": "local",
+        "previewSeconds": 30,
+        "verification": "verified",
+        "syncStatus": "needs_audio_upload",
+        "lyricsSource": "https://lrclib.net"
+      },
+      {
+        "title": "Tak Segampang Itu",
+        "artist": "Anggi Marito",
+        "file": "audio/grup1-05-tak-segampang-itu.mp3",
+        "bait": "Waktu demi waktu, hari demi hari\nSadar ku t'lah sendiri",
+        "answer": "Kau t'lah pergi jauh, tinggalkan diriku\nTernyata ku rindu",
+        "year": "2022",
+        "timestamp": {
+          "start": 15.55,
+          "end": 45.78
+        },
+        "audioSource": "local",
+        "previewSeconds": 30,
+        "verification": "verified",
+        "syncStatus": "needs_audio_upload",
+        "lyricsSource": "https://lrclib.net"
+      }
+    ]
+  },
+  {
+    "name": "Grup 2",
+    "meta": "Galau Pop",
+    "songs": [
+      {
+        "title": "Sempurna",
+        "artist": "Andra and the Backbone",
+        "file": "audio/grup2-01-sempurna.mp3",
+        "bait": "Kau begitu sempurna, di mataku kau begitu indah\nKau membuat diriku akan selalu memujamu",
+        "answer": "Di setiap langkahku, 'ku 'kan selalu memikirkan dirimu\n'Tak bisa 'ku bayangkan hidupku tanpa cintamu",
+        "year": "2007",
+        "timestamp": {
+          "start": 8.96,
+          "end": 45.94
+        },
+        "audioSource": "local",
+        "previewSeconds": 30,
+        "verification": "verified",
+        "syncStatus": "needs_audio_upload",
+        "lyricsSource": "https://lrclib.net"
+      },
+      {
+        "title": "Tentang Aku, Kau & Dia",
+        "artist": "Kangen Band",
+        "file": "audio/grup2-02-tentang-aku-kau-dia.mp3",
+        "bait": "Selayaknya engkau tahu\nBetapa ku mencintaimu",
+        "answer": "Kau tenangkanku dari mimpi burukku\nSelayaknya kau mengerti",
+        "year": "2007",
+        "timestamp": {
+          "start": 17.2,
+          "end": 38.63
+        },
+        "audioSource": "local",
+        "previewSeconds": 30,
+        "verification": "verified",
+        "syncStatus": "needs_audio_upload",
+        "lyricsSource": "https://lrclib.net"
+      },
+      {
+        "title": "Asal Kau Bahagia",
+        "artist": "Armada",
+        "file": "audio/grup2-03-asal-kau-bahagia.mp3",
+        "bait": "Yang, kemarin ku melihatmu\nKau bertemu dengannya",
+        "answer": "Kurasa sekarang kau masih\nMemikirkan tentang dia",
+        "year": "2017",
+        "timestamp": {
+          "start": 14.79,
+          "end": 43.5
+        },
+        "audioSource": "local",
+        "previewSeconds": 30,
+        "verification": "verified",
+        "syncStatus": "needs_audio_upload",
+        "lyricsSource": "https://lrclib.net"
+      },
+      {
+        "title": "Gajah",
+        "artist": "Tulus",
+        "file": "audio/grup2-04-gajah.mp3",
+        "bait": "Setidaknya punya tujuh puluh tahun\nTak bisa melompat kumahir berenang",
+        "answer": "Bahagia melihat kawanan betina\nBerkumpul bersama sampai ajal",
+        "year": "2014",
+        "timestamp": {
+          "start": 0,
+          "end": 21.41
+        },
+        "audioSource": "local",
+        "previewSeconds": 30,
+        "verification": "verified",
+        "syncStatus": "needs_audio_upload",
+        "lyricsSource": "https://lrclib.net"
+      },
+      {
+        "title": "Akad",
+        "artist": "Payung Teduh",
+        "file": "audio/grup2-05-akad.mp3",
+        "bait": "Betapa bahagianya hatiku\nSaat ku duduk berdua denganmu",
+        "answer": "Berjalan bersamamu\nMenarilah denganku",
+        "year": "2017",
+        "timestamp": {
+          "start": 11.32,
+          "end": 24.35
+        },
+        "audioSource": "local",
+        "previewSeconds": 30,
+        "verification": "verified",
+        "syncStatus": "needs_audio_upload",
+        "lyricsSource": "https://lrclib.net"
+      }
+    ]
+  },
+  {
+    "name": "Grup 3",
+    "meta": "Nostalgia",
+    "songs": [
+      {
+        "title": "Pupus",
+        "artist": "Dewa 19",
+        "file": "audio/grup3-01-pupus.mp3",
+        "bait": "Aku tak mengerti apa yang kurasa\nRindu yang tak pernah begitu hebatnya",
+        "answer": "Aku mencintaimu lebih dari yang kau tau\nMeski kau takkan pernah tau",
+        "year": "2002",
+        "timestamp": {
+          "start": 26.24,
+          "end": 53.74
+        },
+        "audioSource": "local",
+        "previewSeconds": 30,
+        "verification": "verified",
+        "syncStatus": "needs_audio_upload",
+        "lyricsSource": "https://lrclib.net"
+      },
+      {
+        "title": "Menghapus Jejakmu",
+        "artist": "Peterpan",
+        "file": "audio/grup3-02-menghapus-jejakmu.mp3",
+        "bait": "Terus melangkah melupakanmu\nLelah hati perhatikan sikapmu",
+        "answer": "Jalan pikiranmu buatku ragu\nTak mungkin ini tetap bertahan",
+        "year": "2007",
+        "timestamp": {
+          "start": 17.28,
+          "end": 32.68
+        },
+        "audioSource": "local",
+        "previewSeconds": 30,
+        "verification": "verified",
+        "syncStatus": "needs_audio_upload",
+        "lyricsSource": "https://lrclib.net"
+      },
+      {
+        "title": "Kehadiranmu",
+        "artist": "Vagetoz",
+        "file": "audio/grup3-03-kehadiranmu.mp3",
+        "bait": "Hadirnya dirimu\nBerikan suasana baru",
+        "answer": "Kau mampu tenangkan aku\nDi saat risau dalam hatiku",
+        "year": "2007",
+        "timestamp": {
+          "start": 18.72,
+          "end": 37.91
+        },
+        "audioSource": "local",
+        "previewSeconds": 30,
+        "verification": "verified",
+        "syncStatus": "needs_audio_upload",
+        "lyricsSource": "https://lrclib.net"
+      },
+      {
+        "title": "Dia",
+        "artist": "Anji",
+        "file": "audio/grup3-04-dia.mp3",
+        "bait": "Di suatu hari tanpa sengaja kita bertemu\nAku yang pernah terluka kembali mengenal cinta",
+        "answer": "Hati ini kembali temukan senyum yang hilang\nSemua itu karena dia",
+        "year": "2016",
+        "timestamp": {
+          "start": 15.34,
+          "end": 43.29
+        },
+        "audioSource": "local",
+        "previewSeconds": 30,
+        "verification": "verified",
+        "syncStatus": "needs_audio_upload",
+        "lyricsSource": "https://lrclib.net"
+      },
+      {
+        "title": "Monokrom",
+        "artist": "Tulus",
+        "file": "audio/grup3-05-monokrom.mp3",
+        "bait": "Lembaran foto hitam-putih\nAku coba ingat lagi warna bajumu kala itu",
+        "answer": "Kali pertama di hidupku\nManusia lain memelukku",
+        "year": "2016",
+        "timestamp": {
+          "start": 25.76,
+          "end": 48.28
+        },
+        "audioSource": "local",
+        "previewSeconds": 30,
+        "verification": "verified",
+        "syncStatus": "needs_audio_upload",
+        "lyricsSource": "https://lrclib.net"
+      }
+    ]
+  },
+  {
+    "name": "Grup 4",
+    "meta": "Sing Along",
+    "songs": [
+      {
+        "title": "Kenangan Terindah",
+        "artist": "Samsons",
+        "file": "audio/grup4-01-kenangan-terindah.mp3",
+        "bait": "Aku yang lemah tanpamu\nAku yang rentan karena",
+        "answer": "Cinta yang t'lah hilang darimu\nYang mampu menyanjungku",
+        "year": "2005",
+        "timestamp": {
+          "start": 20.0,
+          "end": 36.24
+        },
+        "audioSource": "local",
+        "previewSeconds": 30,
+        "verification": "verified",
+        "syncStatus": "needs_audio_upload",
+        "lyricsSource": "https://lrclib.net"
+      },
+      {
+        "title": "Dan",
+        "artist": "Sheila on 7",
+        "file": "audio/grup4-02-dan.mp3",
+        "bait": "Dan...\nDan bila esok datang kembali",
+        "answer": "Seperti sedia kala\nDi mana kau bisa bercanda",
+        "year": "1999",
+        "timestamp": {
+          "start": 16.04,
+          "end": 31.6
+        },
+        "audioSource": "local",
+        "previewSeconds": 30,
+        "verification": "verified",
+        "syncStatus": "needs_audio_upload",
+        "lyricsSource": "https://lrclib.net"
+      },
+      {
+        "title": "Terima Kasih Cinta",
+        "artist": "Afgan",
+        "file": "audio/grup4-03-terima-kasih-cinta.mp3",
+        "bait": "Tersadar di dalam sepiku\nSetelah jauh melangkah",
+        "answer": "Cahaya kasihmu menuntunku\nKembali dalam dekap tanganmu",
+        "year": "2008",
+        "timestamp": {
+          "start": 16.41,
+          "end": 46.77
+        },
+        "audioSource": "local",
+        "previewSeconds": 30,
+        "verification": "verified",
+        "syncStatus": "needs_audio_upload",
+        "lyricsSource": "https://lrclib.net"
+      },
+      {
+        "title": "Tetap Dalam Jiwa",
+        "artist": "Isyana Sarasvati",
+        "file": "audio/grup4-04-tetap-dalam-jiwa.mp3",
+        "bait": "Tak pernah terbayang akan jadi seperti\nIni pada akhirnya",
+        "answer": "Semua waktu yang pernah kita lewati bersama\nNyata hilang dan sirna",
+        "year": "2015",
+        "timestamp": {
+          "start": 12.55,
+          "end": 28.14
+        },
+        "audioSource": "local",
+        "previewSeconds": 30,
+        "verification": "verified",
+        "syncStatus": "needs_audio_upload",
+        "lyricsSource": "https://lrclib.net"
+      },
+      {
+        "title": "Zona Nyaman",
+        "artist": "Fourtwnty",
+        "file": "audio/grup4-05-zona-nyaman.mp3",
+        "bait": "Pagi ke pagi, ku terjebak di dalam ambisi\nSeperti orang-orang berdasi yang gila materi",
+        "answer": "Rasa bosan membukakan jalan mencari peran\nKeluarlah dari zona nyaman",
+        "year": "2017",
+        "timestamp": {
+          "start": 15.84,
+          "end": 47.41
+        },
+        "audioSource": "local",
+        "previewSeconds": 30,
+        "verification": "verified",
+        "syncStatus": "needs_audio_upload",
+        "lyricsSource": "https://lrclib.net"
+      }
+    ]
+  }
 ];
 function normalizeSongData(data){
   if(Array.isArray(data))return {groups:data, meta:["Lintas Era","Galau Pop","Nostalgia","Sing Along"], years:{}};
   if(data&&Array.isArray(data.groups))return {groups:data.groups.map(g=>({name:g.name,songs:g.songs||[]})), meta:data.groups.map(g=>g.meta||g.name), years:Object.fromEntries(data.groups.flatMap(g=>(g.songs||[]).map(s=>[s.title,s.year||''])))};
   return null;
 }
-function loadGroups(){try{const saved=normalizeSongData(JSON.parse(localStorage.getItem(STORAGE_SONGS)||'null'));if(saved)return saved.groups;}catch(e){}return DEFAULT_GROUPS;}
+function hasLegacyMedia(groups){return groups.some(g=>(g.songs||[]).some(s=>String(s.file||'').includes('cdn.andotherstori')||String(s.file||'').includes('youtube')||!s.timestamp));}
+function loadGroups(){try{const saved=normalizeSongData(JSON.parse(localStorage.getItem(STORAGE_SONGS)||'null'));if(saved&&!hasLegacyMedia(saved.groups))return saved.groups;if(saved&&hasLegacyMedia(saved.groups))localStorage.removeItem(STORAGE_SONGS);}catch(e){}return DEFAULT_GROUPS;}
 let GROUPS = loadGroups();
-let GROUP_META = ["Lintas Era", "Galau Pop", "Nostalgia", "Sing Along"];
+let DEFAULT_NORMALIZED = normalizeSongData({groups:DEFAULT_GROUPS});
+let GROUP_META = DEFAULT_NORMALIZED.meta || ["Lintas Era", "Galau Pop", "Nostalgia", "Sing Along"];
 let YEAR_MAP = {
   "Mungkin Nanti":"2004","Laskar Pelangi":"2008","Surat Cinta untuk Starla":"2016","To The Bone":"2019","Tak Segampang Itu":"2022",
   "Sempurna":"2007","Tentang Aku, Kau & Dia":"2007","Asal Kau Bahagia":"2017","Gajah":"2014","Akad":"2017",
