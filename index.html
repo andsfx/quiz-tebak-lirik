@@ -55,6 +55,8 @@
   .score-buttons{display:none;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:24px}
   .answer-wrap{text-align:center;margin-top:28px}
   .intro-copy{text-align:center;color:#a3a3a3;font-size:14px;line-height:1.55;margin:4px 0 18px}
+  .howto{background:#222;border-radius:6px;padding:16px 18px;margin:0 0 20px;color:#bdbdbd;font-size:13px;line-height:1.55;display:grid;gap:8px;text-align:left}
+  .howto b{color:#fff;font-weight:1000}
   .final-title{font-size:28px;font-weight:1000;text-align:center;margin:2px 0 16px}
   .ranking{display:grid;gap:10px}
   .rank-row{display:flex;align-items:center;gap:12px;background:#222;border-radius:6px;padding:14px}
@@ -79,6 +81,12 @@
   <main class="panel">
     <section id="screen-intro" class="screen active">
       <div class="intro-copy">Pilih grup pertama. Putar bait, peserta lanjutkan lirik, lalu kasih skor.</div>
+      <div class="howto">
+        <div><b>1.</b> Host pilih grup, lalu klik <b>Mulai Grup</b>.</div>
+        <div><b>2.</b> Klik <b>Play Bait</b>. Peserta nebak lanjutan lirik.</div>
+        <div><b>3.</b> Klik <b>Lihat Jawaban</b>, lalu beri skor: <b>2</b> persis, <b>1</b> sebagian, <b>0</b> salah.</div>
+        <div><b>4.</b> Tiap grup dapat 5 lagu. Ranking keluar setelah semua grup selesai.</div>
+      </div>
       <button class="btn full" onclick="startGroup(0)">Mulai Grup 1</button>
       <a class="admin-link" href="admin.html">Admin Timestamp</a>
     </section>
