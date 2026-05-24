@@ -39,7 +39,7 @@
   .progress-fill{height:100%;background:var(--green);border-radius:inherit;width:0%}
   .song-row{display:flex;align-items:center;gap:14px;padding-bottom:14px;border-bottom:1px solid #242424}
   .song-art{width:54px;height:54px;border-radius:5px;background:#252525;display:grid;place-items:center;color:#9a9a9a;font-size:19px;flex:0 0 auto}
-  .song-main{min-width:0}.song-row.locked .song-title{filter:blur(6px);color:#777}.song-row.locked .song-artist{filter:blur(5px);color:#666}.song-row.locked .year{filter:blur(5px);color:#666}.song-row.locked .song-art{background:var(--green);color:var(--greenText)} .song-title{font-size:17px;font-weight:1000;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis} .song-artist{font-size:12px;color:#aaa;margin-top:4px;font-weight:700}
+  .song-main{min-width:0}.song-row.locked .song-title{color:#fff}.song-row.locked .song-artist{color:#888}.song-row.locked .year{color:#777}.song-row.locked .song-art{background:var(--green);color:var(--greenText)} .song-title{font-size:17px;font-weight:1000;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis} .song-artist{font-size:12px;color:#aaa;margin-top:4px;font-weight:700}
   .year{margin-left:auto;padding:4px 8px;border-radius:999px;background:#222;color:#aaa;font-size:10px;font-weight:900;flex:0 0 auto}
   .audio-box{margin-top:14px;background:var(--panel2);border-radius:6px;padding:10px}
   .audio-warning{display:none;background:var(--warningBg);color:var(--warningText);border-radius:4px;padding:8px 10px;font-size:10px;margin-bottom:8px;font-weight:800;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -70,36 +70,9 @@
   .footer{margin:0;padding-top:0;border-top:0;text-align:center;color:#6f6f6f;font-size:9px;align-self:end}
   .reset{font-weight:1000;letter-spacing:.14em;margin-bottom:6px;text-transform:uppercase;cursor:pointer;color:#777}
   .admin-link{display:inline-block;margin-top:4px;color:#777;text-decoration:none;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
-  .view-switch{position:fixed;right:16px;top:14px;z-index:20;display:flex;gap:6px;background:#050505;border:1px solid #2a2a2a;border-radius:999px;padding:4px;box-shadow:0 10px 30px rgba(0,0,0,.35)}
-  .view-btn{border:0;border-radius:999px;background:transparent;color:#888;height:28px;padding:0 12px;font-family:inherit;font-size:10px;font-weight:1000;letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
-  .view-btn.active{background:var(--green);color:var(--greenText)}
-  body.stage{--bg:#050510;--panel:#111127;--panel2:#17172f;--active:#1b1b35;--line:rgba(148,163,184,.18);--green:#22c55e;background:radial-gradient(circle at 65% 20%,rgba(168,85,247,.18),transparent 34%),radial-gradient(circle at 25% 85%,rgba(34,197,94,.12),transparent 32%),#050510}
-  body.stage .app{max-width:none;width:100vw;height:100vh;padding:26px 34px;grid-template-columns:300px 1fr;grid-template-rows:auto 1fr auto;gap:22px}
-  body.stage .header{grid-column:1/3;text-align:left;display:flex;align-items:end;justify-content:space-between;border-bottom:1px solid rgba(148,163,184,.16);padding-bottom:16px}
-  body.stage .kicker{font-size:13px;color:#a5b4fc}.stage h1{font-size:48px;margin:4px 0 0;background:linear-gradient(90deg,#fff,#c4b5fd,#f9a8d4);-webkit-background-clip:text;color:transparent}.stage .subtitle{font-size:16px;color:#cbd5e1}
-  body.stage .group-grid{grid-column:1;grid-row:2;grid-template-columns:1fr;align-content:start;gap:14px}
-  body.stage .group-card{min-height:118px;border-radius:18px;padding:18px;background:rgba(20,20,43,.82);border:1px solid rgba(148,163,184,.14);box-shadow:0 18px 50px rgba(0,0,0,.35)}
-  body.stage .group-card.active{border-color:rgba(34,197,94,.8);box-shadow:0 0 0 1px rgba(34,197,94,.28),0 20px 70px rgba(34,197,94,.12)}
-  body.stage .group-name{font-size:18px}.stage .score{font-size:44px;margin-top:18px}.stage .score span{font-size:16px}.stage .song-count{font-size:13px;color:#94a3b8}
-  body.stage .panel{grid-column:2;grid-row:2;background:rgba(17,17,39,.86);border:1px solid rgba(99,102,241,.32);border-radius:28px;padding:28px;box-shadow:0 30px 90px rgba(0,0,0,.42);display:flex;min-height:0;overflow:hidden}
-  body.stage .screen.active{width:100%;height:100%;min-height:0;overflow:hidden;display:flex;flex-direction:column}.stage .screen:not(.active){display:none}
-  body.stage .quiz-top{font-size:16px;margin-bottom:16px}.stage .quiz-group{font-size:17px}.stage .quiz-progress-text{font-size:17px;color:#e2e8f0}.stage .progress-track{height:6px;margin-bottom:28px;background:rgba(148,163,184,.18)}
-  body.stage .song-row{border:0;background:rgba(255,255,255,.045);border-radius:22px;padding:14px;margin-bottom:12px;flex:0 0 auto}.stage .song-art{width:70px;height:70px;border-radius:18px;background:linear-gradient(135deg,#6366f1,#a855f7,#ec4899);font-size:0;box-shadow:0 18px 40px rgba(168,85,247,.25)}.stage .song-art:after{content:'▶';font-size:30px;color:#fff}.stage .song-title{font-size:26px}.stage .song-artist{font-size:17px}.stage .year{font-size:15px;padding:8px 14px}
-  body.stage .audio-box{margin-top:0;padding:12px;border-radius:18px;background:rgba(255,255,255,.055);flex:0 0 auto}.stage audio{display:none}.stage .audio-warning{display:none!important}
-  body.stage .section-label{font-size:14px;margin:14px 0 10px;color:#c4b5fd;flex:0 0 auto}.stage .lyric-card{flex:1 1 auto;min-height:0;display:grid;place-items:center;border-radius:26px;padding:24px;background:radial-gradient(circle at 50% 20%,rgba(99,102,241,.25),transparent 40%),rgba(255,255,255,.06);overflow:hidden}.stage .lyric-text{font-size:clamp(34px,4.4vw,68px);line-height:1.1;text-align:center;letter-spacing:-1.4px}.stage .answer-card{font-size:clamp(28px,3.5vw,52px);border-radius:24px;padding:20px;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.35);max-height:22vh;overflow:hidden}
-  body.stage .answer-wrap{margin-top:12px;flex:0 0 auto}.stage .score-buttons{gap:14px;margin-top:12px;flex:0 0 auto}.stage .btn{height:46px;font-size:14px;padding:0 28px}.stage .btn.danger{background:#ef4444;color:#fff}.stage .btn.ghost{background:rgba(255,255,255,.06)}
-  body.stage .intro-copy{font-size:26px;line-height:1.35}.stage .howto{font-size:20px;line-height:1.5;border-radius:20px;padding:24px;gap:12px;background:rgba(255,255,255,.06)}.stage .final-title{font-size:54px}.stage .rank-row{border-radius:18px;padding:22px}.stage .rank-pos{width:56px;height:56px;font-size:22px}.stage .rank-name{font-size:28px}.stage .rank-score{font-size:42px}
-  body.stage .footer,.stage .view-switch,.stage .host-only{display:none!important}.stage .audio-box{background:transparent!important;padding:0!important}.stage .play-status{display:none}.stage #screen-question .song-main,.stage #screen-question .year{visibility:hidden}.stage.answer-visible #screen-question .song-main,.stage.answer-visible #screen-question .year{visibility:visible}
-  @media(max-width:900px),(max-height:760px){body.stage .app{padding:14px;grid-template-columns:220px 1fr;grid-template-rows:auto 1fr auto;gap:12px}body.stage .header{padding-bottom:8px}.stage h1{font-size:30px}.stage .kicker{font-size:10px}.stage .subtitle{font-size:12px}body.stage .group-grid{gap:8px}body.stage .group-card{min-height:86px;padding:10px;border-radius:14px}.stage .group-name{font-size:14px}.stage .score{font-size:28px;margin-top:8px}.stage .score span{font-size:11px}.stage .song-count{font-size:10px}body.stage .panel{padding:14px;border-radius:18px}.stage .quiz-top{font-size:12px;margin-bottom:8px}.stage .quiz-group,.stage .quiz-progress-text{font-size:12px}.stage .progress-track{height:4px;margin-bottom:10px}body.stage .song-row{padding:10px;border-radius:14px;margin-bottom:8px}.stage .song-art{width:48px;height:48px;border-radius:12px}.stage .song-art:after{font-size:22px}.stage .song-title{font-size:17px}.stage .song-artist{font-size:12px}.stage .year{font-size:11px}.stage audio{height:28px}.stage .audio-box{padding:8px;border-radius:12px}.stage .section-label{font-size:10px;margin:8px 0 6px}.stage .lyric-card{border-radius:16px;padding:14px}.stage .lyric-text{font-size:clamp(24px,4vw,42px);letter-spacing:-.8px}.stage .answer-card{font-size:clamp(22px,3.3vw,34px);padding:12px}.stage .btn{height:36px;font-size:11px;padding:0 18px}.stage .answer-wrap,.stage .score-buttons{margin-top:8px}.stage .score-buttons{gap:8px}.stage .intro-copy{font-size:16px}.stage .howto{font-size:13px;padding:14px;gap:6px}.stage .final-title{font-size:32px}.stage .rank-row{padding:12px;border-radius:12px}.stage .rank-pos{width:34px;height:34px;font-size:14px}.stage .rank-name{font-size:16px}.stage .rank-score{font-size:24px}}
-  @media(max-width:900px){body.stage .app{grid-template-columns:1fr;grid-template-rows:auto auto 1fr;padding:8px;gap:6px}body.stage .header,body.stage .panel{grid-column:1}body.stage .header{grid-row:1;display:block;text-align:center;padding-bottom:4px}body.stage .group-grid{grid-column:1;grid-row:2;grid-template-columns:repeat(4,1fr);gap:8px}body.stage .group-card{min-height:58px;padding:8px}.stage .group-label{font-size:8px}.stage .group-name{font-size:11px;margin-top:3px}.stage .score{font-size:20px;margin-top:4px}.stage .score span,.stage .song-count{font-size:9px}body.stage .panel{grid-row:3;min-height:0;height:auto}.stage .quiz-top,.stage .progress-track{display:none}.stage .footer{grid-row:4}.stage h1{font-size:24px}.stage .subtitle{display:none}.stage .kicker{font-size:9px}.stage .intro-copy{font-size:13px}.stage .howto{font-size:11px;line-height:1.3;padding:10px}.stage .lyric-text{font-size:clamp(18px,3.6vw,30px)}.stage .song-row{display:none}.stage .audio-box{display:none}.stage audio{height:26px}.stage .btn{height:32px;font-size:10px}.stage .section-label{font-size:9px;margin:6px 0 5px}.stage .answer-card{font-size:18px;max-height:18vh}.stage .score-buttons{grid-template-columns:repeat(3,1fr)}}
-  @media(max-width:640px){.view-switch{right:8px;top:8px}.app{padding:12px;gap:10px}.group-grid{grid-template-columns:repeat(2,1fr);gap:8px}.group-card{min-height:72px;padding:8px}.score{margin-top:8px;font-size:20px}.panel{padding:12px}.score-buttons{grid-template-columns:1fr}.song-title{white-space:normal}.btn{height:36px}.song-art{width:44px;height:44px}.lyric-card{padding:12px}.lyric-text{font-size:18px}h1{font-size:25px}.subtitle{font-size:11px}body.stage .app{padding:12px;grid-template-columns:1fr;grid-template-rows:auto auto 1fr auto}body.stage .header,body.stage .panel{grid-column:1}body.stage .group-grid{grid-column:1;grid-row:2;grid-template-columns:repeat(2,1fr)}body.stage .panel{grid-row:3;padding:14px}.stage h1{font-size:26px}.stage .subtitle{display:none}.stage .group-card{min-height:76px;padding:10px}.stage .score{font-size:24px}.stage .lyric-text{font-size:24px}.stage .btn{height:38px;font-size:11px}}
 </style>
 </head>
 <body>
-<div class="view-switch" aria-label="Pilih tampilan">
-  <button class="view-btn" id="btn-view-host" onclick="setViewMode('host')">Host</button>
-  <button class="view-btn" id="btn-view-stage" onclick="setViewMode('stage')">Stage</button>
-</div>
 <div class="app">
   <header class="header">
     <div class="kicker">Lyric Quiz - Indonesia</div>
@@ -141,8 +114,8 @@
         <div class="audio-warning" id="audio-warn"></div>
         <audio id="q-audio" controls preload="metadata"></audio>
         <iframe id="yt-frame" class="yt-frame" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-        <button class="btn full host-only" id="btn-play" onclick="togglePlayback()">▶ Play Bait</button>
-        <button class="btn full host-only ghost" id="btn-retry" onclick="playSegment()" style="display:none">Retry Audio</button>
+        <button class="btn full" id="btn-play" onclick="togglePlayback()">▶ Play Bait</button>
+        <button class="btn full ghost" id="btn-retry" onclick="playSegment()" style="display:none">Retry Audio</button>
         <div class="play-status" id="play-status">Ready</div>
         <div class="playbar"><div class="playbar-fill" id="playbar-fill"></div></div>
         <div class="audio-time"><span id="play-elapsed">0:00</span><span id="play-total">0:00</span></div>
@@ -151,8 +124,8 @@
       <div class="lyric-card"><div class="lyric-text" id="q-bait"></div></div>
       <div class="section-label" id="answer-label" style="display:none">Jawaban</div>
       <div class="answer-card lyric-text" id="q-answer"></div>
-      <div class="answer-wrap host-only"><button class="btn" id="btn-reveal" onclick="revealAnswer()">Lihat Jawaban</button></div>
-      <div class="score-buttons host-only" id="score-buttons"><button class="btn" onclick="score(2)">2 Persis</button><button class="btn" onclick="score(1)">1 Sebagian</button><button class="btn danger" onclick="score(0)">0 Salah</button></div><div class="utility-wrap host-only"><button class="btn ghost" onclick="toggleUtility()">⋯ Recovery</button><div class="utility-panel" id="utility-panel"><div class="recovery"><button class="btn ghost" onclick="undoLast()">Undo</button><button class="btn ghost" onclick="backSong()">Back</button><button class="btn ghost" onclick="skipSong()">Skip</button><button class="btn ghost" onclick="adjustScore(-1)">Score -</button><button class="btn ghost" onclick="adjustScore(1)">Score +</button></div></div></div>
+      <div class="answer-wrap"><button class="btn" id="btn-reveal" onclick="revealAnswer()">Lihat Jawaban</button></div>
+      <div class="score-buttons" id="score-buttons"><button class="btn" onclick="score(2)">2 Persis</button><button class="btn" onclick="score(1)">1 Sebagian</button><button class="btn danger" onclick="score(0)">0 Salah</button></div><div class="utility-wrap"><button class="btn ghost" onclick="toggleUtility()">⋯ Recovery</button><div class="utility-panel" id="utility-panel"><div class="recovery"><button class="btn ghost" onclick="undoLast()">Undo</button><button class="btn ghost" onclick="backSong()">Back</button><button class="btn ghost" onclick="skipSong()">Skip</button><button class="btn ghost" onclick="adjustScore(-1)">Score -</button><button class="btn ghost" onclick="adjustScore(1)">Score +</button></div></div></div>
     </section>
 
     <section id="screen-group-done" class="screen">
@@ -261,9 +234,7 @@ let YEAR_MAP = {
 };
 const STORAGE_SCORE = "quizTebakLirik_scores_v1";
 const STORAGE_TS = "quizTebakLirik_timestamps_v1";
-const STORAGE_VIEW = "quizTebakLirik_view_mode_v1";
 const STORAGE_HISTORY = "quizTebakLirik_history_v1";
-const STORAGE_RUNTIME = "quizTebakLirik_runtime_v1";
 let scores = loadScores();
 let progress = JSON.parse(localStorage.getItem('quizTebakLirik_progress_v2') || '[0,0,0,0]');
 let history = JSON.parse(localStorage.getItem(STORAGE_HISTORY) || '[]');
@@ -272,12 +243,9 @@ let ytPlayer=null, ytReadyPromise=null, ytStopTimer=null, ytLoadTimeout=null, pl
 function loadScores(){try{const s=JSON.parse(localStorage.getItem(STORAGE_SCORE)||'null');if(Array.isArray(s)&&s.length===GROUPS.length)return s;}catch(e){}return GROUPS.map(()=>0)}
 function saveScores(){localStorage.setItem(STORAGE_SCORE,JSON.stringify(scores));localStorage.setItem('quizTebakLirik_progress_v2',JSON.stringify(progress));localStorage.setItem(STORAGE_HISTORY,JSON.stringify(history.slice(-80)));}
 function loadTimestamps(){try{return JSON.parse(localStorage.getItem(STORAGE_TS)||'{}')}catch(e){return {}}}
-function setViewMode(mode){const isStage=mode==='stage';document.body.classList.toggle('stage',isStage);localStorage.setItem(STORAGE_VIEW,isStage?'stage':'host');document.getElementById('btn-view-host').classList.toggle('active',!isStage);document.getElementById('btn-view-stage').classList.toggle('active',isStage);}
-function initViewMode(){const q=new URLSearchParams(location.search);const fromUrl=q.get('view')||q.get('mode');setViewMode(fromUrl==='stage'||fromUrl==='projector'?'stage':'host');}
-function setAnswerVisible(visible){document.body.classList.toggle('answer-visible',!!visible);const row=document.getElementById('song-row');if(row)row.classList.toggle('locked',!visible);}
-function currentScreen(){return document.querySelector('.screen.active')?.id||'screen-intro'}
-function saveRuntime(){localStorage.setItem(STORAGE_RUNTIME,JSON.stringify({screen:currentScreen(),cur,scores,progress,answer:document.body.classList.contains('answer-visible'),t:Date.now()}));}
-function show(id){document.querySelectorAll('.screen').forEach(el=>el.classList.toggle('active',el.id===id));if(id!=='screen-question')setAnswerVisible(false);renderGroups();saveRuntime();}
+function renderSongMeta(visible=false){const s=getCurrentSong?.();if(!s)return;document.getElementById('q-title').textContent=visible?s.title:'Tebak judul lagu';document.getElementById('q-artist').textContent=visible?s.artist:'Dengar bait, lanjutkan lirik';document.getElementById('q-year').textContent=visible?(s.year||YEAR_MAP[s.title]||''):'????';}
+function setAnswerVisible(visible){document.body.classList.toggle('answer-visible',!!visible);const row=document.getElementById('song-row');if(row)row.classList.toggle('locked',!visible);renderSongMeta(!!visible);}
+function show(id){document.querySelectorAll('.screen').forEach(el=>el.classList.toggle('active',el.id===id));if(id!=='screen-question')setAnswerVisible(false);renderGroups();}
 function renderGroups(){const box=document.getElementById('group-grid');box.innerHTML='';GROUPS.forEach((g,i)=>{const d=document.createElement('div');d.className='group-card '+(i===cur.g?'active':'');d.innerHTML=`<div class="group-label">GRUP ${String(i+1).padStart(2,'0')}</div><div class="group-name">${GROUP_META[i]}</div><div class="score">${scores[i]} <span>/10</span></div><div class="song-count">${progress[i]||0} / 5 lagu</div>`;d.onclick=()=>startGroup(i);box.appendChild(d);})}
 function startGroup(idx){cur.g=idx;cur.q=progress[idx]||0;if(cur.q>=GROUPS[idx].songs.length)cur.q=0;document.getElementById('gi-label').textContent=`GRUP ${String(idx+1).padStart(2,'0')} - ${GROUP_META[idx].toUpperCase()}`;document.getElementById('gi-copy').textContent=`${GROUPS[idx].name} siap. ${GROUPS[idx].songs.length} lagu menunggu.`;show('screen-group-intro');}
 function getCurrentSong(){return GROUPS[cur.g].songs[cur.q];}
@@ -292,28 +260,19 @@ function stopYTTimer(){if(ytStopTimer){clearInterval(ytStopTimer);ytStopTimer=nu
 function stopPlayback(){stopYTTimer();try{if(ytPlayer&&ytPlayer.pauseVideo)ytPlayer.pauseVideo();}catch(e){}setPlayUI('idle',activeSeg?`Stopped ${activeSeg.start.toFixed(2)}s → ${activeSeg.end.toFixed(2)}s`:'Stopped');}
 function togglePlayback(){if(playState==='playing'||playState==='loading')stopPlayback();else playSegment();}
 function toggleUtility(){document.getElementById('utility-panel')?.classList.toggle('show');}
-function startQuestion(){stopYTTimer();setAnswerVisible(false);const g=GROUPS[cur.g], s=g.songs[cur.q];document.getElementById('q-group').textContent=`GRUP ${String(cur.g+1).padStart(2,'0')} - ${GROUP_META[cur.g].toUpperCase()}`;document.getElementById('q-progress').textContent=`Lagu ${cur.q+1} dari ${g.songs.length}`;document.getElementById('q-progress-fill').style.width=`${((cur.q+1)/g.songs.length)*100}%`;document.getElementById('q-title').textContent=s.title;document.getElementById('q-artist').textContent=s.artist;document.getElementById('q-year').textContent=s.year||YEAR_MAP[s.title]||'';document.getElementById('q-bait').textContent=s.bait;document.getElementById('q-answer').textContent=s.answer;document.getElementById('q-answer').style.display='none';document.getElementById('answer-label').style.display='none';document.getElementById('btn-reveal').style.display='inline-block';document.getElementById('score-buttons').style.display='none';document.getElementById('utility-panel')?.classList.remove('show');const frame=document.getElementById('yt-frame');frame.classList.add('show');const audio=document.getElementById('q-audio');audio.pause();audio.removeAttribute('src');audio.style.display='none';activeSeg=segFor(s);setPlayProgress(0,0,activeSeg.end-activeSeg.start);setPlayUI('idle',`Ready ${activeSeg.start.toFixed(2)}s → ${activeSeg.end.toFixed(2)}s`);show('screen-question');loadYTPlayer(s).then(p=>{try{p.cueVideoById({videoId:activeSeg.id,startSeconds:activeSeg.start,endSeconds:activeSeg.end});}catch(e){}});} 
+function startQuestion(){stopYTTimer();setAnswerVisible(false);const g=GROUPS[cur.g], s=g.songs[cur.q];document.getElementById('q-group').textContent=`GRUP ${String(cur.g+1).padStart(2,'0')} - ${GROUP_META[cur.g].toUpperCase()}`;document.getElementById('q-progress').textContent=`Lagu ${cur.q+1} dari ${g.songs.length}`;document.getElementById('q-progress-fill').style.width=`${((cur.q+1)/g.songs.length)*100}%`;document.getElementById('q-bait').textContent=s.bait;document.getElementById('q-answer').textContent=s.answer;document.getElementById('q-answer').style.display='none';document.getElementById('answer-label').style.display='none';document.getElementById('btn-reveal').style.display='inline-block';document.getElementById('score-buttons').style.display='none';document.getElementById('utility-panel')?.classList.remove('show');const frame=document.getElementById('yt-frame');frame.classList.add('show');const audio=document.getElementById('q-audio');audio.pause();audio.removeAttribute('src');audio.style.display='none';activeSeg=segFor(s);setPlayProgress(0,0,activeSeg.end-activeSeg.start);setPlayUI('idle',`Ready ${activeSeg.start.toFixed(2)}s → ${activeSeg.end.toFixed(2)}s`);show('screen-question');loadYTPlayer(s).then(p=>{try{p.cueVideoById({videoId:activeSeg.id,startSeconds:activeSeg.start,endSeconds:activeSeg.end});}catch(e){}});} 
 async function playSegment(){const s=getCurrentSong(), seg=segFor(s);activeSeg=seg;setPlayProgress(0,0,seg.end-seg.start);setPlayUI('loading','Loading...');const loadingSince=Date.now();if(ytLoadTimeout)clearTimeout(ytLoadTimeout);ytLoadTimeout=setTimeout(()=>{if(playState==='loading')setPlayUI('error','Error: audio belum jalan. Klik Retry.',true)},8000);const p=await loadYTPlayer(s);if(!p)return;try{p.loadVideoById({videoId:seg.id,startSeconds:seg.start,endSeconds:seg.end});p.playVideo();stopYTTimer();ytStopTimer=setInterval(()=>{try{const state=p.getPlayerState?.();const now=p.getCurrentTime?.()||seg.start;const elapsed=Math.max(0,now-seg.start),total=Math.max(1,seg.end-seg.start);if(state===YT.PlayerState.PLAYING){setPlayUI('playing',`Playing ${seg.start.toFixed(2)}s → ${seg.end.toFixed(2)}s`);setPlayProgress(elapsed/total,elapsed,total);}else if(playState==='loading'&&Date.now()-loadingSince>8000){setPlayUI('error','Error: audio belum jalan. Klik Retry.',true);stopYTTimer();}if(now>=seg.end){p.pauseVideo();stopYTTimer();setPlayProgress(1,total,total);setPlayUI('ended','Ended. Replay ready.');}}catch(e){}},150);}catch(e){setPlayUI('error','Error: '+e.message,true)}}
-function revealAnswer(){setAnswerVisible(true);document.getElementById('q-answer').style.display='block';document.getElementById('answer-label').style.display='block';document.getElementById('btn-reveal').style.display='none';document.getElementById('score-buttons').style.display='grid';saveRuntime();}
+function revealAnswer(){setAnswerVisible(true);document.getElementById('q-answer').style.display='block';document.getElementById('answer-label').style.display='block';document.getElementById('btn-reveal').style.display='none';document.getElementById('score-buttons').style.display='grid';}
 function pushHistory(action,delta=0){history.push({action,g:cur.g,q:cur.q,scoreDelta:delta,scores:[...scores],progress:[...progress],time:Date.now()});saveScores()}
 function score(n){pushHistory('score',n);scores[cur.g]+=n;cur.q++;progress[cur.g]=Math.min(cur.q,GROUPS[cur.g].songs.length);saveScores();const g=GROUPS[cur.g];if(cur.q>=g.songs.length){document.getElementById('gd-name').textContent=`${g.name} selesai`;document.getElementById('gd-score').textContent=scores[cur.g];document.getElementById('btn-next-group').textContent=cur.g>=GROUPS.length-1?'Lihat Hasil Akhir':'Lanjut Grup Berikutnya';show('screen-group-done');}else startQuestion();}
 function undoLast(){const h=history.pop();if(!h){alert('Belum ada aksi untuk undo');return}scores=h.scores;progress=h.progress;cur={g:h.g,q:h.q};saveScores();startQuestion();}
 function skipSong(){pushHistory('skip',0);cur.q++;progress[cur.g]=Math.min(cur.q,GROUPS[cur.g].songs.length);saveScores();if(cur.q>=GROUPS[cur.g].songs.length)show('screen-group-done');else startQuestion();}
 function backSong(){pushHistory('back',0);cur.q=Math.max(0,cur.q-1);progress[cur.g]=cur.q;saveScores();startQuestion();}
-function adjustScore(delta){scores[cur.g]=Math.max(0,scores[cur.g]+delta);saveScores();renderGroups();saveRuntime();}
+function adjustScore(delta){scores[cur.g]=Math.max(0,scores[cur.g]+delta);saveScores();renderGroups();}
 function nextGroup(){if(cur.g>=GROUPS.length-1){renderFinal();show('screen-final');}else startGroup(cur.g+1);}
 function renderFinal(){const ranked=GROUPS.map((g,i)=>({name:g.name,meta:GROUP_META[i],score:scores[i]})).sort((a,b)=>b.score-a.score);const el=document.getElementById('ranking');el.innerHTML='';ranked.forEach((r,i)=>{const row=document.createElement('div');row.className='rank-row';row.innerHTML=`<div class="rank-pos">${i+1}</div><div class="rank-name">${r.name} · ${r.meta}</div><div class="rank-score">${r.score}</div>`;el.appendChild(row);})}
 function resetAll(){if(!confirm('Reset semua skor? Semua progress lokal terhapus.'))return;scores=GROUPS.map(()=>0);progress=GROUPS.map(()=>0);history=[];cur={g:0,q:0};saveScores();show('screen-intro');}
 
-function applyRuntime(rt){
-  if(!rt||!document.body.classList.contains('stage'))return;
-  scores=rt.scores||scores;progress=rt.progress||progress;cur=rt.cur||cur;
-  if(rt.screen==='screen-question'){startQuestion();if(rt.answer){document.getElementById('q-answer').style.display='block';document.getElementById('answer-label').style.display='block';setAnswerVisible(true);}return;}
-  if(rt.screen==='screen-final'){renderFinal();show('screen-final');return;}
-  if(rt.screen==='screen-group-done'){document.getElementById('gd-name').textContent=`${GROUPS[cur.g].name} selesai`;document.getElementById('gd-score').textContent=scores[cur.g];show('screen-group-done');return;}
-  show(rt.screen||'screen-intro');
-}
-window.addEventListener('storage',e=>{if(e.key===STORAGE_RUNTIME){try{applyRuntime(JSON.parse(e.newValue||'{}'))}catch(_){}}});
 
 async function loadSongData(){
   try{
@@ -327,7 +286,7 @@ async function loadSongData(){
     if(loaded){GROUPS=loaded.groups;GROUP_META=loaded.meta;YEAR_MAP={...YEAR_MAP,...loaded.years};}
   }catch(e){}
 }
-loadSongData().then(()=>{scores=loadScores();initViewMode();renderGroups();try{applyRuntime(JSON.parse(localStorage.getItem(STORAGE_RUNTIME)||'{}'))}catch(e){}});
+loadSongData().then(()=>{scores=loadScores();renderGroups();});
 </script>
 </body>
 </html>
