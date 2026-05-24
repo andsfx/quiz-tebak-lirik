@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Admin · Timestamp Tebak Lirik</title>
+<link rel="icon" href="data:," />
+<style>
+  :root{
+    --bg:#0f1115;
+    --panel:#161a22;
+    --panel2:#1c2230;
+    --text:#e8ecf3;
+    --muted:#9aa3b2;
+    --accent:#ffb84d;
+    --accent2:#7cd1ff;
+    --good:#5ddb8f;
+    --warn:#ff7676;
+    --border:#2a3142;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+  body{padding:20px;max-width:1100px;margin:0 auto}
+  h1{margin:4px 0 6px}
+  .sub{color:var(--muted);margin-bottom:20px}
+  .grid{display:grid;grid-template-columns:1fr;gap:14px}
+  .song{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:14px}
+  .song h3{margin:0 0 4px;font-size:16px}
+  .song .meta{color:var(--muted);font-size:13px;margin-bottom:8px}
+  audio{width:100%;max-width:520px}
+  .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:8px}
+  .btn{background:var(--accent);color:#1a1a1a;border:0;padding:8px 14px;border-radius:8px;font-weight:700;cursor:pointer;font-size:14px}
+  .btn.ghost{background:transparent;color:var(--text);border:1px solid var(--border)}
+  .btn.cool{background:var(--accent2);color:#0b1f2a}
+  .btn.warn{background:var(--warn);color:#2a0b0b}
+  .btn.ok{background:var(--good);color:#0b1f12}
+  .ts{background:var(--panel2);padding:6px 10px;border-radius:6px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;min-width:140px;text-align:center}
+  .group-head{margin-top:16px;font-size:18px;color:var(--accent)}
+  .topbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+  textarea{width:100%;min-height:120px;background:var(--panel2);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:10px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px}
+</style>
+</head>
+<body>
+<h1>⚙ Admin Timestamp</h1>
+<div class="sub">Tandai segment bait untuk tiap lagu. Tersimpan otomatis di browser ini (<code>localStorage</code>). Export/Import untuk backup.</div>
+
+<div class="topbar">
+  <a class="btn ghost" href="index.html">⬅ Kembali ke Quiz</a>
+  <button class="btn cool" onclick="doExport()">💾 Export JSON</button>
+  <button class="btn cool" onclick="document.getElementById('imp').classList.toggle('hide')">📥 Import JSON</button>
+  <button class="btn warn" onclick="clearAll()">🗑 Hapus Semua</button>
+</div>
+
+<div id="imp" class="hide" style="margin-bottom:16px">
+  <textarea id="imp-text" placeholder='Paste JSON di sini, lalu klik Apply...'></textarea>
+  <div class="row"><button class="btn ok" onclick="doImport()">✓ Apply</button></div>
+</div>
+
+<div id="list" class="grid"></div>
+
+<script>
+const GROUPS = [
+  { name: "Grup 1", songs: [
+    { title: "Mungkin Nanti", artist: "Peterpan", file: "audio/grup1-01-mungkin-nanti.mp3" },
+    { title: "Laskar Pelangi", artist: "Nidji", file: "audio/grup1-02-laskar-pelangi.mp3" },
+    { title: "Surat Cinta untuk Starla", artist: "Virgoun", file: "audio/grup1-03-surat-cinta-untuk-starla.mp3" },
+    { title: "To The Bone", artist: "Pamungkas", file: "audio/grup1-04-to-the-bone.mp3" },
+    { title: "Tak Segampang Itu", artist: "Anggi Marito", file: "audio/grup1-05-tak-segampang-itu.mp3" }
+  ]},
+  { name: "Grup 2", songs: [
+    { title: "Sempurna", artist: "Andra and the Backbone", file: "audio/grup2-01-sempurna.mp3" },
+    { title: "Tentang Aku, Kau & Dia", artist: "Kangen Band", file: "audio/grup2-02-tentang-aku-kau-dan-dia.mp3" },
+    { title: "Asal Kau Bahagia", artist: "Armada", file: "audio/grup2-03-asal-kau-bahagia.mp3" },
+    { title: "Gajah", artist: "Tulus", file: "audio/grup2-04-gajah.mp3" },
+    { title: "Akad", artist: "Payung Teduh", file: "audio/grup2-05-akad.mp3" }
+  ]},
+  { name: "Grup 3", songs: [
+    { title: "Pupus", artist: "Dewa 19", file: "audio/grup3-01-pupus.mp3" },
+    { title: "Menghapus Jejakmu", artist: "Peterpan", file: "audio/grup3-02-menghapus-jejakmu.mp3" },
+    { title: "Kehadiranmu", artist: "Vagetoz", file: "audio/grup3-03-kehadiranmu.mp3" },
+    { title: "Dia", artist: "Anji", file: "audio/grup3-04-dia.mp3" },
+    { title: "Monokrom", artist: "Tulus", file: "audio/grup3-05-monokrom.mp3" }
+  ]},
+  { name: "Grup 4", songs: [
+    { title: "Kenangan Terindah", artist: "Samsons", file: "audio/grup4-01-kenangan-terindah.mp3" },
+    { title: "Dan", artist: "Sheila on 7", file: "audio/grup4-02-dan.mp3" },
+    { title: "Terima Kasih Cinta", artist: "Afgan", file: "audio/grup4-03-terima-kasih-cinta.mp3" },
+    { title: "Tetap Dalam Jiwa", artist: "Isyana Sarasvati", file: "audio/grup4-04-tetap-dalam-jiwa.mp3" },
+    { title: "Zona Nyaman", artist: "Fourtwnty", file: "audio/grup4-05-zona-nyaman.mp3" }
+  ]}
+];
+
+const STORAGE_TS = "quizTebakLirik_timestamps_v1";
+
+function loadTS(){
+  try{ return JSON.parse(localStorage.getItem(STORAGE_TS) || "{}"); }
+  catch(e){ return {}; }
+}
+function saveTS(obj){ localStorage.setItem(STORAGE_TS, JSON.stringify(obj)); }
+function fmt(t){ if(t==null) return "--"; return t.toFixed(2)+"s"; }
+
+function render(){
+  const ts = loadTS();
+  const list = document.getElementById("list");
+  list.innerHTML = "";
+  GROUPS.forEach((g, gi) => {
+    const head = document.createElement("div");
+    head.className = "group-head";
+    head.textContent = g.name;
+    list.appendChild(head);
+    g.songs.forEach((s, qi) => {
+      const key = `g${gi+1}q${qi}`;
+      const seg = ts[key] || {};
+      const card = document.createElement("div");
+      card.className = "song";
+      card.innerHTML = `
+        <h3>${qi+1}. ${s.title}</h3>
+        <div class="meta">${s.artist} · <code>${key}</code></div>
+        <audio controls preload="metadata" src="${s.file}"></audio>
+        <div class="row">
+          <button class="btn" data-act="start">Mark Start</button>
+          <div class="ts" data-slot="start">${fmt(seg.start)}</div>
+          <button class="btn" data-act="end">Mark End</button>
+          <div class="ts" data-slot="end">${fmt(seg.end)}</div>
+          <button class="btn cool" data-act="preview">▶ Preview Bait</button>
+          <button class="btn warn" data-act="clear">Clear</button>
+        </div>
+      `;
+      const audio = card.querySelector("audio");
+      const startSlot = card.querySelector('[data-slot="start"]');
+      const endSlot = card.querySelector('[data-slot="end"]');
+      card.querySelectorAll("button[data-act]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const cur = loadTS();
+          cur[key] = cur[key] || {};
+          const act = btn.dataset.act;
+          if(act === "start"){ cur[key].start = audio.currentTime; startSlot.textContent = fmt(cur[key].start); saveTS(cur); }
+          else if(act === "end"){ cur[key].end = audio.currentTime; endSlot.textContent = fmt(cur[key].end); saveTS(cur); }
+          else if(act === "clear"){ delete cur[key]; saveTS(cur); startSlot.textContent="--"; endSlot.textContent="--"; }
+          else if(act === "preview"){
+            const seg = cur[key];
+            if(!seg || seg.start==null || seg.end==null){ alert("Set Start dan End dulu."); return; }
+            audio.currentTime = seg.start;
+            audio.play();
+            const handler = () => {
+              if(audio.currentTime >= seg.end){
+                audio.pause();
+                audio.removeEventListener("timeupdate", handler);
+              }
+            };
+            audio.addEventListener("timeupdate", handler);
+          }
+        });
+      });
+      list.appendChild(card);
+    });
+  });
+}
+
+function doExport(){
+  const data = JSON.stringify(loadTS(), null, 2);
+  const blob = new Blob([data], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "quiz-timestamps.json";
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function doImport(){
+  try{
+    const obj = JSON.parse(document.getElementById("imp-text").value);
+    saveTS(obj);
+    alert("Imported. Reloading...");
+    location.reload();
+  }catch(e){ alert("Invalid JSON: "+e.message); }
+}
+
+function clearAll(){
+  if(!confirm("Hapus semua timestamp?")) return;
+  localStorage.removeItem(STORAGE_TS);
+  location.reload();
+}
+
+document.getElementById('imp').classList.add('hide');
+const style = document.createElement('style');
+style.textContent = '.hide{display:none}';
+document.head.appendChild(style);
+
+render();
+</script>
+</body>
+</html>

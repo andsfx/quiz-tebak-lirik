@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Tebak Lirik · 4 Grup</title>
+<link rel="icon" href="data:," />
+<style>
+  :root{
+    --bg:#0f1115;
+    --panel:#161a22;
+    --panel2:#1c2230;
+    --text:#e8ecf3;
+    --muted:#9aa3b2;
+    --accent:#ffb84d;
+    --accent2:#7cd1ff;
+    --good:#5ddb8f;
+    --warn:#ff7676;
+    --border:#2a3142;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+  body{min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:24px}
+  .wrap{width:100%;max-width:980px}
+  h1{font-size:clamp(28px,4vw,44px);margin:8px 0 4px;letter-spacing:.3px}
+  h2{font-size:clamp(22px,3vw,32px);margin:0 0 8px}
+  .sub{color:var(--muted);margin-bottom:24px}
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:28px;box-shadow:0 8px 32px rgba(0,0,0,.4)}
+  .card+.card{margin-top:20px}
+  .row{display:flex;gap:12px;flex-wrap:wrap}
+  .btn{background:var(--accent);color:#1a1a1a;border:0;padding:14px 22px;border-radius:12px;font-weight:700;font-size:16px;cursor:pointer;transition:transform .1s, filter .1s}
+  .btn:hover{filter:brightness(1.08)}
+  .btn:active{transform:translateY(1px)}
+  .btn.ghost{background:transparent;color:var(--text);border:1px solid var(--border)}
+  .btn.ok{background:var(--good);color:#0b1f12}
+  .btn.warn{background:var(--warn);color:#2a0b0b}
+  .btn.cool{background:var(--accent2);color:#0b1f2a}
+  .pill{display:inline-block;background:var(--panel2);color:var(--muted);padding:4px 10px;border-radius:999px;font-size:12px;margin-right:6px}
+  .title{font-size:clamp(26px,3.6vw,40px);margin:6px 0 4px}
+  .artist{color:var(--muted);font-size:18px;margin-bottom:18px}
+  .bait{background:var(--panel2);border-left:4px solid var(--accent);padding:18px 20px;border-radius:8px;font-size:clamp(18px,2vw,22px);line-height:1.6;white-space:pre-line;margin:14px 0}
+  .answer{background:#1f2a1f;border-left:4px solid var(--good);padding:18px 20px;border-radius:8px;font-size:clamp(18px,2vw,22px);line-height:1.6;white-space:pre-line;margin:14px 0}
+  .audio-wrap{margin:18px 0;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  audio{width:100%;max-width:520px}
+  .scoreboard{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px}
+  .group-score{background:var(--panel2);padding:12px;border-radius:10px;text-align:center}
+  .group-score .name{font-size:13px;color:var(--muted)}
+  .group-score .val{font-size:24px;font-weight:700;margin-top:4px}
+  .ranking{display:flex;flex-direction:column;gap:10px;margin-top:18px}
+  .rank-row{display:flex;align-items:center;gap:14px;background:var(--panel2);padding:14px 18px;border-radius:12px}
+  .rank-row .pos{font-size:28px;font-weight:800;width:40px;text-align:center}
+  .rank-row.gold{background:linear-gradient(90deg,#3a2e0e,#1c2230)}
+  .rank-row.silver{background:linear-gradient(90deg,#2a2d33,#1c2230)}
+  .rank-row.bronze{background:linear-gradient(90deg,#3a2412,#1c2230)}
+  .progress{color:var(--muted);font-size:14px;margin-bottom:12px}
+  .small{font-size:13px;color:var(--muted)}
+  .footer{margin-top:24px;color:var(--muted);font-size:12px;text-align:center}
+  .warn-note{background:#2a1414;border:1px solid #5a2020;color:#ffc8c8;padding:10px 14px;border-radius:8px;margin-bottom:14px;font-size:14px;display:none}
+  .warn-note.show{display:block}
+  @media(max-width:600px){
+    .scoreboard{grid-template-columns:repeat(2,1fr)}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div id="screen-intro" class="card">
+    <h1>🎤 Tebak Lirik</h1>
+    <div class="sub">4 grup · 5 lagu per grup · skor 2 / 1 / 0 per lagu</div>
+    <div class="warn-note" id="ts-warn">Belum ada timestamp tersimpan. Buka <code>admin.html</code> dulu untuk tandai segment bait setiap lagu.</div>
+    <div class="scoreboard" id="sb-intro"></div>
+    <div style="margin-top:24px" class="row">
+      <button class="btn" onclick="startGroup(0)">▶ Mulai Grup 1</button>
+      <button class="btn ghost" onclick="resetAll()">🔄 Reset Skor</button>
+      <a class="btn ghost" href="admin.html">⚙ Admin Timestamp</a>
+    </div>
+  </div>
+
+  <div id="screen-group-intro" class="card" style="display:none">
+    <div class="pill">Selanjutnya</div>
+    <h2 id="gi-name"></h2>
+    <div class="sub">5 lagu menunggu. Siapkan grupnya.</div>
+    <div class="row">
+      <button class="btn" onclick="startQuestion()">▶ Mulai Grup Ini</button>
+      <button class="btn ghost" onclick="goIntro()">⬅ Kembali</button>
+    </div>
+  </div>
+
+  <div id="screen-question" class="card" style="display:none">
+    <div class="progress" id="q-progress"></div>
+    <div class="pill" id="q-group"></div>
+    <div class="title" id="q-title"></div>
+    <div class="artist" id="q-artist"></div>
+
+    <div class="audio-wrap">
+      <audio id="q-audio" controls preload="metadata"></audio>
+      <button class="btn cool" onclick="playSegment()">▶ Play Bait</button>
+    </div>
+
+    <div class="bait" id="q-bait"></div>
+    <div class="answer" id="q-answer" style="display:none"></div>
+
+    <div class="row" style="margin-top:14px">
+      <button class="btn" id="btn-reveal" onclick="revealAnswer()">👁 Lihat Jawaban</button>
+      <div id="score-buttons" style="display:none;gap:10px;flex-wrap:wrap" class="row">
+        <button class="btn ok" onclick="score(2)">2 · Persis</button>
+        <button class="btn" onclick="score(1)">1 · Sebagian</button>
+        <button class="btn warn" onclick="score(0)">0 · Salah</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="screen-group-done" class="card" style="display:none">
+    <div class="pill">Grup Selesai</div>
+    <h2 id="gd-name"></h2>
+    <div class="sub">Skor grup ini: <span id="gd-score" style="color:var(--accent);font-weight:700"></span> / 10</div>
+    <div class="scoreboard" id="sb-done"></div>
+    <div class="row" style="margin-top:20px">
+      <button class="btn" id="btn-next-group" onclick="nextGroup()">▶ Lanjut Grup Berikutnya</button>
+    </div>
+  </div>
+
+  <div id="screen-final" class="card" style="display:none">
+    <h1>🏆 Hasil Akhir</h1>
+    <div class="sub">Peringkat 4 grup berdasarkan total skor.</div>
+    <div class="ranking" id="ranking"></div>
+    <div class="row" style="margin-top:24px">
+      <button class="btn ghost" onclick="resetAll()">🔄 Mulai Ulang</button>
+    </div>
+  </div>
+
+  <div class="footer">Tebak Lirik · projector mode · skor disimpan di browser</div>
+</div>
+
+<script>
+// ===== DATA =====
+const GROUPS = [
+  { name: "Grup 1", songs: [
+    { title: "Mungkin Nanti", artist: "Peterpan", file: "audio/grup1-01-mungkin-nanti.mp3",
+      bait: "Mungkin nanti saatku tlah pergi\nSaat semua telah berakhir",
+      answer: "Coba untuk kau tunggu\nDan bila yang kau tunggu tak datang" },
+    { title: "Laskar Pelangi", artist: "Nidji", file: "audio/grup1-02-laskar-pelangi.mp3",
+      bait: "Mimpi adalah kunci\nUntuk kita menaklukkan dunia",
+      answer: "Berlarilah tanpa lelah\nSampai engkau meraihnya" },
+    { title: "Surat Cinta untuk Starla", artist: "Virgoun", file: "audio/grup1-03-surat-cinta-untuk-starla.mp3",
+      bait: "Kutuliskan kenangan tentang\nCaraku menemukan dirimu",
+      answer: "Tentang apa yang membuatku mudah\nBerikan hatiku padamu" },
+    { title: "To The Bone", artist: "Pamungkas", file: "audio/grup1-04-to-the-bone.mp3",
+      bait: "I love you to the bone\nKnow I'll never let you go",
+      answer: "Said I love you to the bone\nKnow I'll never leave you alone" },
+    { title: "Tak Segampang Itu", artist: "Anggi Marito", file: "audio/grup1-05-tak-segampang-itu.mp3",
+      bait: "Tak segampang itu Ferguso\nUntuk melupakanmu",
+      answer: "Kalau aku bisa\nSudah dari dulu" }
+  ]},
+  { name: "Grup 2", songs: [
+    { title: "Sempurna", artist: "Andra and the Backbone", file: "audio/grup2-01-sempurna.mp3",
+      bait: "Kau begitu sempurna\nDi mataku kau begitu indah",
+      answer: "Kau membuatku sangat terpesona\nKau buatku terlena" },
+    { title: "Tentang Aku, Kau & Dia", artist: "Kangen Band", file: "audio/grup2-02-tentang-aku-kau-dan-dia.mp3",
+      bait: "Sayang, kau pergi tinggalkan aku\nDemi seorang yang baru kau kenal",
+      answer: "Aku rela tinggalkanmu\nKarena kau bukan milikku" },
+    { title: "Asal Kau Bahagia", artist: "Armada", file: "audio/grup2-03-asal-kau-bahagia.mp3",
+      bait: "Aku tak apa-apa\nMeski hancur hatiku mendengar",
+      answer: "Kau bersama yang lain\nAsalkan kau bahagia" },
+    { title: "Gajah", artist: "Tulus", file: "audio/grup2-04-gajah.mp3",
+      bait: "Kawan, ku punya cerita\nTentang aku yang dulu",
+      answer: "Sering diludahi\nDan terinjak tanah" },
+    { title: "Akad", artist: "Payung Teduh", file: "audio/grup2-05-akad.mp3",
+      bait: "Betapa kusangat beruntung\nHati ini telah kau pilih",
+      answer: "Bukan sekedar menjadi penghuni\nTapi pemilik utuh diriku" }
+  ]},
+  { name: "Grup 3", songs: [
+    { title: "Pupus", artist: "Dewa 19", file: "audio/grup3-01-pupus.mp3",
+      bait: "Aku tak mengerti apa yang kurasa\nRindu yang tak pernah begitu hebatnya",
+      answer: "Aku mencintaimu, lebih dari apapun\nWalaupun ku tahu mungkin tak akan bisa" },
+    { title: "Menghapus Jejakmu", artist: "Peterpan", file: "audio/grup3-02-menghapus-jejakmu.mp3",
+      bait: "Terlalu indah dilupakan\nTerlalu sedih dikenangkan",
+      answer: "Setelah aku jauh berjalan\nDan kau ku tinggalkan" },
+    { title: "Kehadiranmu", artist: "Vagetoz", file: "audio/grup3-03-kehadiranmu.mp3",
+      bait: "Aku berharap kau tahu\nSiapa diriku sebenarnya",
+      answer: "Aku tak bisa hidup tanpamu\nKau adalah segalanya untukku" },
+    { title: "Dia", artist: "Anji", file: "audio/grup3-04-dia.mp3",
+      bait: "Mungkin ini memang jalan takdirku\nMengagumi tanpa dicintai",
+      answer: "Tak mengapa bagiku asal kau pun bahagia\nDengan hidupmu, dengan hidupmu" },
+    { title: "Monokrom", artist: "Tulus", file: "audio/grup3-05-monokrom.mp3",
+      bait: "Terima kasih telah mewarnaiku\nSampai aku di titik ini",
+      answer: "Walau tak selalu berakhir indah\nAku berterima kasih" }
+  ]},
+  { name: "Grup 4", songs: [
+    { title: "Kenangan Terindah", artist: "Samsons", file: "audio/grup4-01-kenangan-terindah.mp3",
+      bait: "Aku yang lemah tanpamu\nAku yang rentan karena",
+      answer: "Cinta yang tlah hilang darimu\nYang mampu menyanjungku" },
+    { title: "Dan", artist: "Sheila on 7", file: "audio/grup4-02-dan.mp3",
+      bait: "Dan terjadi lagi\nKisah lama yang terulang kembali",
+      answer: "Kau terluka lagi\nDari cinta rumit yang kau jalani" },
+    { title: "Terima Kasih Cinta", artist: "Afgan", file: "audio/grup4-03-terima-kasih-cinta.mp3",
+      bait: "Terima kasih cinta untuk segalanya\nKau berikan lagi kesempatan itu",
+      answer: "Tak akan terulang lagi semua\nKesalahan yang membuatmu kecewa" },
+    { title: "Tetap Dalam Jiwa", artist: "Isyana Sarasvati", file: "audio/grup4-04-tetap-dalam-jiwa.mp3",
+      bait: "Mengingatmu dalam khayalan\nAndaikan dirimu masih di sini",
+      answer: "Walau ku tahu ini takkan kembali\nNamun ku tetap menanti" },
+    { title: "Zona Nyaman", artist: "Fourtwnty", file: "audio/grup4-05-zona-nyaman.mp3",
+      bait: "Lelahmu jadi lelahku juga\nBahagiamu bahagiaku pasti",
+      answer: "Berbagi takdir kita selalu\nKau dan aku menjadi satu" }
+  ]}
+];
+
+const STORAGE_SCORE = "quizTebakLirik_scores_v1";
+const STORAGE_TS = "quizTebakLirik_timestamps_v1";
+
+let scores = loadScores();
+let cur = { g: 0, q: 0 };
+
+function loadScores(){
+  try{
+    const s = JSON.parse(localStorage.getItem(STORAGE_SCORE) || "null");
+    if(Array.isArray(s) && s.length === GROUPS.length) return s;
+  }catch(e){}
+  return GROUPS.map(() => 0);
+}
+function saveScores(){ localStorage.setItem(STORAGE_SCORE, JSON.stringify(scores)); }
+
+function loadTimestamps(){
+  try{ return JSON.parse(localStorage.getItem(STORAGE_TS) || "{}"); }
+  catch(e){ return {}; }
+}
+
+function show(id){
+  ["screen-intro","screen-group-intro","screen-question","screen-group-done","screen-final"].forEach(s=>{
+    document.getElementById(s).style.display = (s===id) ? "block" : "none";
+  });
+}
+
+function renderScoreboard(targetId){
+  const el = document.getElementById(targetId);
+  if(!el) return;
+  el.innerHTML = "";
+  GROUPS.forEach((g,i)=>{
+    const div = document.createElement("div");
+    div.className = "group-score";
+    div.innerHTML = `<div class="name">${g.name}</div><div class="val">${scores[i]}</div>`;
+    el.appendChild(div);
+  });
+}
+
+function goIntro(){
+  renderScoreboard("sb-intro");
+  const ts = loadTimestamps();
+  document.getElementById("ts-warn").classList.toggle("show", Object.keys(ts).length === 0);
+  show("screen-intro");
+}
+
+function startGroup(idx){
+  cur.g = idx;
+  cur.q = 0;
+  document.getElementById("gi-name").textContent = GROUPS[idx].name;
+  show("screen-group-intro");
+}
+
+function startQuestion(){
+  const g = GROUPS[cur.g];
+  const s = g.songs[cur.q];
+  document.getElementById("q-progress").textContent = `Lagu ${cur.q+1} / ${g.songs.length}`;
+  document.getElementById("q-group").textContent = g.name;
+  document.getElementById("q-title").textContent = s.title;
+  document.getElementById("q-artist").textContent = s.artist;
+  document.getElementById("q-bait").textContent = s.bait;
+  const ans = document.getElementById("q-answer");
+  ans.textContent = s.answer;
+  ans.style.display = "none";
+  document.getElementById("btn-reveal").style.display = "inline-block";
+  document.getElementById("score-buttons").style.display = "none";
+
+  const audio = document.getElementById("q-audio");
+  audio.src = s.file;
+  audio.load();
+  show("screen-question");
+}
+
+function playSegment(){
+  const audio = document.getElementById("q-audio");
+  const ts = loadTimestamps();
+  const key = `g${cur.g+1}q${cur.q}`;
+  const seg = ts[key];
+  if(!seg || seg.start == null || seg.end == null){
+    alert("Timestamp belum diset. Buka admin.html lalu Mark Start/End untuk lagu ini.");
+    audio.currentTime = 0;
+    audio.play().catch(()=>{});
+    return;
+  }
+  audio.currentTime = seg.start;
+  audio.play().catch(()=>{});
+  const stopAt = seg.end;
+  const onTime = () => {
+    if(audio.currentTime >= stopAt){
+      audio.pause();
+      audio.removeEventListener("timeupdate", onTime);
+    }
+  };
+  audio.removeEventListener("timeupdate", audio._segHandler || (()=>{}));
+  audio._segHandler = onTime;
+  audio.addEventListener("timeupdate", onTime);
+}
+
+function revealAnswer(){
+  document.getElementById("q-answer").style.display = "block";
+  document.getElementById("btn-reveal").style.display = "none";
+  document.getElementById("score-buttons").style.display = "flex";
+}
+
+function score(n){
+  scores[cur.g] += n;
+  saveScores();
+  cur.q++;
+  const g = GROUPS[cur.g];
+  if(cur.q >= g.songs.length){
+    document.getElementById("gd-name").textContent = g.name;
+    document.getElementById("gd-score").textContent = scores[cur.g];
+    renderScoreboard("sb-done");
+    const isLast = cur.g >= GROUPS.length - 1;
+    document.getElementById("btn-next-group").textContent = isLast ? "🏆 Lihat Hasil Akhir" : "▶ Lanjut Grup Berikutnya";
+    show("screen-group-done");
+  } else {
+    startQuestion();
+  }
+}
+
+function nextGroup(){
+  if(cur.g >= GROUPS.length - 1){
+    renderFinal();
+    show("screen-final");
+  } else {
+    startGroup(cur.g + 1);
+  }
+}
+
+function renderFinal(){
+  const ranked = GROUPS.map((g,i) => ({ name: g.name, score: scores[i] }))
+    .sort((a,b) => b.score - a.score);
+  const el = document.getElementById("ranking");
+  el.innerHTML = "";
+  const medals = ["🥇","🥈","🥉","4"];
+  const cls = ["gold","silver","bronze",""];
+  ranked.forEach((r,i)=>{
+    const row = document.createElement("div");
+    row.className = "rank-row " + cls[i];
+    row.innerHTML = `<div class="pos">${medals[i]}</div><div style="flex:1"><div style="font-size:22px;font-weight:700">${r.name}</div></div><div style="font-size:24px;font-weight:800;color:var(--accent)">${r.score}</div>`;
+    el.appendChild(row);
+  });
+}
+
+function resetAll(){
+  if(!confirm("Reset semua skor?")) return;
+  scores = GROUPS.map(()=>0);
+  saveScores();
+  cur = { g:0, q:0 };
+  goIntro();
+}
+
+goIntro();
+</script>
+</body>
+</html>
