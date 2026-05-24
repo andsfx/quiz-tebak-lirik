@@ -3,93 +3,133 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Tebak Lirik · 4 Grup</title>
+<title>Quiz Tebak Lirik</title>
 <link rel="icon" href="data:," />
 <style>
   @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
-  :root{--bg:#121212;--panel:#181818;--panel2:#1f1f1f;--card:#252525;--text:#fff;--muted:#b3b3b3;--accent:#1ed760;--good:#1ed760;--warn:#f3727f;--info:#539df5;--border:#4d4d4d;--shadow:rgba(0,0,0,.5) 0 8px 24px}
-  *{box-sizing:border-box} html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:'DM Sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif}
-  body{min-height:100vh;padding:22px;display:flex;justify-content:center;background:radial-gradient(circle at 20% 0%,rgba(30,215,96,.18),transparent 32%),#121212}
-  .wrap{width:100%;max-width:1080px}.card{background:linear-gradient(180deg,#1f1f1f,#181818);border-radius:24px;padding:28px;box-shadow:var(--shadow);border:1px solid rgba(255,255,255,.05)}.card+.card{margin-top:20px}
-  h1{font-size:clamp(34px,6vw,72px);line-height:.95;margin:0 0 10px;font-weight:1000;letter-spacing:-2px}h2{font-size:clamp(26px,4vw,44px);margin:0 0 8px;font-weight:900;letter-spacing:-1px}.sub,.small,.progress,.artist{color:var(--muted)}.sub{font-size:16px;margin-bottom:24px}.artist{font-size:18px;margin:2px 0 18px}.title{font-size:clamp(30px,4vw,54px);font-weight:1000;letter-spacing:-1.5px;margin:8px 0 0}
-  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.btn,a.btn{appearance:none;text-decoration:none;border:0;border-radius:9999px;padding:12px 20px;background:var(--accent);color:#000;font-weight:900;font-size:14px;letter-spacing:.8px;text-transform:uppercase;cursor:pointer;transition:transform .12s,filter .12s,background .12s}.btn:hover{filter:brightness(1.08);transform:scale(1.02)}.btn:active{transform:scale(.98)}.btn.ghost{background:#1f1f1f;color:#fff;box-shadow:inset 0 0 0 1px #4d4d4d}.btn.ok{background:var(--good);color:#000}.btn.warn{background:var(--warn);color:#28070b}.btn.cool{background:#fff;color:#000}
-  .pill{display:inline-flex;align-items:center;background:#1f1f1f;color:#fff;padding:7px 12px;border-radius:9999px;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1.4px}.bait,.answer{background:#252525;border-radius:18px;padding:22px;font-size:clamp(19px,2.2vw,28px);line-height:1.5;white-space:pre-line;margin:16px 0;box-shadow:rgba(0,0,0,.3) 0 8px 8px}.bait{box-shadow:inset 4px 0 0 var(--accent),rgba(0,0,0,.3) 0 8px 8px}.answer{box-shadow:inset 4px 0 0 var(--good),rgba(0,0,0,.3) 0 8px 8px}
-  .audio-wrap{margin:18px 0;display:flex;gap:12px;align-items:center;flex-wrap:wrap}audio{width:100%;max-width:560px;filter:invert(1) hue-rotate(180deg)}.scoreboard{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px}.group-score{background:#252525;padding:16px;border-radius:18px;text-align:left}.group-score .name{font-size:13px;color:var(--muted);font-weight:700}.group-score .val{font-size:34px;font-weight:1000;margin-top:4px;color:#fff}.ranking{display:flex;flex-direction:column;gap:10px;margin-top:18px}.rank-row{display:flex;align-items:center;gap:14px;background:#252525;padding:16px 18px;border-radius:18px}.rank-row .pos{font-size:28px;font-weight:1000;width:44px;text-align:center}.rank-row.gold{background:linear-gradient(90deg,rgba(30,215,96,.22),#252525)}.rank-row.silver{background:linear-gradient(90deg,rgba(255,255,255,.18),#252525)}.rank-row.bronze{background:linear-gradient(90deg,rgba(255,164,43,.22),#252525)}.footer{margin-top:22px;color:var(--muted);font-size:12px;text-align:center}.warn-note{background:rgba(243,114,127,.12);border:1px solid rgba(243,114,127,.45);color:#ffd8dc;padding:12px 14px;border-radius:14px;margin-bottom:14px;font-size:14px;display:none}.warn-note.show{display:block}
-  @media(max-width:760px){body{padding:12px}.card{padding:20px;border-radius:18px}.scoreboard{grid-template-columns:repeat(2,1fr)}.btn{width:100%;justify-content:center}}
+  :root {
+    --bg:#111111; --panel:#181818; --panel2:#1f1f1f; --card:#171717; --active:#242424;
+    --line:#282828; --text:#ffffff; --muted:#a3a3a3; --dim:#707070; --green:#1ed760;
+    --greenText:#07130a; --warningBg:#3a2b1e; --warningText:#c7863e; --danger:#f3727f;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:'DM Sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif}
+  body{min-height:100vh}
+  .app{max-width:720px;margin:0 auto;padding:34px 20px 46px}
+  .header{text-align:center;margin-bottom:34px}
+  .kicker{font-size:10px;letter-spacing:.18em;color:#8a8a8a;font-weight:900;text-transform:uppercase}
+  h1{font-size:clamp(34px,5vw,42px);line-height:1.04;font-weight:1000;letter-spacing:-1.2px;margin:9px 0 7px}
+  .subtitle{font-size:13px;color:var(--muted)}
+  .group-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:26px}
+  .group-card{background:#181818;border-radius:8px;padding:13px;min-height:108px;color:#858585;position:relative;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.14)}
+  .group-card.active{background:var(--active);color:var(--text)}
+  .group-card.active:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--green);box-shadow:0 0 18px rgba(30,215,96,.45)}
+  .group-label{font-size:10px;letter-spacing:.1em;font-weight:1000;text-transform:uppercase;color:#777}
+  .group-card.active .group-label{color:var(--green)}
+  .group-name{margin-top:6px;font-size:13px;font-weight:800;color:inherit;line-height:1.2}
+  .score{margin-top:22px;font-size:28px;font-weight:1000;letter-spacing:-.5px;color:inherit}
+  .score span{font-size:11px;color:#888;font-weight:800}
+  .song-count{font-size:10px;color:#777;margin-top:2px;font-weight:700}
+  .panel{background:var(--panel);border-radius:8px;padding:24px;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+  .screen{display:none} .screen.active{display:block}
+  .quiz-top{display:flex;justify-content:space-between;align-items:center;font-size:10px;margin-bottom:12px;gap:12px}
+  .quiz-group{color:var(--green);font-weight:1000;letter-spacing:.1em;text-transform:uppercase}
+  .quiz-progress-text{color:#aaa;font-weight:800}
+  .progress-track{height:3px;background:var(--line);border-radius:99px;margin-bottom:28px;overflow:hidden}
+  .progress-fill{height:100%;background:var(--green);border-radius:inherit;width:0%}
+  .song-row{display:flex;align-items:center;gap:16px;padding-bottom:20px;border-bottom:1px solid #242424}
+  .song-art{width:54px;height:54px;border-radius:5px;background:#252525;display:grid;place-items:center;color:#9a9a9a;font-size:19px;flex:0 0 auto}
+  .song-main{min-width:0} .song-title{font-size:17px;font-weight:1000;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis} .song-artist{font-size:12px;color:#aaa;margin-top:4px;font-weight:700}
+  .year{margin-left:auto;padding:4px 8px;border-radius:999px;background:#222;color:#aaa;font-size:10px;font-weight:900;flex:0 0 auto}
+  .audio-box{margin-top:24px;background:var(--panel2);border-radius:6px;padding:12px}
+  .audio-warning{display:none;background:var(--warningBg);color:var(--warningText);border-radius:4px;padding:10px 12px;font-size:11px;margin-bottom:12px;font-weight:800;line-height:1.35}
+  .audio-warning.show{display:block}
+  audio{width:100%;height:34px;margin-bottom:12px;filter:invert(1) hue-rotate(180deg);opacity:.92}
+  .btn{border:0;border-radius:999px;background:var(--green);color:var(--greenText);font-weight:1000;text-transform:uppercase;letter-spacing:.12em;cursor:pointer;height:40px;padding:0 24px;font-size:12px;font-family:inherit}
+  .btn:hover{filter:brightness(1.06);transform:translateY(-1px)} .btn:active{transform:translateY(0)}
+  .btn.full{width:100%} .btn.ghost{background:transparent;color:#8b8b8b} .btn.danger{background:transparent;color:var(--danger)}
+  .section-label{margin-top:24px;margin-bottom:10px;font-size:10px;letter-spacing:.14em;color:#aaa;font-weight:1000;text-transform:uppercase}
+  .lyric-card{background:#222;border-radius:5px;padding:24px}
+  .lyric-text{font-size:clamp(22px,4vw,29px);line-height:1.35;font-weight:1000;white-space:pre-line;letter-spacing:-.3px}
+  .answer-card{background:#202820;border-radius:5px;padding:22px;color:#eaffef;display:none}
+  .score-buttons{display:none;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:24px}
+  .answer-wrap{text-align:center;margin-top:28px}
+  .intro-copy{text-align:center;color:#a3a3a3;font-size:14px;line-height:1.55;margin:4px 0 18px}
+  .final-title{font-size:28px;font-weight:1000;text-align:center;margin:2px 0 16px}
+  .ranking{display:grid;gap:10px}
+  .rank-row{display:flex;align-items:center;gap:12px;background:#222;border-radius:6px;padding:14px}
+  .rank-pos{width:34px;height:34px;border-radius:50%;background:#2b2b2b;display:grid;place-items:center;font-weight:1000;color:#fff}
+  .rank-name{font-weight:1000;flex:1} .rank-score{font-size:22px;font-weight:1000;color:var(--green)}
+  .footer{margin-top:30px;padding-top:24px;border-top:1px solid #1c1c1c;text-align:center;color:#6f6f6f;font-size:10px}
+  .reset{font-weight:1000;letter-spacing:.14em;margin-bottom:20px;text-transform:uppercase;cursor:pointer;color:#777}
+  .admin-link{display:inline-block;margin-top:12px;color:#777;text-decoration:none;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+  @media(max-width:640px){.app{padding:28px 14px 36px}.group-grid{grid-template-columns:repeat(2,1fr)}.panel{padding:18px}.score-buttons{grid-template-columns:1fr}.song-title{white-space:normal}}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div id="screen-intro" class="card">
-    <h1>Tebak Lirik</h1>
-    <div class="sub">4 grup. 5 lagu per grup. Skor 2 / 1 / 0 per lagu.</div>
-    <div class="warn-note" id="ts-warn">Belum ada timestamp tersimpan. Buka <code>admin.html</code> dulu untuk tandai segment bait setiap lagu.</div>
-    <div class="scoreboard" id="sb-intro"></div>
-    <div style="margin-top:24px" class="row">
-      <button class="btn" onclick="startGroup(0)">Mulai Grup 1</button>
-      <button class="btn ghost" onclick="resetAll()">Reset Skor</button>
-      <a class="btn ghost" href="admin.html">Admin Timestamp</a>
-    </div>
-  </div>
+<div class="app">
+  <header class="header">
+    <div class="kicker">Lyric Quiz - Indonesia</div>
+    <h1>Quiz Tebak Lirik</h1>
+    <div class="subtitle">20 Lagu Pop Indonesia 2000-2026 • 4 Grup Bersaing</div>
+  </header>
 
-  <div id="screen-group-intro" class="card" style="display:none">
-    <div class="pill">Selanjutnya</div>
-    <h2 id="gi-name"></h2>
-    <div class="sub">5 lagu menunggu. Siapkan grupnya.</div>
-    <div class="row">
-      <button class="btn" onclick="startQuestion()">Mulai Grup Ini</button>
-      <button class="btn ghost" onclick="goIntro()">Kembali</button>
-    </div>
-  </div>
+  <div class="group-grid" id="group-grid"></div>
 
-  <div id="screen-question" class="card" style="display:none">
-    <div class="progress" id="q-progress"></div>
-    <div class="pill" id="q-group"></div>
-    <div class="title" id="q-title"></div>
-    <div class="artist" id="q-artist"></div>
+  <main class="panel">
+    <section id="screen-intro" class="screen active">
+      <div class="intro-copy">Pilih grup pertama. Putar bait, peserta lanjutkan lirik, lalu kasih skor.</div>
+      <button class="btn full" onclick="startGroup(0)">Mulai Grup 1</button>
+      <a class="admin-link" href="admin.html">Admin Timestamp</a>
+    </section>
 
-    <div class="audio-wrap">
-      <audio id="q-audio" controls preload="metadata"></audio>
-      <button class="btn cool" onclick="playSegment()">Play Bait</button>
-    </div>
+    <section id="screen-group-intro" class="screen">
+      <div class="quiz-top"><div class="quiz-group" id="gi-label"></div><div class="quiz-progress-text">5 lagu</div></div>
+      <div class="progress-track"><div class="progress-fill" style="width:0%"></div></div>
+      <div class="intro-copy" id="gi-copy"></div>
+      <button class="btn full" onclick="startQuestion()">Mulai Grup Ini</button>
+    </section>
 
-    <div class="bait" id="q-bait"></div>
-    <div class="answer" id="q-answer" style="display:none"></div>
-
-    <div class="row" style="margin-top:14px">
-      <button class="btn" id="btn-reveal" onclick="revealAnswer()">Lihat Jawaban</button>
-      <div id="score-buttons" style="display:none;gap:10px;flex-wrap:wrap" class="row">
-        <button class="btn ok" onclick="score(2)">2 · Persis</button>
-        <button class="btn" onclick="score(1)">1 · Sebagian</button>
-        <button class="btn warn" onclick="score(0)">0 · Salah</button>
+    <section id="screen-question" class="screen">
+      <div class="quiz-top"><div class="quiz-group" id="q-group"></div><div class="quiz-progress-text" id="q-progress"></div></div>
+      <div class="progress-track"><div class="progress-fill" id="q-progress-fill"></div></div>
+      <div class="song-row">
+        <div class="song-art">▶</div>
+        <div class="song-main"><div class="song-title" id="q-title"></div><div class="song-artist" id="q-artist"></div></div>
+        <div class="year" id="q-year"></div>
       </div>
-    </div>
-  </div>
+      <div class="audio-box">
+        <div class="audio-warning" id="audio-warn"></div>
+        <audio id="q-audio" controls preload="metadata"></audio>
+        <button class="btn full" onclick="playSegment()">Play Bait</button>
+      </div>
+      <div class="section-label">Bait Pembuka</div>
+      <div class="lyric-card"><div class="lyric-text" id="q-bait"></div></div>
+      <div class="section-label" id="answer-label" style="display:none">Jawaban</div>
+      <div class="answer-card lyric-text" id="q-answer"></div>
+      <div class="answer-wrap"><button class="btn" id="btn-reveal" onclick="revealAnswer()">Lihat Jawaban</button></div>
+      <div class="score-buttons" id="score-buttons"><button class="btn" onclick="score(2)">2 Persis</button><button class="btn" onclick="score(1)">1 Sebagian</button><button class="btn danger" onclick="score(0)">0 Salah</button></div>
+    </section>
 
-  <div id="screen-group-done" class="card" style="display:none">
-    <div class="pill">Grup Selesai</div>
-    <h2 id="gd-name"></h2>
-    <div class="sub">Skor grup ini: <span id="gd-score" style="color:var(--accent);font-weight:700"></span> / 10</div>
-    <div class="scoreboard" id="sb-done"></div>
-    <div class="row" style="margin-top:20px">
-      <button class="btn" id="btn-next-group" onclick="nextGroup()">Lanjut Grup Berikutnya</button>
-    </div>
-  </div>
+    <section id="screen-group-done" class="screen">
+      <div class="final-title" id="gd-name"></div>
+      <div class="intro-copy">Skor grup ini: <b id="gd-score" style="color:var(--green)"></b> / 10</div>
+      <button class="btn full" id="btn-next-group" onclick="nextGroup()">Lanjut Grup Berikutnya</button>
+    </section>
 
-  <div id="screen-final" class="card" style="display:none">
-    <h1>Hasil Akhir</h1>
-    <div class="sub">Peringkat 4 grup berdasarkan total skor.</div>
-    <div class="ranking" id="ranking"></div>
-    <div class="row" style="margin-top:24px">
-      <button class="btn ghost" onclick="resetAll()">Mulai Ulang</button>
-    </div>
-  </div>
+    <section id="screen-final" class="screen">
+      <div class="final-title">Hasil Akhir</div>
+      <div class="ranking" id="ranking"></div>
+      <div class="answer-wrap"><button class="btn" onclick="resetAll()">Mulai Ulang</button></div>
+    </section>
+  </main>
 
-  <div class="footer">Tebak Lirik · projector mode · skor tersimpan lokal</div>
+  <footer class="footer">
+    <div class="reset" onclick="resetAll()">Reset Quiz</div>
+    <div>Skor dan timestamp tersimpan lokal di browser ini.</div>
+  </footer>
 </div>
-
 <script>
-// ===== DATA =====
 const GROUPS = [
   { name: "Grup 1", songs: [
     { title: "Mungkin Nanti", artist: "Peterpan", file: "https://cdn.andotherstori.my.id/quiz-tebak-lirik/audio/grup1-01-mungkin-nanti.mp3",
@@ -160,160 +200,32 @@ const GROUPS = [
       answer: "Berbagi takdir kita selalu\nKau dan aku menjadi satu" }
   ]}
 ];
-
+const GROUP_META = ["Lintas Era", "Galau Pop", "Nostalgia", "Sing Along"];
+const YEAR_MAP = {
+  "Mungkin Nanti":"2004","Laskar Pelangi":"2008","Surat Cinta untuk Starla":"2016","To The Bone":"2019","Tak Segampang Itu":"2022",
+  "Sempurna":"2007","Tentang Aku, Kau & Dia":"2007","Asal Kau Bahagia":"2017","Gajah":"2014","Akad":"2017",
+  "Pupus":"2002","Menghapus Jejakmu":"2007","Kehadiranmu":"2007","Dia":"2016","Monokrom":"2016",
+  "Kenangan Terindah":"2005","Dan":"1999","Terima Kasih Cinta":"2008","Tetap Dalam Jiwa":"2015","Zona Nyaman":"2017"
+};
 const STORAGE_SCORE = "quizTebakLirik_scores_v1";
 const STORAGE_TS = "quizTebakLirik_timestamps_v1";
-
 let scores = loadScores();
+let progress = JSON.parse(localStorage.getItem('quizTebakLirik_progress_v2') || '[0,0,0,0]');
 let cur = { g: 0, q: 0 };
-
-function loadScores(){
-  try{
-    const s = JSON.parse(localStorage.getItem(STORAGE_SCORE) || "null");
-    if(Array.isArray(s) && s.length === GROUPS.length) return s;
-  }catch(e){}
-  return GROUPS.map(() => 0);
-}
-function saveScores(){ localStorage.setItem(STORAGE_SCORE, JSON.stringify(scores)); }
-
-function loadTimestamps(){
-  try{ return JSON.parse(localStorage.getItem(STORAGE_TS) || "{}"); }
-  catch(e){ return {}; }
-}
-
-function show(id){
-  ["screen-intro","screen-group-intro","screen-question","screen-group-done","screen-final"].forEach(s=>{
-    document.getElementById(s).style.display = (s===id) ? "block" : "none";
-  });
-}
-
-function renderScoreboard(targetId){
-  const el = document.getElementById(targetId);
-  if(!el) return;
-  el.innerHTML = "";
-  GROUPS.forEach((g,i)=>{
-    const div = document.createElement("div");
-    div.className = "group-score";
-    div.innerHTML = `<div class="name">${g.name}</div><div class="val">${scores[i]}</div>`;
-    el.appendChild(div);
-  });
-}
-
-function goIntro(){
-  renderScoreboard("sb-intro");
-  const ts = loadTimestamps();
-  document.getElementById("ts-warn").classList.toggle("show", Object.keys(ts).length === 0);
-  show("screen-intro");
-}
-
-function startGroup(idx){
-  cur.g = idx;
-  cur.q = 0;
-  document.getElementById("gi-name").textContent = GROUPS[idx].name;
-  show("screen-group-intro");
-}
-
-function startQuestion(){
-  const g = GROUPS[cur.g];
-  const s = g.songs[cur.q];
-  document.getElementById("q-progress").textContent = `Lagu ${cur.q+1} / ${g.songs.length}`;
-  document.getElementById("q-group").textContent = g.name;
-  document.getElementById("q-title").textContent = s.title;
-  document.getElementById("q-artist").textContent = s.artist;
-  document.getElementById("q-bait").textContent = s.bait;
-  const ans = document.getElementById("q-answer");
-  ans.textContent = s.answer;
-  ans.style.display = "none";
-  document.getElementById("btn-reveal").style.display = "inline-block";
-  document.getElementById("score-buttons").style.display = "none";
-
-  const audio = document.getElementById("q-audio");
-  audio.src = s.file;
-  audio.load();
-  show("screen-question");
-}
-
-function playSegment(){
-  const audio = document.getElementById("q-audio");
-  const ts = loadTimestamps();
-  const key = `g${cur.g+1}q${cur.q}`;
-  const seg = ts[key];
-  if(!seg || seg.start == null || seg.end == null){
-    alert("Timestamp belum diset. Buka admin.html lalu Mark Start/End untuk lagu ini.");
-    audio.currentTime = 0;
-    audio.play().catch(()=>{});
-    return;
-  }
-  audio.currentTime = seg.start;
-  audio.play().catch(()=>{});
-  const stopAt = seg.end;
-  const onTime = () => {
-    if(audio.currentTime >= stopAt){
-      audio.pause();
-      audio.removeEventListener("timeupdate", onTime);
-    }
-  };
-  audio.removeEventListener("timeupdate", audio._segHandler || (()=>{}));
-  audio._segHandler = onTime;
-  audio.addEventListener("timeupdate", onTime);
-}
-
-function revealAnswer(){
-  document.getElementById("q-answer").style.display = "block";
-  document.getElementById("btn-reveal").style.display = "none";
-  document.getElementById("score-buttons").style.display = "flex";
-}
-
-function score(n){
-  scores[cur.g] += n;
-  saveScores();
-  cur.q++;
-  const g = GROUPS[cur.g];
-  if(cur.q >= g.songs.length){
-    document.getElementById("gd-name").textContent = g.name;
-    document.getElementById("gd-score").textContent = scores[cur.g];
-    renderScoreboard("sb-done");
-    const isLast = cur.g >= GROUPS.length - 1;
-    document.getElementById("btn-next-group").textContent = isLast ? "Lihat Hasil Akhir" : "Lanjut Grup Berikutnya";
-    show("screen-group-done");
-  } else {
-    startQuestion();
-  }
-}
-
-function nextGroup(){
-  if(cur.g >= GROUPS.length - 1){
-    renderFinal();
-    show("screen-final");
-  } else {
-    startGroup(cur.g + 1);
-  }
-}
-
-function renderFinal(){
-  const ranked = GROUPS.map((g,i) => ({ name: g.name, score: scores[i] }))
-    .sort((a,b) => b.score - a.score);
-  const el = document.getElementById("ranking");
-  el.innerHTML = "";
-  const medals = ["🥇","🥈","🥉","4"];
-  const cls = ["gold","silver","bronze",""];
-  ranked.forEach((r,i)=>{
-    const row = document.createElement("div");
-    row.className = "rank-row " + cls[i];
-    row.innerHTML = `<div class="pos">${medals[i]}</div><div style="flex:1"><div style="font-size:22px;font-weight:700">${r.name}</div></div><div style="font-size:24px;font-weight:800;color:var(--accent)">${r.score}</div>`;
-    el.appendChild(row);
-  });
-}
-
-function resetAll(){
-  if(!confirm("Reset semua skor?")) return;
-  scores = GROUPS.map(()=>0);
-  saveScores();
-  cur = { g:0, q:0 };
-  goIntro();
-}
-
-goIntro();
+function loadScores(){try{const s=JSON.parse(localStorage.getItem(STORAGE_SCORE)||'null');if(Array.isArray(s)&&s.length===GROUPS.length)return s;}catch(e){}return GROUPS.map(()=>0)}
+function saveScores(){localStorage.setItem(STORAGE_SCORE,JSON.stringify(scores));localStorage.setItem('quizTebakLirik_progress_v2',JSON.stringify(progress));}
+function loadTimestamps(){try{return JSON.parse(localStorage.getItem(STORAGE_TS)||'{}')}catch(e){return {}}}
+function show(id){document.querySelectorAll('.screen').forEach(el=>el.classList.toggle('active',el.id===id));renderGroups();}
+function renderGroups(){const box=document.getElementById('group-grid');box.innerHTML='';GROUPS.forEach((g,i)=>{const d=document.createElement('div');d.className='group-card '+(i===cur.g?'active':'');d.innerHTML=`<div class="group-label">GRUP ${String(i+1).padStart(2,'0')}</div><div class="group-name">${GROUP_META[i]}</div><div class="score">${scores[i]} <span>/10</span></div><div class="song-count">${progress[i]||0} / 5 lagu</div>`;d.onclick=()=>startGroup(i);box.appendChild(d);})}
+function startGroup(idx){cur.g=idx;cur.q=progress[idx]||0;if(cur.q>=GROUPS[idx].songs.length)cur.q=0;document.getElementById('gi-label').textContent=`GRUP ${String(idx+1).padStart(2,'0')} - ${GROUP_META[idx].toUpperCase()}`;document.getElementById('gi-copy').textContent=`${GROUPS[idx].name} siap. ${GROUPS[idx].songs.length} lagu menunggu.`;show('screen-group-intro');}
+function startQuestion(){const g=GROUPS[cur.g], s=g.songs[cur.q];document.getElementById('q-group').textContent=`GRUP ${String(cur.g+1).padStart(2,'0')} - ${GROUP_META[cur.g].toUpperCase()}`;document.getElementById('q-progress').textContent=`Lagu ${cur.q+1} dari ${g.songs.length}`;document.getElementById('q-progress-fill').style.width=`${((cur.q+1)/g.songs.length)*100}%`;document.getElementById('q-title').textContent=s.title;document.getElementById('q-artist').textContent=s.artist;document.getElementById('q-year').textContent=YEAR_MAP[s.title]||'';document.getElementById('q-bait').textContent=s.bait;document.getElementById('q-answer').textContent=s.answer;document.getElementById('q-answer').style.display='none';document.getElementById('answer-label').style.display='none';document.getElementById('btn-reveal').style.display='inline-block';document.getElementById('score-buttons').style.display='none';const audio=document.getElementById('q-audio');audio.src=s.file;audio.load();const warn=document.getElementById('audio-warn');warn.textContent=`Audio belum diisi / belum bisa diload: ${s.file.replace('https://cdn.andotherstori.my.id/','')}`;warn.classList.add('show');audio.oncanplay=()=>warn.classList.remove('show');audio.onerror=()=>warn.classList.add('show');show('screen-question');}
+function playSegment(){const audio=document.getElementById('q-audio');const ts=loadTimestamps();const key=`g${cur.g+1}q${cur.q}`;const seg=ts[key];if(!seg||seg.start==null||seg.end==null){audio.currentTime=0;audio.play().catch(()=>{});return;}audio.currentTime=seg.start;audio.play().catch(()=>{});const stopAt=seg.end;const onTime=()=>{if(audio.currentTime>=stopAt){audio.pause();audio.removeEventListener('timeupdate',onTime);}};if(audio._segHandler)audio.removeEventListener('timeupdate',audio._segHandler);audio._segHandler=onTime;audio.addEventListener('timeupdate',onTime);}
+function revealAnswer(){document.getElementById('q-answer').style.display='block';document.getElementById('answer-label').style.display='block';document.getElementById('btn-reveal').style.display='none';document.getElementById('score-buttons').style.display='grid';}
+function score(n){scores[cur.g]+=n;cur.q++;progress[cur.g]=Math.min(cur.q,GROUPS[cur.g].songs.length);saveScores();const g=GROUPS[cur.g];if(cur.q>=g.songs.length){document.getElementById('gd-name').textContent=`${g.name} selesai`;document.getElementById('gd-score').textContent=scores[cur.g];document.getElementById('btn-next-group').textContent=cur.g>=GROUPS.length-1?'Lihat Hasil Akhir':'Lanjut Grup Berikutnya';show('screen-group-done');}else startQuestion();}
+function nextGroup(){if(cur.g>=GROUPS.length-1){renderFinal();show('screen-final');}else startGroup(cur.g+1);}
+function renderFinal(){const ranked=GROUPS.map((g,i)=>({name:g.name,meta:GROUP_META[i],score:scores[i]})).sort((a,b)=>b.score-a.score);const el=document.getElementById('ranking');el.innerHTML='';ranked.forEach((r,i)=>{const row=document.createElement('div');row.className='rank-row';row.innerHTML=`<div class="rank-pos">${i+1}</div><div class="rank-name">${r.name} · ${r.meta}</div><div class="rank-score">${r.score}</div>`;el.appendChild(row);})}
+function resetAll(){if(!confirm('Reset semua skor?'))return;scores=GROUPS.map(()=>0);progress=GROUPS.map(()=>0);cur={g:0,q:0};saveScores();show('screen-intro');}
+renderGroups();
 </script>
 </body>
 </html>
