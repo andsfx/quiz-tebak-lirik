@@ -8,7 +8,7 @@
         {
           "title": "Mungkin Nanti",
           "artist": "Peterpan",
-          "file": "/api/preview?title=Mungkin+Nanti&artist=Peterpan",
+          "file": "",
           "bait": "Mungkin nanti saatku tlah pergi\nSaat semua telah berakhir",
           "answer": "Coba untuk kau tunggu\nDan bila yang kau tunggu tak datang",
           "year": "2004",
@@ -16,13 +16,12 @@
             "start": null,
             "end": null
           },
-          "audioSource": "deezer-live-preview",
+          "audioSource": "youtube",
           "audioSourceUrl": "https://music.apple.com/id/album/mungkin-nanti/1753918951?i=1753918964&uo=4",
           "audioMatchedTitle": "Mungkin Nanti",
           "audioMatchedArtist": "peterpan",
           "audioScore": 8,
           "previewSeconds": 30,
-          "directPreviewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/15/af/a0/15afa040-6a64-9405-7e4c-185593ff5748/mzaf_1077372444592201737.plus.aac.p.m4a",
           "youtube": {
             "id": "SWcMwUySDvI",
             "start": 35,
@@ -32,7 +31,7 @@
         {
           "title": "Laskar Pelangi",
           "artist": "Nidji",
-          "file": "/api/preview?title=Laskar+Pelangi&artist=Nidji",
+          "file": "",
           "bait": "Mimpi adalah kunci\nUntuk kita menaklukkan dunia",
           "answer": "Berlarilah tanpa lelah\nSampai engkau meraihnya",
           "year": "2008",
@@ -40,18 +39,22 @@
             "start": null,
             "end": null
           },
-          "audioSource": "deezer-live-preview",
+          "audioSource": "youtube",
           "audioSourceUrl": "https://music.apple.com/id/album/laskar-pelangi/766160296?i=766160395&uo=4",
           "audioMatchedTitle": "Laskar Pelangi",
           "audioMatchedArtist": "Nidji",
           "audioScore": 8,
           "previewSeconds": 30,
-          "directPreviewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/7b/e0/54/7be0545f-6987-0436-fd2b-af7a0463dd9e/mzaf_8216737427834059470.plus.aac.p.m4a"
+          "youtube": {
+            "id": "fO1iJqBdXrc",
+            "start": 45,
+            "end": 75
+          }
         },
         {
           "title": "Surat Cinta untuk Starla",
           "artist": "Virgoun",
-          "file": "/api/preview?title=Surat+Cinta+untuk+Starla&artist=Virgoun",
+          "file": "",
           "bait": "Kutuliskan kenangan tentang\nCaraku menemukan dirimu",
           "answer": "Tentang apa yang membuatku mudah\nBerikan hatiku padamu",
           "year": "2016",
@@ -59,23 +62,22 @@
             "start": null,
             "end": null
           },
-          "audioSource": "deezer-live-preview",
+          "audioSource": "youtube",
           "audioSourceUrl": "https://music.apple.com/id/album/surat-cinta-untuk-starla/1882725581?i=1882725587&uo=4",
-          "audioMatchedTitle": "Surat Cinta Untuk Starla",
+          "audioMatchedTitle": "Surat Cinta untuk Starla",
           "audioMatchedArtist": "Virgoun",
           "audioScore": 14,
           "previewSeconds": 30,
-          "directPreviewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/2b/15/be/2b15bee7-3031-3cf7-2f75-1940379174cf/mzaf_597427527657645840.plus.aac.p.m4a",
           "youtube": {
             "id": "8GFWd7-JoE4",
-            "start": 35,
-            "end": 65
+            "start": 18,
+            "end": 48
           }
         },
         {
           "title": "To The Bone",
           "artist": "Pamungkas",
-          "file": "/api/preview?title=To+The+Bone&artist=Pamungkas",
+          "file": "",
           "bait": "I love you to the bone\nKnow I'll never let you go",
           "answer": "Said I love you to the bone\nKnow I'll never leave you alone",
           "year": "2019",
@@ -83,18 +85,22 @@
             "start": null,
             "end": null
           },
-          "audioSource": "deezer-live-preview",
+          "audioSource": "youtube",
           "audioSourceUrl": "https://music.apple.com/id/album/to-the-bone/1787908376?i=1787908642&uo=4",
-          "audioMatchedTitle": "To the Bone",
+          "audioMatchedTitle": "To The Bone",
           "audioMatchedArtist": "Pamungkas & The PeoplePeople",
           "audioScore": 11,
           "previewSeconds": 30,
-          "directPreviewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/bf/1a/95/bf1a9585-8c65-8ca7-d77a-3ad3665e1166/mzaf_11258122427603122377.plus.aac.p.m4a"
+          "youtube": {
+            "id": "oIYWenB637c",
+            "start": 49,
+            "end": 79
+          }
         },
         {
           "title": "Tak Segampang Itu",
           "artist": "Anggi Marito",
-          "file": "/api/preview?title=Tak+Segampang+Itu&artist=Anggi+Marito",
+          "file": "",
           "bait": "Tak segampang itu Ferguso\nUntuk melupakanmu",
           "answer": "Kalau aku bisa\nSudah dari dulu",
           "year": "2022",
@@ -102,13 +108,17 @@
             "start": null,
             "end": null
           },
-          "audioSource": "deezer-live-preview",
+          "audioSource": "youtube",
           "audioSourceUrl": "https://music.apple.com/id/album/tak-segampang-itu/1655502818?i=1655502819&uo=4",
           "audioMatchedTitle": "Tak Segampang Itu",
           "audioMatchedArtist": "Anggi Marito",
           "audioScore": 13,
           "previewSeconds": 30,
-          "directPreviewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/da/1f/93/da1f93b4-b2ca-5624-8cba-da0f1f123eed/mzaf_1374587696112479353.plus.aac.p.m4a"
+          "youtube": {
+            "id": "6NsiA6GFAbU",
+            "start": 58,
+            "end": 88
+          }
         }
       ]
     },
@@ -119,7 +129,7 @@
         {
           "title": "Sempurna",
           "artist": "Andra and the Backbone",
-          "file": "/api/preview?title=Sempurna&artist=Andra+and+the+Backbone",
+          "file": "",
           "bait": "Kau begitu sempurna\nDi mataku kau begitu indah",
           "answer": "Kau membuatku sangat terpesona\nKau buatku terlena",
           "year": "2007",
@@ -127,18 +137,22 @@
             "start": null,
             "end": null
           },
-          "audioSource": "deezer-live-preview",
+          "audioSource": "youtube",
           "audioSourceUrl": "https://music.apple.com/id/album/sempurna/1566337626?i=1566337654&uo=4",
           "audioMatchedTitle": "Sempurna",
           "audioMatchedArtist": "Andra And The Backbone",
           "audioScore": 9,
           "previewSeconds": 30,
-          "directPreviewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/63/ef/0c/63ef0c27-1d16-717a-b8c7-cd0522fe8b8f/mzaf_2266158215694571598.plus.aac.p.m4a"
+          "youtube": {
+            "id": "jStNaVCW838",
+            "start": 31,
+            "end": 61
+          }
         },
         {
           "title": "Tentang Aku, Kau & Dia",
           "artist": "Kangen Band",
-          "file": "/api/preview?title=Tentang+Aku%2C+Kau+%26+Dia&artist=Kangen+Band",
+          "file": "",
           "bait": "Sayang, kau pergi tinggalkan aku\nDemi seorang yang baru kau kenal",
           "answer": "Aku rela tinggalkanmu\nKarena kau bukan milikku",
           "year": "2007",
@@ -146,18 +160,22 @@
             "start": null,
             "end": null
           },
-          "audioSource": "deezer-live-preview",
+          "audioSource": "youtube",
           "audioSourceUrl": "https://music.apple.com/id/album/tentang-aku-kau-dan-dia/251014735?i=251014804&uo=4",
-          "audioMatchedTitle": "Tentang Aku, Kau Dan Dia",
+          "audioMatchedTitle": "Tentang Aku, Kau & Dia",
           "audioMatchedArtist": "Kangen Band",
           "audioScore": 14,
           "previewSeconds": 30,
-          "directPreviewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/93/96/04/939604d4-a95a-0574-3cda-ee9b9d903703/mzaf_15975566178770124864.plus.aac.p.m4a"
+          "youtube": {
+            "id": "S5UFxiJnC4I",
+            "start": 27,
+            "end": 57
+          }
         },
         {
           "title": "Asal Kau Bahagia",
           "artist": "Armada",
-          "file": "/api/preview?title=Asal+Kau+Bahagia&artist=Armada",
+          "file": "",
           "bait": "Aku tak apa-apa\nMeski hancur hatiku mendengar",
           "answer": "Kau bersama yang lain\nAsalkan kau bahagia",
           "year": "2017",
@@ -165,18 +183,22 @@
             "start": null,
             "end": null
           },
-          "audioSource": "deezer-live-preview",
+          "audioSource": "youtube",
           "audioSourceUrl": "https://music.apple.com/id/album/asal-kau-bahagia/1542644136?i=1542645054&uo=4",
           "audioMatchedTitle": "Asal Kau Bahagia",
           "audioMatchedArtist": "Armada",
           "audioScore": 11,
           "previewSeconds": 30,
-          "directPreviewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/42/d2/6e/42d26e91-dc89-261d-db3b-eaf14a9fb2ca/mzaf_4196078956770814376.plus.aac.p.m4a"
+          "youtube": {
+            "id": "py6GDNgye6k",
+            "start": 47,
+            "end": 77
+          }
         },
         {
           "title": "Gajah",
           "artist": "Tulus",
-          "file": "/api/preview?title=Gajah&artist=Tulus",
+          "file": "",
           "bait": "Kawan, ku punya cerita\nTentang aku yang dulu",
           "answer": "Sering diludahi\nDan terinjak tanah",
           "year": "2014",
@@ -184,18 +206,22 @@
             "start": null,
             "end": null
           },
-          "audioSource": "deezer-live-preview",
+          "audioSource": "youtube",
           "audioSourceUrl": "https://music.apple.com/id/album/gajah/823622637?i=823622718&uo=4",
           "audioMatchedTitle": "Gajah",
           "audioMatchedArtist": "Tulus",
           "audioScore": 5,
           "previewSeconds": 30,
-          "directPreviewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/fb/0e/65/fb0e6524-6fda-0752-9598-cfd18584252b/mzaf_17902202676346052752.plus.aac.p.m4a"
+          "youtube": {
+            "id": "lLER9AdL-Ig",
+            "start": 9,
+            "end": 39
+          }
         },
         {
           "title": "Akad",
           "artist": "Payung Teduh",
-          "file": "/api/preview?title=Akad&artist=Payung+Teduh",
+          "file": "",
           "bait": "Betapa kusangat beruntung\nHati ini telah kau pilih",
           "answer": "Bukan sekedar menjadi penghuni\nTapi pemilik utuh diriku",
           "year": "2017",
@@ -203,13 +229,17 @@
             "start": null,
             "end": null
           },
-          "audioSource": "deezer-live-preview",
+          "audioSource": "youtube",
           "audioSourceUrl": "https://music.apple.com/id/album/akad/1318700857?i=1318701282&uo=4",
           "audioMatchedTitle": "Akad",
           "audioMatchedArtist": "Payung Teduh",
           "audioScore": 7,
           "previewSeconds": 30,
-          "directPreviewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/9c/1b/8a/9c1b8aa8-c1a9-79fd-35f4-f48f506976b6/mzaf_721664516174953961.plus.aac.p.m4a"
+          "youtube": {
+            "id": "viW0M5R2BLo",
+            "start": 26,
+            "end": 56
+          }
         }
       ]
     },
@@ -220,7 +250,7 @@
         {
           "title": "Pupus",
           "artist": "Dewa 19",
-          "file": "/api/preview?title=Pupus&artist=Dewa+19",
+          "file": "",
           "bait": "Aku tak mengerti apa yang kurasa\nRindu yang tak pernah begitu hebatnya",
           "answer": "Aku mencintaimu, lebih dari apapun\nWalaupun ku tahu mungkin tak akan bisa",
           "year": "2002",
@@ -228,18 +258,22 @@
             "start": null,
             "end": null
           },
-          "audioSource": "deezer-live-preview",
+          "audioSource": "youtube",
           "audioSourceUrl": "https://music.apple.com/id/album/pupus/533699929?i=533699938&uo=4",
           "audioMatchedTitle": "Pupus",
           "audioMatchedArtist": "Dewa 19",
           "audioScore": 7,
           "previewSeconds": 30,
-          "directPreviewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/18/16/38/181638b5-9461-7b12-7bab-41f7c53769c2/mzaf_14461950327890110706.plus.aac.p.m4a"
+          "youtube": {
+            "id": "VQ-qjEV1m6M",
+            "start": 24,
+            "end": 54
+          }
         },
         {
           "title": "Menghapus Jejakmu",
           "artist": "Peterpan",
-          "file": "/api/preview?title=Menghapus+Jejakmu&artist=Peterpan",
+          "file": "",
           "bait": "Terlalu indah dilupakan\nTerlalu sedih dikenangkan",
           "answer": "Setelah aku jauh berjalan\nDan kau ku tinggalkan",
           "year": "2007",
@@ -247,13 +281,12 @@
             "start": null,
             "end": null
           },
-          "audioSource": "deezer-live-preview",
+          "audioSource": "youtube",
           "audioSourceUrl": "https://music.apple.com/id/album/menghapus-jejakmu/1753918951?i=1753919160&uo=4",
           "audioMatchedTitle": "Menghapus Jejakmu",
           "audioMatchedArtist": "peterpan",
           "audioScore": 8,
           "previewSeconds": 30,
-          "directPreviewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/aa/3e/31/aa3e3160-eff3-1dbe-8c40-cd8202c5ab33/mzaf_2143616650751538166.plus.aac.p.m4a",
           "youtube": {
             "id": "Qk8C5dDz3LU",
             "start": 35,
@@ -263,7 +296,7 @@
         {
           "title": "Kehadiranmu",
           "artist": "Vagetoz",
-          "file": "/api/preview?title=Kehadiranmu&artist=Vagetoz",
+          "file": "",
           "bait": "Aku berharap kau tahu\nSiapa diriku sebenarnya",
           "answer": "Aku tak bisa hidup tanpamu\nKau adalah segalanya untukku",
           "year": "2007",
@@ -271,18 +304,22 @@
             "start": null,
             "end": null
           },
-          "audioSource": "deezer-live-preview",
+          "audioSource": "youtube",
           "audioSourceUrl": "https://music.apple.com/id/album/kehadiranmu/316947045?i=316947094&uo=4",
           "audioMatchedTitle": "Kehadiranmu",
           "audioMatchedArtist": "Vagetoz",
           "audioScore": 5,
           "previewSeconds": 30,
-          "directPreviewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/33/c2/09/33c20905-966c-0bcc-d4f7-b75b8f7cc7c3/mzaf_17740897376634071356.plus.aac.p.m4a"
+          "youtube": {
+            "id": "KzbrDZwLwv0",
+            "start": 33,
+            "end": 63
+          }
         },
         {
           "title": "Dia",
           "artist": "Anji",
-          "file": "/api/preview?title=Dia&artist=Anji",
+          "file": "",
           "bait": "Mungkin ini memang jalan takdirku\nMengagumi tanpa dicintai",
           "answer": "Tak mengapa bagiku asal kau pun bahagia\nDengan hidupmu, dengan hidupmu",
           "year": "2016",
@@ -290,18 +327,22 @@
             "start": null,
             "end": null
           },
-          "audioSource": "deezer-live-preview",
+          "audioSource": "youtube",
           "audioSourceUrl": "https://music.apple.com/id/album/dia/1368025156?i=1368025193&uo=4",
           "audioMatchedTitle": "Dia",
           "audioMatchedArtist": "Anji",
           "audioScore": 5,
           "previewSeconds": 30,
-          "directPreviewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/d4/cd/57/d4cd5748-c946-3a36-222f-b979f02502a5/mzaf_11776360530188792812.plus.aac.p.m4a"
+          "youtube": {
+            "id": "jjYpd6X41VA",
+            "start": 33,
+            "end": 63
+          }
         },
         {
           "title": "Monokrom",
           "artist": "Tulus",
-          "file": "/api/preview?title=Monokrom&artist=Tulus",
+          "file": "",
           "bait": "Terima kasih telah mewarnaiku\nSampai aku di titik ini",
           "answer": "Walau tak selalu berakhir indah\nAku berterima kasih",
           "year": "2016",
@@ -309,13 +350,17 @@
             "start": null,
             "end": null
           },
-          "audioSource": "deezer-live-preview",
+          "audioSource": "youtube",
           "audioSourceUrl": "https://music.apple.com/id/album/monokrom/1137907436?i=1137907946&uo=4",
           "audioMatchedTitle": "Monokrom",
           "audioMatchedArtist": "Tulus",
           "audioScore": 5,
           "previewSeconds": 30,
-          "directPreviewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/b8/ed/83/b8ed8318-9ffb-063b-bca6-252ef5ef257f/mzaf_16151384645329084271.plus.aac.p.m4a"
+          "youtube": {
+            "id": "QqJ-Vp8mvbk",
+            "start": 55,
+            "end": 85
+          }
         }
       ]
     },
@@ -326,7 +371,7 @@
         {
           "title": "Kenangan Terindah",
           "artist": "Samsons",
-          "file": "/api/preview?title=Kenangan+Terindah&artist=Samsons",
+          "file": "",
           "bait": "Aku yang lemah tanpamu\nAku yang rentan karena",
           "answer": "Cinta yang tlah hilang darimu\nYang mampu menyanjungku",
           "year": "2005",
@@ -334,18 +379,22 @@
             "start": null,
             "end": null
           },
-          "audioSource": "deezer-live-preview",
+          "audioSource": "youtube",
           "audioSourceUrl": "https://music.apple.com/id/album/kenangan-terindah/1443625277?i=1443625295&uo=4",
           "audioMatchedTitle": "Kenangan Terindah",
           "audioMatchedArtist": "SAMSONS",
           "audioScore": 8,
           "previewSeconds": 30,
-          "directPreviewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/79/6a/2c/796a2c29-db2c-4a7c-c67a-076c16b05517/mzaf_10008055065877217348.plus.aac.p.m4a"
+          "youtube": {
+            "id": "X0YDGxu1dCQ",
+            "start": 35,
+            "end": 65
+          }
         },
         {
           "title": "Dan",
           "artist": "Sheila on 7",
-          "file": "/api/preview?title=Dan&artist=Sheila+on+7",
+          "file": "",
           "bait": "Dan terjadi lagi\nKisah lama yang terulang kembali",
           "answer": "Kau terluka lagi\nDari cinta rumit yang kau jalani",
           "year": "1999",
@@ -353,18 +402,22 @@
             "start": null,
             "end": null
           },
-          "audioSource": "deezer-live-preview",
+          "audioSource": "youtube",
           "audioSourceUrl": "https://music.apple.com/id/album/dan/326500886?i=326500979&uo=4",
-          "audioMatchedTitle": "Dan...",
+          "audioMatchedTitle": "Dan",
           "audioMatchedArtist": "Sheila On 7",
           "audioScore": 7,
           "previewSeconds": 30,
-          "directPreviewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/98/08/f7/9808f7ad-8328-7780-5d22-aa52b878bd45/mzaf_13785359830703877395.plus.aac.p.m4a"
+          "youtube": {
+            "id": "dGcGbF4ex5o",
+            "start": 26,
+            "end": 56
+          }
         },
         {
           "title": "Terima Kasih Cinta",
           "artist": "Afgan",
-          "file": "/api/preview?title=Terima+Kasih+Cinta&artist=Afgan",
+          "file": "",
           "bait": "Terima kasih cinta untuk segalanya\nKau berikan lagi kesempatan itu",
           "answer": "Tak akan terulang lagi semua\nKesalahan yang membuatmu kecewa",
           "year": "2008",
@@ -372,18 +425,22 @@
             "start": null,
             "end": null
           },
-          "audioSource": "deezer-live-preview",
+          "audioSource": "youtube",
           "audioSourceUrl": "https://music.apple.com/id/album/terima-kasih-cinta/1794736681?i=1794736692&uo=4",
           "audioMatchedTitle": "Terima Kasih Cinta",
           "audioMatchedArtist": "Afgan",
           "audioScore": 11,
           "previewSeconds": 30,
-          "directPreviewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/2a/41/2f/2a412f4f-b831-a523-8ebb-8f7848c87273/mzaf_354438077123077541.plus.aac.p.m4a"
+          "youtube": {
+            "id": "Hr0AAqHLLSg",
+            "start": 23,
+            "end": 53
+          }
         },
         {
           "title": "Tetap Dalam Jiwa",
           "artist": "Isyana Sarasvati",
-          "file": "/api/preview?title=Tetap+Dalam+Jiwa&artist=Isyana+Sarasvati",
+          "file": "",
           "bait": "Mengingatmu dalam khayalan\nAndaikan dirimu masih di sini",
           "answer": "Walau ku tahu ini takkan kembali\nNamun ku tetap menanti",
           "year": "2015",
@@ -391,18 +448,22 @@
             "start": null,
             "end": null
           },
-          "audioSource": "deezer-live-preview",
+          "audioSource": "youtube",
           "audioSourceUrl": "https://music.apple.com/id/album/tetap-dalam-jiwa/1162739059?i=1162739301&uo=4",
           "audioMatchedTitle": "Tetap Dalam Jiwa",
           "audioMatchedArtist": "Isyana Sarasvati",
           "audioScore": 13,
           "previewSeconds": 30,
-          "directPreviewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/e6/28/14/e62814a4-8f84-d6f8-1c07-98528c48cfde/mzaf_14464309126160010374.plus.aac.p.m4a"
+          "youtube": {
+            "id": "anMYu17aZT4",
+            "start": 37,
+            "end": 67
+          }
         },
         {
           "title": "Zona Nyaman",
           "artist": "Fourtwnty",
-          "file": "/api/preview?title=Zona+Nyaman&artist=Fourtwnty",
+          "file": "",
           "bait": "Lelahmu jadi lelahku juga\nBahagiamu bahagiaku pasti",
           "answer": "Berbagi takdir kita selalu\nKau dan aku menjadi satu",
           "year": "2017",
@@ -410,13 +471,17 @@
             "start": null,
             "end": null
           },
-          "audioSource": "deezer-live-preview",
+          "audioSource": "youtube",
           "audioSourceUrl": "https://music.apple.com/id/album/zona-nyaman-from-filosofi-kopi-2-ben-jody/1503120859?i=1503120873&uo=4",
-          "audioMatchedTitle": "Zona Nyaman (From \"Filosofi Kopi 2: Ben & Jody)",
+          "audioMatchedTitle": "Zona Nyaman",
           "audioMatchedArtist": "Fourtwnty",
           "audioScore": 8,
           "previewSeconds": 30,
-          "directPreviewUrl": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/36/a2/60/36a260e7-35e8-0b53-03f2-0a64d48c904e/mzaf_12250690712113371806.plus.aac.p.m4a"
+          "youtube": {
+            "id": "tb_RhafSifw",
+            "start": 39,
+            "end": 69
+          }
         }
       ]
     }
