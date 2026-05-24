@@ -15,7 +15,7 @@
   *{box-sizing:border-box}
   html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:'DM Sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif}
   body{min-height:100vh;overflow:auto}
-  .app{max-width:760px;min-height:100vh;margin:0 auto;padding:18px 20px 16px;display:grid;grid-template-rows:auto auto 1fr auto;gap:14px}
+  .app{max-width:760px;min-height:100vh;margin:0 auto;padding:18px 20px 16px;display:grid;grid-template-rows:auto auto auto auto;gap:14px}
   .header{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center;margin:0}
   .header-copy{text-align:left}
   .kicker{font-size:9px;letter-spacing:.18em;color:#8a8a8a;font-weight:900;text-transform:uppercase}
@@ -25,14 +25,15 @@
   .top-admin-btn:before{content:"⚙";font-size:12px;color:var(--green)}
   .top-admin-btn:hover{border-color:var(--green);transform:translateY(-1px)}
   .group-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:0} body.in-question .group-grid,body.in-question .footer{display:none} body.in-question .app{grid-template-rows:auto 1fr}
-  .group-card{background:#181818;border-radius:8px;padding:10px 12px;min-height:92px;color:#858585;position:relative;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.14)}
+  .group-card{background:#181818;border-radius:8px;padding:12px 13px;min-height:92px;color:#b6b6b6;position:relative;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.14);cursor:pointer;border:1px solid #202020;transition:.16s ease}
+  .group-card:hover{border-color:#333;background:#202020;transform:translateY(-1px)}
   .group-card.active{background:var(--active);color:var(--text)}
   .group-card.active:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--green);box-shadow:0 0 18px rgba(30,215,96,.45)}
   .group-label{font-size:10px;letter-spacing:.1em;font-weight:1000;text-transform:uppercase;color:#777}
   .group-card.active .group-label{color:var(--green)}
   .group-name{margin-top:6px;font-size:13px;font-weight:800;color:inherit;line-height:1.2}
-  .score{margin-top:14px;font-size:24px;font-weight:1000;letter-spacing:-.5px;color:inherit}
-  .score span{font-size:10px;color:#888;font-weight:800}
+  .score{margin-top:13px;font-size:24px;font-weight:1000;letter-spacing:-.5px;color:inherit;display:flex;align-items:baseline;gap:4px;line-height:1}
+  .score span{font-size:11px;color:#a0a0a0;font-weight:900}
   .song-count{font-size:10px;color:#777;margin-top:1px;font-weight:700}
   .panel{background:var(--panel);border-radius:18px;padding:18px;box-shadow:0 8px 24px rgba(0,0,0,.25);min-height:0;overflow:hidden}
   .screen{display:none} .screen.active{display:block}
@@ -69,11 +70,12 @@
   .rank-row{display:flex;align-items:center;gap:12px;background:#222;border-radius:6px;padding:14px}
   .rank-pos{width:34px;height:34px;border-radius:50%;background:#2b2b2b;display:grid;place-items:center;font-weight:1000;color:#fff}
   .rank-name{font-weight:1000;flex:1} .rank-score{font-size:22px;font-weight:1000;color:var(--green)}
-  .footer{margin:0;padding-top:0;border-top:0;text-align:center;color:#6f6f6f;font-size:9px;align-self:end}
-  .reset{font-weight:1000;letter-spacing:.14em;margin-bottom:6px;text-transform:uppercase;cursor:pointer;color:#777}
+  .footer{margin:2px 0 0;padding-top:0;border-top:0;text-align:center;color:#767676;font-size:9px;align-self:start}
+  .reset{display:inline-flex;align-items:center;justify-content:center;min-height:28px;padding:0 14px;border-radius:999px;background:#1f1719;color:#f59aa5;border:1px solid rgba(251,113,133,.28);font-weight:1000;letter-spacing:.12em;margin-bottom:8px;text-transform:uppercase;cursor:pointer;font-size:10px}
+  .reset:hover{background:#251a1d;border-color:rgba(251,113,133,.55)}
   .admin-link{display:inline-block;margin-top:4px;color:#777;text-decoration:none;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
 
-  @media(max-width:560px){.app{padding:14px;gap:10px}.header{grid-template-columns:1fr;gap:8px}.header-copy{text-align:left}h1{font-size:28px}.subtitle{font-size:11px}.top-admin-btn{justify-self:start;padding:0 12px;min-height:34px;font-size:9px}.group-grid{grid-template-columns:repeat(2,1fr);gap:8px}.group-card{min-height:74px;padding:9px}.score{font-size:20px;margin-top:8px}.panel{padding:14px;border-radius:16px}.song-row{gap:10px}.song-art{width:46px;height:46px}.lyric-text{font-size:20px}.score-buttons{grid-template-columns:1fr}.footer{padding-bottom:10px}}
+  @media(max-width:560px){.app{padding:14px;gap:10px}.header{grid-template-columns:1fr;gap:8px}.header-copy{text-align:left}h1{font-size:28px}.subtitle{font-size:11px}.top-admin-btn{justify-self:start;padding:0 12px;min-height:34px;font-size:9px}.group-grid{grid-template-columns:repeat(2,1fr);gap:8px}.group-card{min-height:74px;padding:10px}.score{font-size:20px;margin-top:8px}.panel{padding:14px;border-radius:16px}.song-row{gap:10px}.song-art{width:46px;height:46px}.lyric-text{font-size:20px}.score-buttons{grid-template-columns:1fr}.footer{padding-bottom:10px}}
 </style>
 </head>
 <body>
@@ -549,7 +551,7 @@ function loadTimestamps(){try{return JSON.parse(localStorage.getItem(STORAGE_TS)
 function renderSongMeta(visible=false){const s=getCurrentSong?.();if(!s)return;document.getElementById('q-title').textContent=visible?s.title:'Tebak judul lagu';document.getElementById('q-artist').textContent=visible?s.artist:'Dengar bait, lanjutkan lirik';document.getElementById('q-year').textContent=visible?(s.year||YEAR_MAP[s.title]||''):'????';}
 function setAnswerVisible(visible){document.body.classList.toggle('answer-visible',!!visible);const row=document.getElementById('song-row');if(row)row.classList.toggle('locked',!visible);renderSongMeta(!!visible);}
 function show(id){document.body.classList.toggle('in-question',id==='screen-question');document.querySelectorAll('.screen').forEach(el=>el.classList.toggle('active',el.id===id));if(id!=='screen-question')setAnswerVisible(false);renderGroups();}
-function renderGroups(){const box=document.getElementById('group-grid');box.innerHTML='';GROUPS.forEach((g,i)=>{const d=document.createElement('div');d.className='group-card '+(i===cur.g?'active':'');d.innerHTML=`<div class="group-label">GRUP ${String(i+1).padStart(2,'0')}</div><div class="group-name">${GROUP_META[i]}</div><div class="score">${scores[i]} <span>/10</span></div><div class="song-count">${progress[i]||0} / 5 lagu</div>`;d.onclick=()=>startGroup(i);box.appendChild(d);})}
+function renderGroups(){const box=document.getElementById('group-grid');box.innerHTML='';GROUPS.forEach((g,i)=>{const d=document.createElement('div');d.className='group-card '+(i===cur.g?'active':'');d.innerHTML=`<div class="group-label">GRUP ${String(i+1).padStart(2,'0')}</div><div class="group-name">${GROUP_META[i]}</div><div class="score">${scores[i]} <span>/ 10</span></div><div class="song-count">${progress[i]||0} / 5 lagu</div>`;d.onclick=()=>startGroup(i);box.appendChild(d);})}
 function startGroup(idx){cur.g=idx;cur.q=progress[idx]||0;if(cur.q>=GROUPS[idx].songs.length)cur.q=0;document.getElementById('gi-label').textContent=`GRUP ${String(idx+1).padStart(2,'0')} - ${GROUP_META[idx].toUpperCase()}`;document.getElementById('gi-copy').textContent=`${GROUPS[idx].name} siap. ${GROUPS[idx].songs.length} lagu menunggu.`;show('screen-group-intro');}
 function getCurrentSong(){return GROUPS[cur.g].songs[cur.q];}
 function fmtTime(sec){sec=Math.max(0,Math.floor(Number(sec)||0));return `${Math.floor(sec/60)}:${String(sec%60).padStart(2,'0')}`;}
