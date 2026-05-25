@@ -80,14 +80,29 @@
 </style>
 </head>
 <body>
-<div class="app">
+<script src="auth.js"></script>
+<div id="auth-overlay" style="display:flex;align-items:center;justify-content:center;min-height:100vh;background:#111;padding:20px">
+  <div style="background:#181818;border-radius:18px;padding:32px 28px;max-width:360px;width:100%;box-shadow:0 12px 40px rgba(0,0,0,.5)">
+    <div style="font-size:10px;letter-spacing:.18em;color:#8a8a8a;font-weight:900;text-transform:uppercase;margin-bottom:6px">Quiz Tebak Lirik</div>
+    <h1 style="font-size:28px;font-weight:1000;margin:0 0 6px;letter-spacing:-1px">Login</h1>
+    <p style="color:#a3a3a3;font-size:13px;margin:0 0 20px">Masukkan password untuk akses quiz.</p>
+    <select id="auth-role" style="width:100%;padding:12px;border-radius:8px;border:1px solid #333;background:#222;color:#fff;font-size:14px;margin-bottom:12px;font-family:inherit">
+      <option value="admin">Admin</option>
+      <option value="demo">Demo (Review)</option>
+    </select>
+    <input id="auth-pass" type="password" placeholder="Password" style="width:100%;padding:12px;border-radius:8px;border:1px solid #333;background:#222;color:#fff;font-size:14px;margin-bottom:12px;font-family:inherit" onkeydown="if(event.key==='Enter')doLogin()">
+    <div id="auth-error" style="color:#fb7185;font-size:12px;font-weight:800;margin-bottom:10px;display:none">Password salah</div>
+    <button onclick="doLogin()" style="width:100%;padding:12px;border-radius:999px;border:0;background:#1ed760;color:#07130a;font-weight:1000;font-size:13px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;font-family:inherit">Masuk</button>
+  </div>
+</div>
+<div class="app" id="app" style="display:none">
   <header class="header">
     <div class="header-copy">
       <div class="kicker">Lyric Quiz - Indonesia</div>
       <h1>Quiz Tebak Lirik</h1>
       <div class="subtitle">20 Lagu Pop Indonesia 2000-2026 • 4 Grup Bersaing</div>
     </div>
-    <a class="top-admin-btn" href="admin.html">Admin Timestamp</a>
+    <div style="display:flex;gap:8px;align-items:center;justify-content:flex-end;flex-wrap:wrap"><span id="role-badge" class="pill" style="display:none;background:#222;color:#aaa;padding:6px 10px;border-radius:999px;font-size:10px;font-weight:1000;text-transform:uppercase"></span><button class="top-admin-btn" style="border:1px solid #333" onclick="authLogout()">Logout</button><a class="top-admin-btn" href="admin.html" onclick="return authDemoGate()">Admin Timestamp</a></div>
   </header>
 
   <div class="group-grid" id="group-grid"></div>
@@ -603,7 +618,24 @@ async function loadSongData(){
     if(loaded){GROUPS=loaded.groups;GROUP_META=loaded.meta;YEAR_MAP={...YEAR_MAP,...loaded.years};}
   }catch(e){}
 }
-loadSongData().then(()=>{scores=loadScores();renderGroups();});
+function doLogin(){
+  const role=document.getElementById('auth-role').value;
+  const pass=document.getElementById('auth-pass').value;
+  const ok=authLogin(role,pass);
+  document.getElementById('auth-error').style.display=ok?'none':'block';
+  if(ok) boot();
+}
+function applyRoleUI(role){
+  const adminLink=document.querySelector('a[href="admin.html"]');
+  if(role==='demo'&&adminLink)adminLink.style.display='none';
+}
+function boot(){
+  const role=authRequire();
+  if(!role)return;
+  applyRoleUI(role);
+  loadSongData().then(()=>{scores=loadScores();renderGroups();});
+}
+boot();
 </script>
 </body>
 </html>
