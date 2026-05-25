@@ -20,7 +20,7 @@
 </div><script>
 const STORAGE='quizTebakLirik_songs_draft_v3';
 const AUDIO_BASE='https://audio.andotherstori.my.id/';
-const AUDIO_VERSION='mp3fix-20260525';
+const AUDIO_VERSION='laskar-full-20260525-0952';
 let DATA={groups:[]},FLAT=[],idx=0,timer=null,DIRTY=false;
 const $=s=>document.querySelector(s);const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function audioUrl(file){if(!file)return '';const raw=/^https?:\/\//i.test(file)?file:AUDIO_BASE+String(file).replace(/^\/?audio\//,'').replace(/^\//,'');return raw+(raw.includes('?')?'&':'?')+'v='+AUDIO_VERSION}
