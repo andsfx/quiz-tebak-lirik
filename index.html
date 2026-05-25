@@ -93,12 +93,13 @@
 
   <main class="panel">
     <section id="screen-intro" class="screen active">
-      <div class="intro-copy">Pilih grup pertama. Putar bait, peserta lanjutkan lirik, lalu kasih skor.</div>
+      <div class="intro-copy">Pilih grup. Host putar full song, tampilkan pertanyaan manual, lalu tandai benar atau salah.</div>
       <div class="howto">
         <div><b>1.</b> Host pilih grup, lalu klik <b>Mulai Grup</b>.</div>
-        <div><b>2.</b> Klik <b>Play Bait</b>. Peserta nebak lanjutan lirik.</div>
-        <div><b>3.</b> Klik <b>Lihat Jawaban</b>, lalu beri skor: <b>2</b> persis, <b>1</b> sebagian, <b>0</b> salah.</div>
-        <div><b>4.</b> Tiap grup dapat 5 lagu. Ranking keluar setelah semua grup selesai.</div>
+        <div><b>2.</b> Klik <b>Play Full Song</b>. Host bebas play/stop kapan saja.</div>
+        <div><b>3.</b> Klik <b>Tampilkan Pertanyaan</b>, lalu <b>Lihat Jawaban</b>.</div>
+        <div><b>4.</b> Tandai <b>Benar</b> atau <b>Salah</b>. Tiap grup dapat 5 lagu.</div>
+        <div><b>5.</b> Ranking keluar setelah semua grup selesai.</div>
       </div>
       <button class="btn full" onclick="startGroup(0)">Mulai Grup 1</button>
     </section>
@@ -127,17 +128,18 @@
         <div class="playbar"><div class="playbar-fill" id="playbar-fill"></div></div>
         <div class="audio-time"><span id="play-elapsed">0:00</span><span id="play-total">0:00</span></div>
       </div>
-      <div class="section-label">Bait Pembuka</div>
+      <div class="answer-wrap"><button class="btn" id="btn-question" onclick="showQuestion()">Tampilkan Pertanyaan</button></div>
+      <div class="section-label" id="question-label" style="display:none">Pertanyaan</div>
       <div class="lyric-card"><div class="lyric-text" id="q-bait"></div></div>
       <div class="section-label" id="answer-label" style="display:none">Jawaban</div>
       <div class="answer-card lyric-text" id="q-answer"></div>
       <div class="answer-wrap"><button class="btn" id="btn-reveal" onclick="revealAnswer()">Lihat Jawaban</button></div>
-      <div class="score-buttons" id="score-buttons"><button class="btn ghost" style="grid-column:1/-1" onclick="playFullSong()">▶ Play Full Song</button><button class="btn" onclick="score(2)">2 Persis</button><button class="btn" onclick="score(1)">1 Sebagian</button><button class="btn danger" onclick="score(0)">0 Salah</button></div><div class="utility-wrap"><button class="btn ghost" onclick="toggleUtility()">⋯ Recovery</button><div class="utility-panel" id="utility-panel"><div class="recovery"><button class="btn ghost" onclick="undoLast()">Undo</button><button class="btn ghost" onclick="backSong()">Back</button><button class="btn ghost" onclick="skipSong()">Skip</button><button class="btn ghost" onclick="adjustScore(-1)">Score -</button><button class="btn ghost" onclick="adjustScore(1)">Score +</button></div></div></div>
+      <div class="score-buttons" id="score-buttons"><button class="btn" onclick="score(1)">✅ Benar</button><button class="btn danger" onclick="score(0)">❌ Salah</button></div><div class="utility-wrap"><button class="btn ghost" onclick="toggleUtility()">⋯ Recovery</button><div class="utility-panel" id="utility-panel"><div class="recovery"><button class="btn ghost" onclick="playSegment()">Play Bait Lama</button><button class="btn ghost" onclick="undoLast()">Undo</button><button class="btn ghost" onclick="backSong()">Back</button><button class="btn ghost" onclick="skipSong()">Skip</button><button class="btn ghost" onclick="adjustScore(-1)">Score -</button><button class="btn ghost" onclick="adjustScore(1)">Score +</button></div></div></div>
     </section>
 
     <section id="screen-group-done" class="screen">
       <div class="final-title" id="gd-name"></div>
-      <div class="intro-copy">Skor grup ini: <b id="gd-score" style="color:var(--green)"></b> / 10</div>
+      <div class="intro-copy">Skor grup ini: <b id="gd-score" style="color:var(--green)"></b> / 5</div>
       <button class="btn full" id="btn-next-group" onclick="nextGroup()">Lanjut Grup Berikutnya</button>
     </section>
 
@@ -150,7 +152,7 @@
 
   <footer class="footer">
     <div class="reset" onclick="resetAll()">Reset Quiz</div>
-    <div>Skor tersimpan lokal. Audio marker di Admin Timestamp.</div>
+    <div>Skor tersimpan lokal. Full song jadi mode utama. Marker lama tetap di Admin Timestamp.</div>
   </footer>
 </div>
 <script>
@@ -558,21 +560,22 @@ function loadTimestamps(){try{return JSON.parse(localStorage.getItem(STORAGE_TS)
 function renderSongMeta(visible=false){const s=getCurrentSong?.();if(!s)return;document.getElementById('q-title').textContent=visible?s.title:'Tebak judul lagu';document.getElementById('q-artist').textContent=visible?s.artist:'Dengar bait, lanjutkan lirik';document.getElementById('q-year').textContent=visible?(s.year||YEAR_MAP[s.title]||''):'????';}
 function setAnswerVisible(visible){document.body.classList.toggle('answer-visible',!!visible);const row=document.getElementById('song-row');if(row)row.classList.toggle('locked',!visible);renderSongMeta(!!visible);}
 function show(id){document.body.classList.toggle('in-question',id==='screen-question');document.querySelectorAll('.screen').forEach(el=>el.classList.toggle('active',el.id===id));if(id!=='screen-question')setAnswerVisible(false);renderGroups();}
-function renderGroups(){const box=document.getElementById('group-grid');box.innerHTML='';GROUPS.forEach((g,i)=>{const d=document.createElement('div');d.className='group-card '+(i===cur.g?'active':'');d.innerHTML=`<div class="group-label">GRUP ${String(i+1).padStart(2,'0')}</div><div class="group-name">${GROUP_META[i]}</div><div class="score">${scores[i]} <span>/ 10</span></div><div class="song-count">${progress[i]||0} / 5 lagu</div>`;d.onclick=()=>startGroup(i);box.appendChild(d);})}
+function renderGroups(){const box=document.getElementById('group-grid');box.innerHTML='';GROUPS.forEach((g,i)=>{const d=document.createElement('div');d.className='group-card '+(i===cur.g?'active':'');d.innerHTML=`<div class="group-label">GRUP ${String(i+1).padStart(2,'0')}</div><div class="group-name">${GROUP_META[i]}</div><div class="score">${scores[i]} <span>/ 5</span></div><div class="song-count">${progress[i]||0} / 5 lagu</div>`;d.onclick=()=>startGroup(i);box.appendChild(d);})}
 function startGroup(idx){cur.g=idx;cur.q=progress[idx]||0;if(cur.q>=GROUPS[idx].songs.length)cur.q=0;document.getElementById('gi-label').textContent=`GRUP ${String(idx+1).padStart(2,'0')} - ${GROUP_META[idx].toUpperCase()}`;document.getElementById('gi-copy').textContent=`${GROUPS[idx].name} siap. ${GROUPS[idx].songs.length} lagu menunggu.`;show('screen-group-intro');}
 function getCurrentSong(){return GROUPS[cur.g].songs[cur.q];}
 function fmtTime(sec){sec=Math.max(0,Math.floor(Number(sec)||0));return `${Math.floor(sec/60)}:${String(sec%60).padStart(2,'0')}`;}
 function setPlayProgress(ratio=0, elapsed=0, total=0){const fill=document.getElementById('playbar-fill');if(fill)fill.style.width=`${Math.max(0,Math.min(1,ratio))*100}%`;const a=document.getElementById('play-elapsed'),b=document.getElementById('play-total');if(a)a.textContent=fmtTime(elapsed);if(b)b.textContent=fmtTime(total);}
-function setPlayUI(state,text='',error=false){playState=state;const btn=document.getElementById('btn-play');if(btn){btn.textContent=(state==='playing'||state==='loading')?'■ Stop':(state==='ended'?'↻ Replay':'▶ Play Bait');btn.classList.toggle('ghost',state==='playing'||state==='loading');}const el=document.getElementById('play-status');if(el){el.textContent=text||state;el.style.color=error?'#fda4af':'#cbd5e1'}const retry=document.getElementById('btn-retry');if(retry)retry.style.display=error?'block':'none';const art=document.getElementById('song-art');if(art)art.textContent=state==='playing'?'■':'▶';}
+function setPlayUI(state,text='',error=false){playState=state;const btn=document.getElementById('btn-play');if(btn){btn.textContent=(state==='playing'||state==='loading')?'■ Stop Full Song':(state==='ended'?'↻ Replay Full Song':'▶ Play Full Song');btn.classList.toggle('ghost',state==='playing'||state==='loading');}const el=document.getElementById('play-status');if(el){el.textContent=text||state;el.style.color=error?'#fda4af':'#cbd5e1'}const retry=document.getElementById('btn-retry');if(retry)retry.style.display=error?'block':'none';const art=document.getElementById('song-art');if(art)art.textContent=state==='playing'?'■':'▶';}
 function fileFor(song){return audioUrl(song.file||'')}
 function segFor(song){const t=song.timestamp||{};const start=Number(t.start??0);let end=Number(t.end??(start+Number(song.previewSeconds||30)));if(end<=start)end=start+Number(song.previewSeconds||30);return {start,end,file:fileFor(song)};}
 function stopAudioTimer(){if(audioTimer){clearInterval(audioTimer);audioTimer=null}}
-function stopPlayback(){stopAudioTimer();const a=document.getElementById('q-audio');a.pause();setPlayUI('idle',activeSeg?`Stopped ${activeSeg.start.toFixed(2)}s → ${activeSeg.end.toFixed(2)}s`:'Stopped');}
-function togglePlayback(){if(playState==='playing'||playState==='loading')stopPlayback();else playSegment();}
+function stopPlayback(){stopAudioTimer();const a=document.getElementById('q-audio');a.pause();setPlayUI('idle','Stopped');}
+function togglePlayback(){if(playState==='playing'||playState==='loading')stopPlayback();else playFullSong();}
 function toggleUtility(){document.getElementById('utility-panel')?.classList.toggle('show');}
-function startQuestion(){stopPlayback();setAnswerVisible(false);const g=GROUPS[cur.g], s=g.songs[cur.q];document.getElementById('q-group').textContent=`GRUP ${String(cur.g+1).padStart(2,'0')} - ${GROUP_META[cur.g].toUpperCase()}`;document.getElementById('q-progress').textContent=`Lagu ${cur.q+1} dari ${g.songs.length}`;document.getElementById('q-progress-fill').style.width=`${((cur.q+1)/g.songs.length)*100}%`;document.getElementById('q-bait').textContent=s.bait;document.getElementById('q-answer').textContent=s.answer;document.getElementById('q-answer').style.display='none';document.getElementById('answer-label').style.display='none';document.getElementById('btn-reveal').style.display='inline-block';document.getElementById('score-buttons').style.display='none';document.getElementById('utility-panel')?.classList.remove('show');const audio=document.getElementById('q-audio');activeSeg=segFor(s);audio.src=activeSeg.file;audio.style.display='block';setPlayProgress(0,0,activeSeg.end-activeSeg.start);setPlayUI('idle',activeSeg.file?`Ready ${activeSeg.start.toFixed(2)}s → ${activeSeg.end.toFixed(2)}s`:'Audio belum diupload',!activeSeg.file);show('screen-question');}
+function startQuestion(){stopPlayback();setAnswerVisible(false);const g=GROUPS[cur.g], s=g.songs[cur.q];document.getElementById('q-group').textContent=`GRUP ${String(cur.g+1).padStart(2,'0')} - ${GROUP_META[cur.g].toUpperCase()}`;document.getElementById('q-progress').textContent=`Lagu ${cur.q+1} dari ${g.songs.length}`;document.getElementById('q-progress-fill').style.width=`${((cur.q+1)/g.songs.length)*100}%`;document.getElementById('q-bait').textContent=s.bait;document.getElementById('q-bait').style.display='none';document.getElementById('question-label').style.display='none';document.getElementById('q-answer').textContent=`${s.title}\n${s.artist} · ${s.year||YEAR_MAP[s.title]||''}`;document.getElementById('q-answer').style.display='none';document.getElementById('answer-label').style.display='none';document.getElementById('btn-question').style.display='inline-block';document.getElementById('btn-reveal').style.display='none';document.getElementById('score-buttons').style.display='none';document.getElementById('utility-panel')?.classList.remove('show');const audio=document.getElementById('q-audio');activeSeg=segFor(s);audio.src=activeSeg.file;audio.style.display='block';setPlayProgress(0,0,0);setPlayUI('idle',activeSeg.file?'Ready full song':'Audio belum diupload',!activeSeg.file);show('screen-question');}
 async function playSegment(){const a=document.getElementById('q-audio'), s=getCurrentSong(), seg=segFor(s);activeSeg=seg;if(!seg.file){setPlayUI('error','Audio belum diupload',true);return}try{stopAudioTimer();setPlayProgress(0,0,seg.end-seg.start);setPlayUI('loading','Loading local audio...');if(a.src!==new URL(seg.file,location.href).href)a.src=seg.file;a.currentTime=seg.start;await a.play();setPlayUI('playing',`Playing ${seg.start.toFixed(2)}s → ${seg.end.toFixed(2)}s`);audioTimer=setInterval(()=>{const elapsed=Math.max(0,a.currentTime-seg.start),total=Math.max(1,seg.end-seg.start);setPlayProgress(elapsed/total,elapsed,total);if(a.currentTime>=seg.end||a.ended){a.pause();stopAudioTimer();setPlayProgress(1,total,total);setPlayUI('ended','Ended. Replay ready.');}},100);}catch(e){setPlayUI('error','Audio gagal: '+e.message,true);}}
 async function playFullSong(){const a=document.getElementById('q-audio'), s=getCurrentSong(), file=fileFor(s);if(!file){setPlayUI('error','Audio belum diupload',true);return}try{stopAudioTimer();setPlayProgress(0,0,0);setPlayUI('loading','Loading full song...');if(a.src!==new URL(file,location.href).href)a.src=file;a.currentTime=0;await a.play();setPlayUI('playing','Playing full song');audioTimer=setInterval(()=>{const total=Number.isFinite(a.duration)?a.duration:0;setPlayProgress(total?a.currentTime/total:0,a.currentTime,total);if(a.ended){stopAudioTimer();setPlayProgress(1,total,total);setPlayUI('ended','Full song ended.');}},250);}catch(e){setPlayUI('error','Audio gagal: '+e.message,true);}}
+function showQuestion(){document.getElementById('q-bait').style.display='block';document.getElementById('question-label').style.display='block';document.getElementById('btn-question').style.display='none';document.getElementById('btn-reveal').style.display='inline-block';}
 function revealAnswer(){setAnswerVisible(true);document.getElementById('q-answer').style.display='block';document.getElementById('answer-label').style.display='block';document.getElementById('btn-reveal').style.display='none';document.getElementById('score-buttons').style.display='grid';}
 function pushHistory(action,delta=0){history.push({action,g:cur.g,q:cur.q,scoreDelta:delta,scores:[...scores],progress:[...progress],time:Date.now()});saveScores()}
 function score(n){pushHistory('score',n);scores[cur.g]+=n;cur.q++;progress[cur.g]=Math.min(cur.q,GROUPS[cur.g].songs.length);saveScores();const g=GROUPS[cur.g];if(cur.q>=g.songs.length){document.getElementById('gd-name').textContent=`${g.name} selesai`;document.getElementById('gd-score').textContent=scores[cur.g];document.getElementById('btn-next-group').textContent=cur.g>=GROUPS.length-1?'Lihat Hasil Akhir':'Lanjut Grup Berikutnya';show('screen-group-done');}else startQuestion();}
