@@ -18,8 +18,12 @@
   <div class="qa"><div class="box"><b id="qa-total">0</b><span>Total</span></div><div class="box"><b id="qa-lyrics">0</b><span>Lyrics</span></div><div class="box"><b id="qa-sync">0</b><span>Marked</span></div><div class="box"><b id="qa-ready">0</b><span>Ready</span></div></div>
   <div class="layout"><aside class="side"><div class="side-head"><b>Daftar lagu</b><span class="pill" id="list-pos">1/20</span></div><div class="song-list" id="song-list"></div></aside><main class="main" id="editor"></main></div>
 </div><script>
-const STORAGE='quizTebakLirik_songs_draft_v3';let DATA={groups:[]},FLAT=[],idx=0,timer=null,DIRTY=false;
+const STORAGE='quizTebakLirik_songs_draft_v3';
+const AUDIO_BASE='https://audio.andotherstori.my.id/';
+const AUDIO_VERSION='mp3fix-20260525';
+let DATA={groups:[]},FLAT=[],idx=0,timer=null,DIRTY=false;
 const $=s=>document.querySelector(s);const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function audioUrl(file){if(!file)return '';const raw=/^https?:\/\//i.test(file)?file:AUDIO_BASE+String(file).replace(/^\/?audio\//,'').replace(/^\//,'');return raw+(raw.includes('?')?'&':'?')+'v='+AUDIO_VERSION}
 function fmt(t){return t==null||t===''?'--':Number(t).toFixed(2)+'s'}function sec(t){return Number(t||0).toFixed(2)}
 function flatten(){FLAT=[];(DATA.groups||[]).forEach((g,gi)=>(g.songs||[]).forEach((s,si)=>FLAT.push({g,gi,s,si})))}
 function setDirty(v=true){DIRTY=v;let d=$('#dirty');if(d){d.textContent=v?'unsaved':'saved';d.className='pill '+(v?'warn':'ok')}}function save(){localStorage.setItem(STORAGE,JSON.stringify(DATA));setDirty(false)}function active(){return FLAT[idx]?.s}
@@ -38,7 +42,7 @@ function renderEditor(){let s=active();if(!s){$('#editor').textContent='No song'
 function pillClass(s){let y=s.file&&s.timestamp&&s.timestamp.start!=null&&s.timestamp.end!=null&&Number(s.timestamp.end)>Number(s.timestamp.start);return y?'ok':'warn'}function syncLabel(s){let y=s.file&&s.timestamp&&s.timestamp.start!=null&&s.timestamp.end!=null&&Number(s.timestamp.end)>Number(s.timestamp.start);return y?'timestamp set':'needs marker'}
 function pull(){let s=active();if(!s||!$('#title'))return;s.title=$('#title').value.trim();s.artist=$('#artist').value.trim();s.year=$('#year').value.trim();s.bait=$('#bait').value.trim();s.answer=$('#answer').value.trim();s.lyricsSource=$('#source').value.trim();s.file=$('#file').value.trim();s.audioSource='local';s.timestamp=s.timestamp||{}}
 function saveSong(msg='Draft saved'){pull();save();renderList();qa();let st=$('.status');if(st)st.insertAdjacentHTML('beforeend',`<span class="pill ok">${esc(msg)}</span>`)}
-function refreshAudio(){let a=$('#audio'),f=$('#file')?.value.trim();if(a&&f&&a.getAttribute('src')!==f){a.src=f;let n=$('#audio-note');if(n)n.textContent='Metadata belum dimuat. Klik Play untuk cek file.'}}
+function refreshAudio(){let a=$('#audio'),f=audioUrl($('#file')?.value.trim());if(a&&f&&a.getAttribute('src')!==f){a.src=f;let n=$('#audio-note');if(n)n.textContent='Metadata belum dimuat. Klik Play untuk cek file.'}}
 function audioStatus(err=false){let a=$('#audio'),n=$('#audio-note');if(!a||!n)return;if(err||a.error)n.textContent='Audio file belum bisa dimuat dari path ini.';else if(Number.isFinite(a.duration)&&a.duration>0)n.textContent='Audio siap · durasi '+sec(a.duration)+'s';else n.textContent='Metadata belum dimuat. Klik Play untuk cek file.'}function audioEl(){pull();refreshAudio();let a=$('#audio');clearInterval(timer);timer=setInterval(()=>{try{$('#now').textContent=sec(a.currentTime)+'s';audioStatus()}catch(e){}},150);return a}
 async function playAudio(start=null){let a=audioEl();if(!active().file)return alert('Isi file audio dulu');if(start!=null)a.currentTime=Number(start)||0;await a.play().catch(e=>alert('Audio gagal: '+e.message))}
 function pauseAudio(){let a=audioEl();a.pause()}

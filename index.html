@@ -537,6 +537,13 @@ let YEAR_MAP = {
   "Pupus":"2002","Menghapus Jejakmu":"2007","Kehadiranmu":"2007","Dia":"2016","Monokrom":"2016",
   "Kenangan Terindah":"2005","Dan":"1999","Terima Kasih Cinta":"2008","Tetap Dalam Jiwa":"2015","Zona Nyaman":"2017"
 };
+const AUDIO_BASE = "https://audio.andotherstori.my.id/";
+const AUDIO_VERSION = "mp3fix-20260525";
+function audioUrl(file){
+  if(!file)return '';
+  const raw = /^https?:\/\//i.test(file) ? file : AUDIO_BASE + String(file).replace(/^\/?audio\//,'').replace(/^\//,'');
+  return raw + (raw.includes('?') ? '&' : '?') + 'v=' + AUDIO_VERSION;
+}
 const STORAGE_SCORE = "quizTebakLirik_scores_v1";
 const STORAGE_TS = "quizTebakLirik_timestamps_v1";
 const STORAGE_HISTORY = "quizTebakLirik_history_v1";
@@ -557,7 +564,7 @@ function getCurrentSong(){return GROUPS[cur.g].songs[cur.q];}
 function fmtTime(sec){sec=Math.max(0,Math.floor(Number(sec)||0));return `${Math.floor(sec/60)}:${String(sec%60).padStart(2,'0')}`;}
 function setPlayProgress(ratio=0, elapsed=0, total=0){const fill=document.getElementById('playbar-fill');if(fill)fill.style.width=`${Math.max(0,Math.min(1,ratio))*100}%`;const a=document.getElementById('play-elapsed'),b=document.getElementById('play-total');if(a)a.textContent=fmtTime(elapsed);if(b)b.textContent=fmtTime(total);}
 function setPlayUI(state,text='',error=false){playState=state;const btn=document.getElementById('btn-play');if(btn){btn.textContent=(state==='playing'||state==='loading')?'■ Stop':(state==='ended'?'↻ Replay':'▶ Play Bait');btn.classList.toggle('ghost',state==='playing'||state==='loading');}const el=document.getElementById('play-status');if(el){el.textContent=text||state;el.style.color=error?'#fda4af':'#cbd5e1'}const retry=document.getElementById('btn-retry');if(retry)retry.style.display=error?'block':'none';const art=document.getElementById('song-art');if(art)art.textContent=state==='playing'?'■':'▶';}
-function fileFor(song){return song.file||''}
+function fileFor(song){return audioUrl(song.file||'')}
 function segFor(song){const t=song.timestamp||{};const start=Number(t.start??0);let end=Number(t.end??(start+Number(song.previewSeconds||30)));if(end<=start)end=start+Number(song.previewSeconds||30);return {start,end,file:fileFor(song)};}
 function stopAudioTimer(){if(audioTimer){clearInterval(audioTimer);audioTimer=null}}
 function stopPlayback(){stopAudioTimer();const a=document.getElementById('q-audio');a.pause();setPlayUI('idle',activeSeg?`Stopped ${activeSeg.start.toFixed(2)}s → ${activeSeg.end.toFixed(2)}s`:'Stopped');}
